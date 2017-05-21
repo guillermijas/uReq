@@ -1,5 +1,5 @@
 class Requirement < ApplicationRecord
-  belongs_to :project
-  belongs_to :user
-  has_many :comments
+  belongs_to :project, required: true
+  belongs_to :user, required: true
+  has_many :comments, dependent: :destroy
 end

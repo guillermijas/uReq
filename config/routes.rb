@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
-  resources :comments
-  resources :requirements
-  resources :projects
-  devise_for :users
   resources :glosarios
 
+  resources :projects do
+    resources :requirements do
+      resources :comments
+    end
+  end
 
-  root 'glosarios#index'
+  devise_for :users
+
+  root 'projects#index'
 end

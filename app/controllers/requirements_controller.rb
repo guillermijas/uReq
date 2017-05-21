@@ -1,5 +1,6 @@
 class RequirementsController < ApplicationController
   before_action :set_requirement, only: [:show, :edit, :update, :destroy]
+  before_action :find_project
 
   # GET /requirements
   # GET /requirements.json
@@ -25,10 +26,10 @@ class RequirementsController < ApplicationController
   # POST /requirements.json
   def create
     @requirement = Requirement.new(requirement_params)
-
+    @requirement.project = @project
     respond_to do |format|
-      if @requirement.save
-        format.html { redirect_to @requirement, notice: 'Requirement was successfully created.' }
+      if @requirement.save!
+        format.html { redirect_to [@project, @requirement], notice: 'Requirement was successfully created.' }
         format.json { render :show, status: :created, location: @requirement }
       else
         format.html { render :new }
@@ -42,7 +43,7 @@ class RequirementsController < ApplicationController
   def update
     respond_to do |format|
       if @requirement.update(requirement_params)
-        format.html { redirect_to @requirement, notice: 'Requirement was successfully updated.' }
+        format.html { redirect_to [@project, @requirement], notice: 'Requirement was successfully updated.' }
         format.json { render :show, status: :ok, location: @requirement }
       else
         format.html { render :edit }
@@ -56,7 +57,7 @@ class RequirementsController < ApplicationController
   def destroy
     @requirement.destroy
     respond_to do |format|
-      format.html { redirect_to requirements_url, notice: 'Requirement was successfully destroyed.' }
+      format.html { redirect_to project_requirements_path(@project), notice: 'Requirement was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +70,10 @@ class RequirementsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def requirement_params
-      params.require(:requirement).permit(:description, :sufix, :status, :category, :end_date)
+      params.require(:requirement).permit(:description, :sufix, :status, :category, :end_date, :user_id)
     end
+
+  def find_project
+    @project = Project.find(params[:project_id])
+  end
 end

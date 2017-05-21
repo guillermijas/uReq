@@ -12,10 +12,10 @@
     - @comments.each do |comment|
       %tr
         %td= comment.body
-        %td= link_to 'Show', comment
-        %td= link_to 'Edit', edit_comment_path(comment)
-        %td= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' }
+        %td= link_to 'Show', [@project, @requirement, comment]
+        %td= link_to 'Edit', edit_project_requirement_comment_path(@project, @requirement, comment)
+        %td= link_to 'Destroy', [@project, @requirement, comment], method: :delete, data: { confirm: 'Are you sure?' }
 
 %br
 
-= link_to 'New Comment', new_comment_path
+= link_to 'New Comment', new_project_requirement_comment_path(@project, @requirement)

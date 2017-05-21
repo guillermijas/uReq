@@ -16,6 +16,6 @@
   %b End date:
   = @requirement.end_date
 
-= link_to 'Edit', edit_requirement_path(@requirement)
+= link_to 'Edit', edit_project_requirement_path(@project, @requirement)
 \|
-= link_to 'Back', requirements_path
+= link_to 'Back', project_requirements_path(@project)

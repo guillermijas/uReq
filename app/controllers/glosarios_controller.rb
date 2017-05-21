@@ -27,7 +27,7 @@ class GlosariosController < ApplicationController
     @glosario = Glosario.new(glosario_params)
 
     respond_to do |format|
-      if @glosario.save
+      if @glosario.save!
         format.html { redirect_to @glosario, notice: 'Glosario was successfully created.' }
         format.json { render :show, status: :created, location: @glosario }
       else

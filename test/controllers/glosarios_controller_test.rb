@@ -17,7 +17,7 @@ class GlosariosControllerTest < ActionDispatch::IntegrationTest
 
   test "should create glosario" do
     assert_difference('Glosario.count') do
-      post glosarios_url, params: { glosario: { definition: @glosario.definition, key: @glosario.key } }
+      post glosarios_url, params: { glosario: { definition: ('a'..'z').to_a.shuffle[0,8].join, key: ('a'..'z').to_a.shuffle[0,8].join } }
     end
 
     assert_redirected_to glosario_url(Glosario.last)
