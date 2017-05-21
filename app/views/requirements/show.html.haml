@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Description:
+  = @requirement.description
+%p
+  %b Sufix:
+  = @requirement.sufix
+%p
+  %b Status:
+  = @requirement.status
+%p
+  %b Category:
+  = @requirement.category
+%p
+  %b End date:
+  = @requirement.end_date
+
+= link_to 'Edit', edit_requirement_path(@requirement)
+\|
+= link_to 'Back', requirements_path

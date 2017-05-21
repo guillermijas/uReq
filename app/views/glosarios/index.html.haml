@@ -1,0 +1,23 @@
+%h1 Listing glosarios
+
+%table
+  %thead
+    %tr
+      %th Key
+      %th Definition
+      %th
+      %th
+      %th
+
+  %tbody
+    - @glosarios.each do |glosario|
+      %tr
+        %td= glosario.key
+        %td= glosario.definition
+        %td= link_to 'Show', glosario
+        %td= link_to 'Edit', edit_glosario_path(glosario)
+        %td= link_to 'Destroy', glosario, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Glosario', new_glosario_path

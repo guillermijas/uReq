@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Key:
+  = @glosario.key
+%p
+  %b Definition:
+  = @glosario.definition
+
+= link_to 'Edit', edit_glosario_path(@glosario)
+\|
+= link_to 'Back', glosarios_path

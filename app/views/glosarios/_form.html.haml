@@ -1,0 +1,16 @@
+= form_for @glosario do |f|
+  - if @glosario.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@glosario.errors.count, "error")} prohibited this glosario from being saved:"
+      %ul
+        - @glosario.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label :key
+    = f.text_field :key
+  .field
+    = f.label :definition
+    = f.text_field :definition
+  .actions
+    = f.submit 'Save'
