@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170521172328) do
+ActiveRecord::Schema.define(version: 20170522082325) do
 
   create_table "Projects_Users", id: false, force: :cascade do |t|
     t.integer "User_id", null: false
@@ -45,6 +45,10 @@ ActiveRecord::Schema.define(version: 20170521172328) do
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "picture_file_name"
+    t.string "picture_content_type"
+    t.integer "picture_file_size"
+    t.datetime "picture_updated_at"
     t.index ["name"], name: "index_projects_on_name"
   end
 
@@ -75,6 +79,11 @@ ActiveRecord::Schema.define(version: 20170521172328) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "role"
+    t.string "avatar_file_name"
+    t.string "avatar_content_type"
+    t.integer "avatar_file_size"
+    t.datetime "avatar_updated_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

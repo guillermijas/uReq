@@ -1,4 +1,5 @@
 class RequirementsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_requirement, only: [:show, :edit, :update, :destroy]
   before_action :find_project
 
@@ -27,6 +28,7 @@ class RequirementsController < ApplicationController
   def create
     @requirement = Requirement.new(requirement_params)
     @requirement.project = @project
+    @requirement.user = current_user
     respond_to do |format|
       if @requirement.save!
         format.html { redirect_to [@project, @requirement], notice: 'Requirement was successfully created.' }
