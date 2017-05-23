@@ -1,0 +1,13 @@
+!!!
+%html
+  %head
+    %title ReqOnRails
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  %body
+    - unless notice.nil?
+      %p.alert.alert-success= notice
+    - unless alert.nil?
+      %p.alert.alert-danger= alert
+    = yield
