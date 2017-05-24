@@ -1,0 +1,31 @@
+%h1 Listing requirements
+
+%table
+  %thead
+    %tr
+      %th Suffix
+      %th Description
+      %th Status
+      %th End date
+      %th Category
+      %th Level
+      %th
+      %th
+      %th
+
+  %tbody
+    - @requirements.each do |requirement|
+      %tr
+        %td= requirement.suffix
+        %td= requirement.description
+        %td= requirement.status
+        %td= requirement.end_date
+        %td= requirement.category
+        %td= requirement.level
+        %td= link_to 'Show', requirement
+        %td= link_to 'Edit', edit_requirement_path(requirement)
+        %td= link_to 'Destroy', requirement, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Requirement', new_requirement_path
