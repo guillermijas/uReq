@@ -1,0 +1,24 @@
+.modal.face#modal_show
+  .modal-dialog{role: 'document'}
+    .modal-content
+      .modal-header
+        %h5.modal-title= @project.name
+        %button.close{'aria-label': 'Close', 'data-dismiss': 'modal', type: 'button'}
+          %span{'aria-hidden': 'true'} ×
+      .modal-body
+        %p
+          %b Name:
+          = @project.name
+        %p
+          %b Client:
+          = @project.client
+        %p
+          %b End date:
+          = @project.end_date
+        %p
+          %b Status:
+          = @project.status
+
+      .modal-footer
+        = link_to 'Edit', edit_project_path(@project), class: 'btn btn-primary'
+        %button.btn.btn-secondary{'data-dismiss': 'modal', type: 'button'} Close

@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:show, :show_modal, :edit, :update, :destroy]
   before_action :authenticate_user!
 
   # GET /projects
@@ -12,6 +12,15 @@ class ProjectsController < ApplicationController
   # GET /projects/1.json
   def show
   end
+
+
+  def show_modal
+    respond_to do |format|
+      format.js {render layout: false}
+    end
+  end
+
+
 
   # GET /projects/new
   def new

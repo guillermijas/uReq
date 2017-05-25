@@ -18,10 +18,13 @@
         %td= project.client
         %td= project.end_date
         %td= project.status
-        %td= link_to 'Show', project
+        %td= link_to 'Ver', show_modal_projects_path(project), remote: true
         %td= link_to 'Edit', edit_project_path(project)
         %td= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }
 
 %br
 
 = link_to 'New Project', new_project_path
+
+#show
+
