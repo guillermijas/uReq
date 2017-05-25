@@ -8,8 +8,10 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <%-if false%>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+    <%end%>
     <%= yield %>
   </body>
 </html>

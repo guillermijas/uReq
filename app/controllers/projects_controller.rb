@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /projects
   # GET /projects.json
@@ -25,9 +26,15 @@ class ProjectsController < ApplicationController
   # POST /projects.json
   def create
     @project = Project.new(project_params)
+    @project.users.push(current_user)
+    @project.users.push(User.where(role: 'admin').where.not(id: current_user))
 
     respond_to do |format|
       if @project.save
+        @project.user_projects.each do |usr_pr|
+          usr_pr.owner = true
+          usr_pr.save
+        end
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
         format.json { render :show, status: :created, location: @project }
       else
@@ -62,13 +69,13 @@ class ProjectsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_project
-      @project = Project.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_project
+    @project = Project.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def project_params
-      params.require(:project).permit(:name, :client, :end_date, :status)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def project_params
+    params.require(:project).permit(:name, :client, :end_date, :status, :picture)
+  end
 end

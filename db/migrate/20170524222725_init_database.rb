@@ -62,11 +62,12 @@ class InitDatabase < ActiveRecord::Migration[5.1]
       t.timestamps
     end
 
-    create_table :users_projects do |t|
+    create_table :user_projects do |t|
       t.belongs_to :project, index: true
       t.belongs_to :user, index: true
-      t.string :role, null: false, default: 'collaborator'
+      t.boolean :owner, null: false, default: false
     end
+    add_index :user_projects, [:project, :user], :unique => true
 
   end
 end

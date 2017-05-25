@@ -1,0 +1,22 @@
+.container
+  .gray.center.editprofile
+    %h2.text-center Log in
+    %br
+    - if notice
+      %p.alert.alert-success.text-center= notice
+    - if alert
+      %p.alert.alert-danger.text-center= alert
+    = simple_form_for(resource, as: resource_name, url: session_path(resource_name))  do |f|
+      .form-group
+        = f.input :email, label: 'E-mail'
+      .form-group
+        = f.input :password, label: 'Contraseña'
+      - if devise_mapping.rememberable?
+        .form-group
+          = f.input :remember_me, as: :boolean, label: 'Recordar usuario'
+      .actions
+        .row
+          .col.text-center
+            = f.button :submit, 'Iniciar Sesión', class: 'btn btn-success'
+          .col.text-center
+            = link_to('Registrarse', new_registration_path(resource_name), class: 'btn btn-primary')
