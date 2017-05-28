@@ -12,12 +12,13 @@ gem 'sqlite3'
 gem 'puma', '~> 3.7'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
-gem 'jquery-rails'
 gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
+gem 'sprockets-rails'
 
 gem 'bootstrap', '~> 4.0.0.alpha6'
+gem 'jquery-rails'
 gem 'haml-rails'
 gem 'devise'
 gem 'simple_form'
@@ -28,6 +29,8 @@ gem 'truncate_html'
 gem 'ransack'
 gem 'font-awesome-sass', '~> 4.7.0'
 gem 'seed_dump'
+
+
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

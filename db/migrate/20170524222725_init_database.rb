@@ -3,6 +3,8 @@ class InitDatabase < ActiveRecord::Migration[5.1]
 
     create_table :users do |t|
       t.string :email,              null: false, default: ""
+      t.string :first_name
+      t.string :last_name
       t.string :encrypted_password, null: false, default: ""
       t.string   :reset_password_token
       t.datetime :reset_password_sent_at
@@ -15,8 +17,8 @@ class InitDatabase < ActiveRecord::Migration[5.1]
       t.timestamps null: false
       t.string :role
       t.attachment :avatar
-
     end
+
     add_index :users, :email,                unique: true
     add_index :users, :reset_password_token, unique: true
 
@@ -67,7 +69,5 @@ class InitDatabase < ActiveRecord::Migration[5.1]
       t.belongs_to :user, index: true
       t.boolean :owner, null: false, default: false
     end
-    add_index :user_projects, [:project, :user], :unique => true
-
   end
 end

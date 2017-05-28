@@ -254,13 +254,13 @@ DEPENDENCIES
   puma (~> 3.7)
   rails (~> 5.1.1)
   ransack
-  responders
   sass-rails (~> 5.0)
   seed_dump
   selenium-webdriver
   simple_form
   spring
   spring-watcher-listen (~> 2.0.0)
+  sprockets-rails
   sqlite3
   truncate_html
   turbolinks (~> 5)

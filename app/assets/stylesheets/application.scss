@@ -4,7 +4,28 @@
 @import "glossaries";
 @import "projects";
 @import "devise";
+@import "project_sidebar";
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
 
+body {
+  margin: 0;
+  padding: 0;
+  font-family: verdana, sans-serif;
+  font-size: 15px;
+}
+
+.no-margin{
+  margin: 0;
+}
+
+.no-padding{
+  padding: 0;
+}
+
+.center {
+  float: none;
+  margin-left: auto;
+  margin-right: auto;
+}

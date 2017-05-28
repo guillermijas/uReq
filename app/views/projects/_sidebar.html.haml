@@ -1,0 +1,42 @@
+.nav-side-menu
+  .brand
+    (Poner aqui el logo cuando lo tenga)
+  %i.fa.fa-bars.fa-2x.toggle-btn{'data-target': '#menu-content', 'data-toggle': 'collapse'}
+  .menu-list
+    %ul#menu-content.menu-content.collapse.out
+
+      -if current_user.avatar.blank?
+        = image_tag(image_url('user-no-avatar'), class: 'avatar')
+      -else
+        = image_tag(current_user.avatar.url(:thumb), class: 'avatar')
+
+      -unless current_user.first_name.blank? || current_user.last_name.blank?
+        %h5.text-center= current_user.full_name
+
+      %h5.text-center= current_user.user_role
+
+      %hr
+
+      %li.active
+        =link_to(projects_path) do
+          =icon('folder-open')
+          Proyectos activos
+      %li
+        =link_to(projects_path) do
+          =icon('folder')
+          Proyectos archivados
+      %li
+        =link_to(new_project_path) do
+          =icon('plus')
+          Nuevo proyecto
+      %li
+        =link_to(edit_user_registration_path) do
+          =icon('user')
+          Perfil
+      %li
+        =link_to(destroy_user_session_path, method: :delete) do
+          =icon('sign-out')
+          Cerrar sesión
+    %footer
+      Req on Rails © Guillermo Mora, 2017
+

@@ -12,4 +12,21 @@ class User < ApplicationRecord
 
   has_many :requirements
   has_many :comments
+
+  def full_name
+    first_name + ' ' + last_name
+  end
+
+  def user_role
+    case role
+      when 'collaborator'
+        'Colaborador'
+      when 'admin'
+        'Administrador'
+      when 'project_manager'
+        'Jefe de proyecto'
+      else
+        'Sin definir'
+    end
+  end
 end

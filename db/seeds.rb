@@ -1,5 +1,5 @@
 User.create!([
-                 {email: "guillermijas@gmail.com", password: 'qwerty123', role: 'project_manager'},
+                 {email: "guillermijas@gmail.com", password: 'qwerty123', role: 'project_manager', first_name: 'Guillermo', last_name: 'Mora Cordero'},
                  {email: "rossi@gmail.com", password: 'qwerty123', role: 'project_manager'},
                  {email: "admin@admin.com", password: 'asdf1234', role: 'admin'}
              ])
