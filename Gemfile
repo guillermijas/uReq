@@ -5,7 +5,9 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-
+source 'https://rails-assets.org' do
+  gem 'rails-assets-tether', '>= 1.3.3'
+end
 
 gem 'rails', '~> 5.1.1'
 gem 'sqlite3'
@@ -29,8 +31,6 @@ gem 'truncate_html'
 gem 'ransack'
 gem 'font-awesome-sass', '~> 4.7.0'
 gem 'seed_dump'
-
-
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
