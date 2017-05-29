@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :projects do
     collection do
       get ':id/show_modal', to: 'projects#show_modal', as: 'show_modal'
+      get ':id/delete_picture', to: 'projects#delete_picture', as: 'delete_picture'
     end
   end
 

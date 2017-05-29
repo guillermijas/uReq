@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :show_modal, :edit, :update, :destroy]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :show_modal, :delete_picture]
   before_action :authenticate_user!
 
   # GET /projects
@@ -12,15 +12,6 @@ class ProjectsController < ApplicationController
   # GET /projects/1.json
   def show
   end
-
-
-  def show_modal
-    respond_to do |format|
-      format.js {render layout: false}
-    end
-  end
-
-
 
   # GET /projects/new
   def new
@@ -37,7 +28,6 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params)
     @project.users.push(current_user)
     @project.users.push(User.where(role: 'admin').where.not(id: current_user))
-
     respond_to do |format|
       if @project.save
         @project.user_projects.each do |usr_pr|
@@ -59,7 +49,8 @@ class ProjectsController < ApplicationController
   def update
     respond_to do |format|
       if @project.update(project_params)
-        format.html { redirect_to @project, notice: 'Project was successfully updated.' }
+        Log.new(operation: "#{current_user.full_name} ha actualizado el proyecto '#{@project.name}'", project_id: @project.id, user_id: current_user.id).save!
+        format.html { redirect_to projects_path, notice: 'El proyecto se ha actualizado corretamente.' }
         format.json { render :show, status: :ok, location: @project }
       else
         format.html { render :edit }
@@ -72,10 +63,24 @@ class ProjectsController < ApplicationController
   # DELETE /projects/1.json
   def destroy
     @project.destroy
+    Log.new(operation: "#{current_user.full_name} ha eliminado el proyecto '#{@project.name}'", project_id: @project.id, user_id: current_user.id).save!
     respond_to do |format|
       format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def show_modal
+    respond_to do |format|
+      format.js {render layout: false}
+    end
+  end
+
+  def delete_picture
+    @project.picture.destroy
+    @project.picture.clear
+    Log.new(operation: "#{current_user.full_name} ha actualizado el proyecto '#{@project.name}'", project_id: @project.id, user_id: current_user.id).save!
+    redirect_to edit_project_path(@project), notice: 'Foto de proyecto eliminada.'
   end
 
   private
@@ -86,6 +91,7 @@ class ProjectsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def project_params
-    params.require(:project).permit(:name, :client, :end_date, :status, :picture)
+    params.delete_if {|k,v| v.blank?}
+    params.require(:project).permit(:name, :client, :end_date, :status, :picture, :delete_picture)
   end
 end

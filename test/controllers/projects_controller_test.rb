@@ -31,12 +31,13 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to projects_path
   end
 
-=begin
-  test "should show project" do
-    get project_url(@project)
-    assert_response :success
+  test "should not create project" do
+    assert_no_difference('Project.count' || 'Log.count') do
+      post projects_url, params: { project: {name: ''} }
+    end
   end
 
+=begin
   test "should get edit" do
     get edit_project_url(@project)
     assert_response :success

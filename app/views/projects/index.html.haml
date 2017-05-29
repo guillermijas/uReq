@@ -5,28 +5,22 @@
 
 =render 'sidebar'
 #projects
-  %h1 Listing projects
-  %table.table.table-bordered.table-responsive
-    %thead
-      %tr
-        %th Name
-        %th Client
-        %th End date
-        %th Status
-        %th
-        %th
-        %th
+  %h1.text-center Projectos
+  %br
+  %br
+  %br
+  .row
+    - @projects.each do |project|
+      .project.col-md-4
+        -if project.picture.blank?
+          = image_tag(image_url('project-picture-default'), class: 'picture')
+        -else
+          = image_tag(project.picture.url(:medium), class: 'picture')
+        %h3.text-center= project.name
 
-    %tbody
-      - @projects.each do |project|
-        %tr
-          %td= project.name
-          %td= project.client
-          %td= project.end_date
-          %td= project.status
-          %td= link_to 'Ver', show_modal_projects_path(project), remote: true
-          %td= link_to 'Edit', edit_project_path(project)
-          %td= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }
-    %br
+        %td= link_to 'Ver', show_modal_projects_path(project), remote: true
+        %td= link_to 'Editar', edit_project_path(project)
+        %td= link_to 'Eliminar', project, method: :delete, data: { confirm: '¿Está seguro? La acción no puede deshacerse' }
+%br
 #show
 

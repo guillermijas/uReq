@@ -124,6 +124,9 @@ GEM
     mini_portile2 (2.1.0)
     minitest (5.10.2)
     multi_json (1.12.1)
+    nilify_blanks (1.2.1)
+      activerecord (>= 3.0.0)
+      activesupport (>= 3.0.0)
     nio4r (2.0.0)
     nokogiri (1.7.2)
       mini_portile2 (~> 2.1.0)
@@ -254,6 +257,7 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   jquery-rails
   listen (>= 3.0.5, < 3.2)
+  nilify_blanks
   paperclip
   puma (~> 3.7)
   rails (~> 5.1.1)

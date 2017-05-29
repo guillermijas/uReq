@@ -1,7 +1,32 @@
-%h1 Editing project
+= render 'sidebar'
 
-= render 'form'
+#projects
+  %h1.text-center Editar Proyecto
+  %br
+  .jumbotron
+    = simple_form_for @project do |f|
+      - if @project.errors.any?
+        .alert.alert-danger.alert-dismissible Error al guardar proyecto. Revise los campos
+      .form-group
+        = f.input :name, label: 'Nombre del proyeto', required: true, error: 'El nombre del proyecto es obligatorio.', error_html: { class: 'error' }
+      .form-group
+        = f.input :client, label: 'Cliente'
+      .form-group
+        = f.input :status, label: 'Estado', collection: ['Planificando', 'En proceso', 'En espera', 'Verificando', 'Archivado'], selected: 'Planificando'
+      .form-group
+        %label Foto de portada
+        %br
+        -if @project.picture.blank?
+          = image_tag(image_url('project-picture-default'), class: 'picture')
+        -else
+          = image_tag(@project.picture.url(:medium), class: 'picture')
+        %br
+        %br
+        = f.input :picture, as: :file, label: false
+        = f.check_box(:delete_picture)
+        Eliminar foto
+      %br
+      %br
+      = f.button :submit, 'Actualizar proyecto', class: 'btn btn-primary'
+      = link_to 'Volver', projects_path, class: 'btn btn-secondary'
 
-= link_to 'Show', @project
-\|
-= link_to 'Back', projects_path

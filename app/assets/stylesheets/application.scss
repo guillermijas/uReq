@@ -8,6 +8,7 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
+$red: #B00100;
 
 body {
   margin: 0;
@@ -28,4 +29,14 @@ body {
   float: none;
   margin-left: auto;
   margin-right: auto;
+}
+
+.error{
+  color: $red;
+}
+
+.required{
+  abbr{
+    color: $red;
+  }
 }
