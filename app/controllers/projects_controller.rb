@@ -44,7 +44,8 @@ class ProjectsController < ApplicationController
           usr_pr.owner = true
           usr_pr.save
         end
-        format.html { redirect_to @project, notice: 'Project was successfully created.' }
+        Log.new(operation: "#{current_user.full_name} ha creado el proyecto '#{@project.name}'", project_id: @project.id, user_id: current_user.id).save!
+        format.html { redirect_to projects_path, notice: 'Project was successfully created.' }
         format.json { render :show, status: :created, location: @project }
       else
         format.html { render :new }

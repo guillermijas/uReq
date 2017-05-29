@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20170524222725) do
   end
 
   create_table "projects", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.string "client"
     t.date "end_date"
     t.string "status"
@@ -79,8 +79,8 @@ ActiveRecord::Schema.define(version: 20170524222725) do
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
-    t.string "first_name"
-    t.string "last_name"
+    t.string "first_name", null: false
+    t.string "last_name", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"

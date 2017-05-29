@@ -3,8 +3,8 @@ class InitDatabase < ActiveRecord::Migration[5.1]
 
     create_table :users do |t|
       t.string :email,              null: false, default: ""
-      t.string :first_name
-      t.string :last_name
+      t.string :first_name, null: false
+      t.string :last_name, null: false
       t.string :encrypted_password, null: false, default: ""
       t.string   :reset_password_token
       t.datetime :reset_password_sent_at
@@ -23,7 +23,7 @@ class InitDatabase < ActiveRecord::Migration[5.1]
     add_index :users, :reset_password_token, unique: true
 
     create_table :projects do |t|
-      t.string :name
+      t.string :name, null: false
       t.string :client
       t.date :end_date
       t.string :status

@@ -20,7 +20,7 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create project" do
-    assert_difference('Project.count') do
+    assert_difference('Project.count' && 'Log.count') do
       post projects_url, params: { project: { client: @project.client, end_date: @project.end_date, name: @project.name, status: @project.status } }
     end
     assert_equal(2, Project.last.user_projects.count)
@@ -28,7 +28,7 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
     assert_equal(@admin.id, Project.last.user_projects.last.user_id)
     assert_equal(true, Project.last.user_projects.first.owner)
     assert_equal(true, Project.last.user_projects.last.owner)
-    assert_redirected_to project_url(Project.last)
+    assert_redirected_to projects_path
   end
 
 =begin

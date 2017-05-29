@@ -6,15 +6,21 @@
 #
 guille:
   email: guillermijas@gmail.com
+  first_name: Guillermo
+  last_name: Mora
   encrypted_password: <%= Devise::Encryptor.digest(User, "qwerty123") %>
   role: project_manager
 
 admin:
   email: admin@admin.com
+  first_name: Admin
+  last_name: Admin
   encrypted_password: <%= Devise::Encryptor.digest(User, "qwerty123") %>
   role: admin
 
 rossi:
   email: rossi@rossi.com
+  first_name: Carlos
+  last_name: Rossi
   encrypted_password: <%= Devise::Encryptor.digest(User, "qwerty123") %>
   role: project_manager
