@@ -37,7 +37,6 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-=begin
   test "should get edit" do
     get edit_project_url(@project)
     assert_response :success
@@ -45,15 +44,19 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
 
   test "should update project" do
     patch project_url(@project), params: { project: { client: @project.client, end_date: @project.end_date, name: @project.name, status: @project.status } }
-    assert_redirected_to project_url(@project)
+    assert_redirected_to projects_path
+  end
+
+  test "should not update project" do
+    patch project_url(@project), params: { project: {name: ''} }
+    assert_not_equal(@project.name , '')
   end
 
   test "should destroy project" do
     assert_difference('Project.count', -1) do
       delete project_url(@project)
     end
-
     assert_redirected_to projects_url
   end
-=end
+
 end

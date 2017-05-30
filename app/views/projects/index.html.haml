@@ -1,26 +1,32 @@
--unless alert.nil?
-  %p= alert
--unless notice.nil?
-  %p= notice
-
 =render 'sidebar'
 #projects
+  -unless alert.nil?
+    .alert.alert-danger.alert-dismissible.fade.show{:role => "alert"}
+      %button.close{'aria-label': 'Close', 'data-dismiss': 'alert', type: 'button'}
+        %span{'aria-hidden': 'true'} ×
+      %strong Error:
+      =alert
+  -unless notice.nil?
+    .alert.alert-success.alert-dismissible.fade.show{:role => "alert"}
+      %button.close{'aria-label': 'Close', 'data-dismiss': 'alert', type: 'button'}
+        %span{'aria-hidden': 'true'} ×
+      %strong Correcto:
+      =notice
+
   %h1.text-center Projectos
   %br
   %br
   %br
   .row
     - @projects.each do |project|
-      .project.col-md-4
-        -if project.picture.blank?
-          = image_tag(image_url('project-picture-default'), class: 'picture')
-        -else
-          = image_tag(project.picture.url(:medium), class: 'picture')
-        %h3.text-center= project.name
-
-        %td= link_to 'Ver', show_modal_projects_path(project), remote: true
-        %td= link_to 'Editar', edit_project_path(project)
-        %td= link_to 'Eliminar', project, method: :delete, data: { confirm: '¿Está seguro? La acción no puede deshacerse' }
-%br
+      .col-xl-3.col-lg-4.col-md-6.col-sm-6.col-xs-12.project
+        .card
+          .card-block
+            =link_to show_modal_projects_path(project), remote: true do
+              -if project.picture.blank?
+                = image_tag(image_url('project-picture-default'), class: 'picture')
+              -else
+                = image_tag(project.picture.url(:medium), class: 'picture')
+            %h3.text-center= project.name
 #show
 

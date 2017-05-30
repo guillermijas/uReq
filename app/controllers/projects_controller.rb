@@ -1,11 +1,12 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy, :show_modal, :delete_picture]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :show_modal]
   before_action :authenticate_user!
 
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all
+    usr_pr = UserProject.where(user: current_user).pluck(:project_id)
+    @projects = Project.where.not(status: 'Archivado').where(id: usr_pr)
   end
 
   # GET /projects/1
@@ -76,12 +77,14 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def delete_picture
-    @project.picture.destroy
-    @project.picture.clear
-    Log.new(operation: "#{current_user.full_name} ha actualizado el proyecto '#{@project.name}'", project_id: @project.id, user_id: current_user.id).save!
-    redirect_to edit_project_path(@project), notice: 'Foto de proyecto eliminada.'
+  def index_archived
+    usr_pr = UserProject.where(user: current_user).pluck(:project_id)
+    @projects = Project.where(status: 'Archivado').where(id: usr_pr)
+    respond_to do |format|
+      format.html { render 'index' }
+    end
   end
+
 
   private
   # Use callbacks to share common setup or constraints between actions.
@@ -91,7 +94,6 @@ class ProjectsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def project_params
-    params.delete_if {|k,v| v.blank?}
     params.require(:project).permit(:name, :client, :end_date, :status, :picture, :delete_picture)
   end
 end

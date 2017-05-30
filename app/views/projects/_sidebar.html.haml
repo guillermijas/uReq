@@ -17,24 +17,24 @@
 
       %hr
 
-      %li.active
-        =link_to(projects_path) do
+      =link_to(projects_path) do
+        %li{class: ('active' if action_name == 'index')}
           =icon('folder-open')
           Proyectos activos
-      %li
-        =link_to(projects_path) do
+      =link_to(archived_projects_path) do
+        %li{class: ('active' if action_name == 'index_archived')}
           =icon('folder')
           Proyectos archivados
-      %li
-        =link_to(new_project_path) do
+      =link_to(new_project_path) do
+        %li{class: ('active' if action_name == 'new')}
           =icon('plus')
           Nuevo proyecto
-      %li
-        =link_to(edit_user_registration_path) do
+      =link_to(edit_user_registration_path) do
+        %li
           =icon('user')
           Perfil
-      %li
-        =link_to(destroy_user_session_path, method: :delete) do
+      =link_to(destroy_user_session_path, method: :delete) do
+        %li
           =icon('sign-out')
           Cerrar sesión
     %footer
