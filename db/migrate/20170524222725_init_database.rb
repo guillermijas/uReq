@@ -15,7 +15,7 @@ class InitDatabase < ActiveRecord::Migration[5.1]
       t.string   :current_sign_in_ip
       t.string   :last_sign_in_ip
       t.timestamps null: false
-      t.string :role
+      t.string :role, null: false, default: 'collaborator'
       t.attachment :avatar
     end
 

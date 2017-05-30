@@ -36,7 +36,7 @@ class ProjectsController < ApplicationController
           usr_pr.save
         end
         Log.new(operation: "#{current_user.full_name} ha creado el proyecto '#{@project.name}'", project_id: @project.id, user_id: current_user.id).save!
-        format.html { redirect_to projects_path, notice: 'Project was successfully created.' }
+        format.html { redirect_to projects_path, notice: 'El proyecto se ha creado con éxito' }
         format.json { render :show, status: :created, location: @project }
       else
         format.html { render :new }
@@ -66,7 +66,7 @@ class ProjectsController < ApplicationController
     @project.destroy
     Log.new(operation: "#{current_user.full_name} ha eliminado el proyecto '#{@project.name}'", project_id: @project.id, user_id: current_user.id).save!
     respond_to do |format|
-      format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
+      format.html { redirect_to projects_url, notice: 'El proyecto se ha archivado con éxito' }
       format.json { head :no_content }
     end
   end

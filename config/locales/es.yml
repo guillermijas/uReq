@@ -1,0 +1,17 @@
+es:
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              taken: "Este usuario ya existe"
+              blank: "El e-mail no puede estar vacío"
+            first_name:
+              blank: "El nombre no puede estar vacío"
+            last_name:
+              blank: "El apellido no puede estar vacío"
+            password:
+              blank: "La contraseña no puede estar vacía"
+            password_confirmation:
+              confirmation: "Las contraseñas no coinciden"
