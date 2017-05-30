@@ -1,12 +1,12 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy, :show_modal]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :show_modal, :archive]
   before_action :authenticate_user!
 
   # GET /projects
   # GET /projects.json
   def index
     usr_pr = UserProject.where(user: current_user).pluck(:project_id)
-    @projects = Project.where.not(status: 'Archivado').where(id: usr_pr)
+    @projects = Project.where.not(status: 'archived').where(id: usr_pr)
   end
 
   # GET /projects/1
@@ -79,20 +79,22 @@ class ProjectsController < ApplicationController
 
   def index_archived
     usr_pr = UserProject.where(user: current_user).pluck(:project_id)
-    @projects = Project.where(status: 'Archivado').where(id: usr_pr)
+    @projects = Project.where(status: 'archived').where(id: usr_pr)
     respond_to do |format|
       format.html { render 'index' }
     end
   end
 
   def archive
-    if @project.update(status: 'Archived')
-      Log.new(operation: "#{current_user.full_name} ha archivado el proyecto '#{@project.name}'", project_id: @project.id, user_id: current_user.id).save!
-      format.html { redirect_to projects_path, notice: 'El proyecto se ha archivado corretamente.' }
-      format.json { render :show, status: :ok, location: @project }
-    else
-      format.html { render :index }
-      format.json { render json: @project.errors, status: :unprocessable_entity }
+    respond_to do |format|
+      if @project.update(status: 'archived')
+        Log.new(operation: "#{current_user.full_name} ha archivado el proyecto '#{@project.name}'", project_id: @project.id, user_id: current_user.id).save!
+        format.html { redirect_to projects_path, notice: 'El proyecto se ha archivado corretamente.' }
+        format.json { render :show, status: :ok, location: @project }
+      else
+        format.html { redirect_to projects_path, alert: 'El proyecto no se ha podido archivador.' }
+        format.json { render json: @project.errors, status: :unprocessable_entity }
+      end
     end
   end
 

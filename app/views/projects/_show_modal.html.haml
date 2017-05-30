@@ -24,4 +24,4 @@
 
       .modal-footer
         = link_to 'Editar', edit_project_path(@project), class: 'btn btn-primary'
-        = link_to 'Eliminar', archive_projects_path(@project), method: :delete, data: { confirm: '¿Está seguro? La acción no puede deshacerse' }, class: 'btn btn-danger'
+        = link_to 'Archivar', archive_projects_path(@project), method: :post, data: { confirm: '¿Archivar proyecto?' }, class: 'btn btn-danger'
