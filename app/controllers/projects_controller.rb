@@ -66,7 +66,7 @@ class ProjectsController < ApplicationController
     @project.destroy
     Log.new(operation: "#{current_user.full_name} ha eliminado el proyecto '#{@project.name}'", project_id: @project.id, user_id: current_user.id).save!
     respond_to do |format|
-      format.html { redirect_to projects_url, notice: 'El proyecto se ha archivado con éxito' }
+      format.html { redirect_to projects_url, notice: 'El proyecto se ha eliminado con éxito' }
       format.json { head :no_content }
     end
   end
@@ -85,6 +85,16 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def archive
+    if @project.update(status: 'Archived')
+      Log.new(operation: "#{current_user.full_name} ha archivado el proyecto '#{@project.name}'", project_id: @project.id, user_id: current_user.id).save!
+      format.html { redirect_to projects_path, notice: 'El proyecto se ha archivado corretamente.' }
+      format.json { render :show, status: :ok, location: @project }
+    else
+      format.html { render :index }
+      format.json { render json: @project.errors, status: :unprocessable_entity }
+    end
+  end
 
   private
   # Use callbacks to share common setup or constraints between actions.

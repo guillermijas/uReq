@@ -13,7 +13,7 @@
       .form-group
         = f.input :client, label: 'Cliente'
       .form-group
-        = f.input :status, label: 'Estado', collection: ['Planificando', 'En proceso', 'En espera', 'Verificando', 'Archivado'], selected: 'Planificando'
+        = f.input :status, label: 'Estado', collection: [%w(Planificando planning), ['En proceso', 'in_proccess'], ['En espera', 'on_hold'], %w(Verificando verifying), %w(Archivado archived) ], selected: 'Planificando'
       .form-group
         %label Foto de portada
         = f.input :picture, as: :file, label: false

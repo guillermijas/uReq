@@ -1,13 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
+project_1:
+  name: proyecto 1
   client: MyString
-  end_date: 2017-05-25
-  status: MyString
-
-two:
-  name: MyString
-  client: MyString
-  end_date: 2017-05-25
-  status: MyString
+  status: in_proccess
