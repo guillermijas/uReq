@@ -20,8 +20,9 @@
           = @project.updated_at.strftime('%Y-%m-%d a las %H:%M')
         %p
           %strong Estado:
-          = @project.status
+          = @project.status_string
 
       .modal-footer
+        = link_to 'Ver requisitos', project_requirements_path(@project), class: 'btn btn-info'
         = link_to 'Editar', edit_project_path(@project), class: 'btn btn-primary'
         = link_to 'Archivar', archive_projects_path(@project), method: :post, data: { confirm: '¿Archivar proyecto?' }, class: 'btn btn-danger'

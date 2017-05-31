@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   resources :logs
   devise_for :users
   resources :comments
-  resources :requirements
 
   resources :projects do
     collection do
@@ -11,6 +10,7 @@ Rails.application.routes.draw do
       get 'archived', to: 'projects#index_archived', as: 'archived'
       post ':id/archive', to: 'projects#archive', as: 'archive'
     end
+    resources :requirements
   end
 
   root 'projects#index'

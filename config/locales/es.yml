@@ -1,6 +1,8 @@
 es:
   activerecord:
     errors:
+      messages:
+        record_invalid: "Atributo inválido en la base de datos"
       models:
         user:
           attributes:

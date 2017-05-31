@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy, :show_modal, :archive]
+  before_action :set_project, only: %i[show edit update destroy show_modal archive]
   before_action :authenticate_user!
 
   # GET /projects
@@ -12,6 +12,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
+    redirect_to project_requirements_path(@project)
   end
 
   # GET /projects/new
@@ -20,8 +21,7 @@ class ProjectsController < ApplicationController
   end
 
   # GET /projects/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /projects
   # POST /projects.json
@@ -37,10 +37,8 @@ class ProjectsController < ApplicationController
         end
         Log.new(operation: "#{current_user.full_name} ha creado el proyecto '#{@project.name}'", project_id: @project.id, user_id: current_user.id).save!
         format.html { redirect_to projects_path, notice: 'El proyecto se ha creado con éxito' }
-        format.json { render :show, status: :created, location: @project }
       else
         format.html { render :new }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -52,10 +50,8 @@ class ProjectsController < ApplicationController
       if @project.update(project_params)
         Log.new(operation: "#{current_user.full_name} ha actualizado el proyecto '#{@project.name}'", project_id: @project.id, user_id: current_user.id).save!
         format.html { redirect_to projects_path, notice: 'El proyecto se ha actualizado corretamente.' }
-        format.json { render :show, status: :ok, location: @project }
       else
         format.html { render :edit }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -65,15 +61,12 @@ class ProjectsController < ApplicationController
   def destroy
     @project.destroy
     Log.new(operation: "#{current_user.full_name} ha eliminado el proyecto '#{@project.name}'", project_id: @project.id, user_id: current_user.id).save!
-    respond_to do |format|
-      format.html { redirect_to projects_url, notice: 'El proyecto se ha eliminado con éxito' }
-      format.json { head :no_content }
-    end
+    redirect_to projects_url, notice: 'El proyecto se ha eliminado con éxito'
   end
 
   def show_modal
     respond_to do |format|
-      format.js {render layout: false}
+      format.js { render layout: false }
     end
   end
 
@@ -90,15 +83,14 @@ class ProjectsController < ApplicationController
       if @project.update(status: 'archived')
         Log.new(operation: "#{current_user.full_name} ha archivado el proyecto '#{@project.name}'", project_id: @project.id, user_id: current_user.id).save!
         format.html { redirect_to projects_path, notice: 'El proyecto se ha archivado corretamente.' }
-        format.json { render :show, status: :ok, location: @project }
       else
         format.html { redirect_to projects_path, alert: 'El proyecto no se ha podido archivador.' }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end
   end
 
   private
+
   # Use callbacks to share common setup or constraints between actions.
   def set_project
     @project = Project.find(params[:id])
@@ -108,4 +100,5 @@ class ProjectsController < ApplicationController
   def project_params
     params.require(:project).permit(:name, :client, :end_date, :status, :picture, :delete_picture)
   end
+
 end

@@ -4,7 +4,7 @@ User.create!([
                  {email: "admin@admin.com", password: 'asdf1234', role: 'admin', first_name: 'Admin', last_name: 'Admin'}
              ])
 Project.create!([
-                    {name: "AGNT Telegrama", client: "Idea Technologies", end_date: "2017-05-25", status: "En proceso", picture_file_name: nil, picture_content_type: nil, picture_file_size: nil, picture_updated_at: nil}
+                    {name: "AGNT Telegrama", client: "Idea Technologies", end_date: "2017-05-25", status: "in_process", picture_file_name: nil, picture_content_type: nil, picture_file_size: nil, picture_updated_at: nil}
                 ])
 UserProject.create!([
                         {project_id: 1, user_id: 1, owner: true},
