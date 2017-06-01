@@ -1,28 +1,27 @@
-= form_for @requirement do |f|
+= simple_form_for([@project, @requirement]) do |f|
   - if @requirement.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@requirement.errors.count, "error")} prohibited this requirement from being saved:"
+      %h2= "#{pluralize(@requirement.errors.count, 'error')} prohibited this requirement from being saved:"
       %ul
         - @requirement.errors.full_messages.each do |message|
           %li= message
 
-  .field
-    = f.label :suffix
-    = f.text_field :suffix
-  .field
-    = f.label :description
-    = f.text_area :description
-  .field
-    = f.label :status
-    = f.text_field :status
-  .field
-    = f.label :end_date
-    = f.date_select :end_date
-  .field
-    = f.label :category
-    = f.text_field :category
-  .field
-    = f.label :level
-    = f.text_field :level
+  .form-group
+    = f.input :suffix, label: 'ID', required: true,
+              error: 'El sufijo de la ID es obligatorio.', error_html: { class: 'error' }
+  .form-group
+    = f.input :description,  as: :ckeditor, input_html: { ckeditor: { toolbar: 'mini' } }, label: 'Descripcion',
+              required: true, error: 'La descripción del requisito es obligatoria.',
+              error_html: { class: 'error' }
+  .form-group
+    = f.input :status, label: 'Estado',
+              collection: [%w(Pendiente pending), ['En proceso', 'in_process'], %w(Verificando verifying), %w(Rechazado rejected) ],
+              include_blank: false
+  .form-group
+    = f.input :category, label: 'Categoría'
+  .form-group
+    = f.input :level, label: 'Nivel',
+              collection: [%w(Alto high), %w(Medio medium), %w(Bajo low)],
+              include_blank: false
   .actions
-    = f.submit 'Save'
+    = f.button :submit, 'Save'

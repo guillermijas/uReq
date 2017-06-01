@@ -7,7 +7,7 @@ class Requirement < ApplicationRecord
   validates :user_id, presence: true
   validates :level, inclusion: { in: %w[high medium low],
                                  message: "'%{value}' no es un nivel válido" }
-  validates :status, inclusion: { in: %w[pending in_progress verifying rejected],
+  validates :status, inclusion: { in: %w[pending in_process verifying rejected],
                                   message: "'%{value}' no es un nivel válido" }
 
 end

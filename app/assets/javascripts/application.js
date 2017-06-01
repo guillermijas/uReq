@@ -5,3 +5,4 @@
 //= require tether
 //= require bootstrap
 //= require_tree .
+//= require ckeditor/init

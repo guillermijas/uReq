@@ -1,10 +1,10 @@
 class RequirementsController < ApplicationController
-  before_action :set_requirement, only: [:show, :edit, :update, :destroy]
+  before_action :set_requirement, only: %i[show edit update destroy]
 
   # GET /requirements
   # GET /requirements.json
   def index
-    @requirements = Requirement.all
+    @requirements = Requirement.where(project_id: params[:project_id])
   end
 
   # GET /requirements/1
@@ -15,10 +15,12 @@ class RequirementsController < ApplicationController
   # GET /requirements/new
   def new
     @requirement = Requirement.new
+    @project = Project.find(params[:project_id])
   end
 
   # GET /requirements/1/edit
   def edit
+    @project = Project.find(params[:project_id])
   end
 
   # POST /requirements
@@ -62,13 +64,13 @@ class RequirementsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_requirement
-      @requirement = Requirement.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def requirement_params
-      params.require(:requirement).permit(:suffix, :description, :status, :end_date, :category, :level)
-    end
+  def set_requirement
+    @requirement = Requirement.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def requirement_params
+    params.require(:requirement).permit(:suffix, :description, :status, :end_date, :category, :level)
+  end
 end

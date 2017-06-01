@@ -12,8 +12,10 @@
         %span{'aria-hidden': 'true'} ×
       %strong= icon('check')
       =notice
-
-  %h1.text-center Projectos
+  -if action_name == 'index_archived'
+    %h1.text-center Projectos archivados
+  - else
+    %h1.text-center Projectos
   %br
   %br
   %br
