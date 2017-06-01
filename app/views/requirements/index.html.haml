@@ -16,15 +16,16 @@
   %tbody
     - @requirements.each do |requirement|
       %tr
-        %td= requirement.suffix
-        %td= requirement.description
+        %td= requirement.id_string
+        %td= requirement.description.html_safe
         %td= requirement.status
         %td= requirement.end_date
         %td= requirement.category
         %td= requirement.level
-        %td= link_to 'Show', requirement
-        %td= link_to 'Edit', edit_project_requirement_path(requirement)
-        %td= link_to 'Destroy', requirement, method: :delete, data: { confirm: 'Are you sure?' }
+        /%td= link_to 'Show', project_requirement_path(@project, requirement)
+        %td= link_to 'Edit', edit_project_requirement_path(@project, requirement)
+        %td= link_to 'Destroy', project_requirement_path(@project, requirement), method: :delete
+
 
 %br
 

@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 20170601125240) do
     t.date "end_date"
     t.string "category"
     t.string "level"
+    t.integer "id_in_project"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["project_id"], name: "index_requirements_on_project_id"

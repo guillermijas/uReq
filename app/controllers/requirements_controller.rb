@@ -1,65 +1,56 @@
 class RequirementsController < ApplicationController
   before_action :set_requirement, only: %i[show edit update destroy]
+  before_action :set_project
+  before_action :authenticate_user!
 
-  # GET /requirements
-  # GET /requirements.json
+
   def index
     @requirements = Requirement.where(project_id: params[:project_id])
   end
 
-  # GET /requirements/1
-  # GET /requirements/1.json
-  def show
-  end
+  def show; end
 
-  # GET /requirements/new
+  def edit; end
+
   def new
     @requirement = Requirement.new
-    @project = Project.find(params[:project_id])
   end
 
-  # GET /requirements/1/edit
-  def edit
-    @project = Project.find(params[:project_id])
-  end
-
-  # POST /requirements
-  # POST /requirements.json
   def create
     @requirement = Requirement.new(requirement_params)
-
+    @requirement.project = @project
+    @requirement.user = current_user
+    @requirement.id_in_project = @requirement.next_id(@project.id)
     respond_to do |format|
       if @requirement.save
-        format.html { redirect_to @requirement, notice: 'Requirement was successfully created.' }
-        format.json { render :show, status: :created, location: @requirement }
+        Log.new(operation: "#{current_user.full_name} ha creado el requisito '#{@requirement.id_string}'",
+                project_id: @project.id, user_id: current_user.id).save!
+        format.html { redirect_to project_requirements_path(@project), notice: 'Requisito creado' }
       else
         format.html { render :new }
-        format.json { render json: @requirement.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PATCH/PUT /requirements/1
-  # PATCH/PUT /requirements/1.json
   def update
     respond_to do |format|
+      @requirement.user = current_user
       if @requirement.update(requirement_params)
-        format.html { redirect_to @requirement, notice: 'Requirement was successfully updated.' }
-        format.json { render :show, status: :ok, location: @requirement }
+        Log.new(operation: "#{current_user.full_name} ha actualizado el requisito '#{@requirement.id_string}'",
+                project_id: @project.id, user_id: current_user.id).save!
+        format.html { redirect_to project_requirements_path(@project), notice: 'Requisito actualizado' }
       else
         format.html { render :edit }
-        format.json { render json: @requirement.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /requirements/1
-  # DELETE /requirements/1.json
   def destroy
     @requirement.destroy
     respond_to do |format|
-      format.html { redirect_to requirements_url, notice: 'Requirement was successfully destroyed.' }
-      format.json { head :no_content }
+      Log.new(operation: "#{current_user.full_name} ha borrado el requisito '#{@requirement.id_string}'",
+              project_id: @project.id, user_id: current_user.id).save!
+      format.html { redirect_to project_requirements_path(@project), notice: 'Requisito eliminado' }
     end
   end
 
@@ -69,8 +60,13 @@ class RequirementsController < ApplicationController
     @requirement = Requirement.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
+  def set_project
+    @project = Project.find(params[:project_id])
+  end
+
   def requirement_params
-    params.require(:requirement).permit(:suffix, :description, :status, :end_date, :category, :level)
+    params.require(:requirement).permit(:suffix, :description,
+                                        :status, :end_date,
+                                        :category, :level)
   end
 end

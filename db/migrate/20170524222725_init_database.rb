@@ -40,6 +40,7 @@ class InitDatabase < ActiveRecord::Migration[5.1]
       t.date :end_date
       t.string :category
       t.string :level
+      t.integer :id_in_project
       t.timestamps
     end
 
