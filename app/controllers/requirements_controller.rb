@@ -24,7 +24,7 @@ class RequirementsController < ApplicationController
     respond_to do |format|
       if @requirement.save
         Log.new(operation: "#{current_user.full_name} ha creado el requisito '#{@requirement.id_string}'",
-                project_id: @project.id, user_id: current_user.id).save!
+                project_id: @project.id, user_id: current_user.id, requirement_id: @requirement.id).save!
         format.html { redirect_to project_requirements_path(@project), notice: 'Requisito creado' }
       else
         format.html { render :new }
@@ -37,7 +37,7 @@ class RequirementsController < ApplicationController
       @requirement.user = current_user
       if @requirement.update(requirement_params)
         Log.new(operation: "#{current_user.full_name} ha actualizado el requisito '#{@requirement.id_string}'",
-                project_id: @project.id, user_id: current_user.id).save!
+                project_id: @project.id, user_id: current_user.id, requirement_id: @requirement.id).save!
         format.html { redirect_to project_requirements_path(@project), notice: 'Requisito actualizado' }
       else
         format.html { render :edit }
@@ -49,7 +49,7 @@ class RequirementsController < ApplicationController
     @requirement.destroy
     respond_to do |format|
       Log.new(operation: "#{current_user.full_name} ha borrado el requisito '#{@requirement.id_string}'",
-              project_id: @project.id, user_id: current_user.id).save!
+              project_id: @project.id, user_id: current_user.id, requirement_id: @requirement.id).save!
       format.html { redirect_to project_requirements_path(@project), notice: 'Requisito eliminado' }
     end
   end

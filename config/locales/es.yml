@@ -17,3 +17,18 @@ es:
               blank: "La contraseña no puede estar vacía"
             password_confirmation:
               confirmation: "Las contraseñas no coinciden"
+
+
+  #niveles de requisito
+
+  high: "Alto"
+  medium: "Medio"
+  low: "Bajo"
+
+
+  #estado de requisito
+
+  pending: "Pendiente"
+  in_process: "En proceso"
+  verifying: "Verificando"
+  rejected: "Rechazado"

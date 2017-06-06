@@ -1,32 +1,43 @@
-%h1 Listing requirements
+#wrapper
+  #header
+    = render 'header'
 
-%table
-  %thead
-    %tr
-      %th Suffix
-      %th Description
-      %th Status
-      %th End date
-      %th Category
-      %th Level
-      %th
-      %th
-      %th
+  #left-side-menu
+    / https://stackoverflow.com/questions/9253269/conditionally-closing-a-tag-in-haml
+    /    .container
+    - 12.times do
+      - @requirements.group_by(&:category).each do |category, reqs|
+        %h2= category
+        %ul
+          - reqs.each do |req|
+            %li= req.id_string
+  #requirements
 
-  %tbody
-    - @requirements.each do |requirement|
-      %tr
-        %td= requirement.id_string
-        %td= requirement.description.html_safe
-        %td= requirement.status
-        %td= requirement.end_date
-        %td= requirement.category
-        %td= requirement.level
-        /%td= link_to 'Show', project_requirement_path(@project, requirement)
-        %td= link_to 'Edit', edit_project_requirement_path(@project, requirement)
-        %td= link_to 'Destroy', project_requirement_path(@project, requirement), method: :delete
+    %table.table.table-responsive.table-bordered
+      %thead
+        %tr
+          %th ID
+          %th Descripcion
+          %th Estado
+          %th Categoría
+          %th Nivel
+          %th
+          %th
 
+      %tbody
+        - @requirements.each do |requirement|
+          %tr
+            %td= requirement.id_string
+            %td= requirement.description.html_safe
+            %td= t(requirement.status)
+            %td= requirement.category
+            %td= t(requirement.level)
+            /%td= link_to 'Show', project_requirement_path(@project, requirement)
+            %td= link_to 'Editar', edit_project_requirement_path(@project, requirement)
+            %td= link_to 'Borrar', project_requirement_path(@project, requirement), method: :delete
 
-%br
+    %br
+    = link_to 'Nuevo Requisito', new_project_requirement_path
 
-= link_to 'New Requirement', new_project_requirement_path
+  #right-side-menu
+    aaa
