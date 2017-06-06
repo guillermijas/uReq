@@ -30,7 +30,7 @@ class ProjectsController < ApplicationController
     @project.users.push(current_user)
     @project.users.push(User.where(role: 'admin').where.not(id: current_user))
     respond_to do |format|
-      if @project.save
+      if @project.save!
         @project.user_projects.each do |usr_pr|
           usr_pr.owner = true
           usr_pr.save

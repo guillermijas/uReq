@@ -21,7 +21,11 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create project" do
     assert_difference('Project.count' && 'Log.count') do
-      post projects_url, params: { project: { client: @project.client, end_date: @project.end_date, name: @project.name, status: @project.status } }
+      post projects_url, params: {
+        project: {
+          client: @project.client, name: @project.name, status: @project.status
+        }
+      }
     end
     assert_equal(2, Project.last.user_projects.count)
     assert_equal(@user.id, Project.last.user_projects.first.user_id)
@@ -32,8 +36,8 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should not create project" do
-    assert_no_difference('Project.count' || 'Log.count') do
-      post projects_url, params: { project: {name: ''} }
+    assert_raise ActiveRecord::RecordInvalid do
+      post projects_url, params: { project: { name: '', status: @project.status } }
     end
   end
 
