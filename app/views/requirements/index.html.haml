@@ -4,40 +4,33 @@
 
   #left-side-menu
     / https://stackoverflow.com/questions/9253269/conditionally-closing-a-tag-in-haml
-    /    .container
-    - 12.times do
+    .container
       - @requirements.group_by(&:category).each do |category, reqs|
-        %h2= category
+        %h2= category.blank? ? 'Sin categoría' : category
         %ul
           - reqs.each do |req|
-            %li= req.id_string
+            %li
+              =link_to req.id_string, select_project_requirements_path(@project, req), remote: true
+
   #requirements
+    = render 'layouts/alerts'
 
-    %table.table.table-responsive.table-bordered
-      %thead
-        %tr
-          %th ID
-          %th Descripcion
-          %th Estado
-          %th Categoría
-          %th Nivel
-          %th
-          %th
-
-      %tbody
-        - @requirements.each do |requirement|
-          %tr
-            %td= requirement.id_string
-            %td= requirement.description.html_safe
-            %td= t(requirement.status)
-            %td= requirement.category
-            %td= t(requirement.level)
-            /%td= link_to 'Show', project_requirement_path(@project, requirement)
-            %td= link_to 'Editar', edit_project_requirement_path(@project, requirement)
-            %td= link_to 'Borrar', project_requirement_path(@project, requirement), method: :delete
+    %table.table.table-responsive.table-bordered#table-requirements
+      = render 'requirements'
 
     %br
     = link_to 'Nuevo Requisito', new_project_requirement_path
 
   #right-side-menu
-    aaa
+    = @comments
+
+
+/ https://stackoverflow.com/questions/25125076/how-to-make-tr-clickable-over-link-to
+:javascript
+  $(document).on("click", "#table-requirements tr", function() {
+    var link  = $(this).data("href");
+    $.ajax({
+      url: link,
+      type: "GET"
+    });
+  });

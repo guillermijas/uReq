@@ -1,0 +1,19 @@
+%thead
+  %tr
+    %th ID
+    %th Descripcion
+    %th Estado
+    %th Categoría
+    %th Nivel
+    %th
+    %th
+%tbody
+  - @requirements.each do |requirement|
+    %tr{id: requirement.id_string, 'data-href': select_project_requirements_path(@project, requirement) }
+      %td=link_to requirement.id_string, select_project_requirements_path(@project, requirement, format: :js), remote: true
+      %td= requirement.description.html_safe
+      %td= t(requirement.status)
+      %td= requirement.category
+      %td= t(requirement.level)
+      %td= link_to 'Editar', edit_project_requirement_path(@project, requirement)
+      %td= link_to 'Borrar', project_requirement_path(@project, requirement), method: :delete

@@ -15,7 +15,7 @@
               error_html: { class: 'error' }
   .form-group
     = f.input :status, label: 'Estado',
-              collection: [%w(Pendiente pending), ['En proceso', 'in_process'], %w(Verificando verifying), %w(Rechazado rejected) ],
+              collection: [%w(Pendiente pending), ['En proceso', 'in_process'], %w(Verificando verifying), %w(Rechazado rejected), %w(Hecho done)],
               include_blank: false
   .form-group
     = f.input :category, label: 'Categoría'

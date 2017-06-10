@@ -1,0 +1,12 @@
+$("#table-requirements").html("<%= escape_javascript(render partial: 'requirements') %>");
+$("#right-side-menu").html("<%= escape_javascript(render partial: 'req_comments') %>");
+
+var row = $("#<%= @requirement.id_string %>");
+var req = $('#requirements')
+
+if (row.length !== 0) {
+    req.scrollTop(req.position());
+    var pos = row.position().top - 120;
+    req.scrollTop(pos);
+    row.addClass('highlight');
+}

@@ -1,1 +1,15 @@
-a
+.row.align-items-center
+  .col
+    %h2
+      = icon('folder-open-o')
+      = @project.name
+  .col.text-center
+    %h2
+      = icon('bar-chart-o')
+      = "#{@requirements.where(status: 'done').count}/#{@requirements.count}"
+
+  .col.text-right
+    %h2
+      = link_to projects_path do
+        =icon('arrow-left')
+        Volver

@@ -32,3 +32,4 @@ es:
   in_process: "En proceso"
   verifying: "Verificando"
   rejected: "Rechazado"
+  done: "Hecho"

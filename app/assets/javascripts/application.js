@@ -4,5 +4,5 @@
 //= require jquery_ujs
 //= require tether
 //= require bootstrap
-//= require_tree .
 //= require ckeditor/init
+//= require_tree .

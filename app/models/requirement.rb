@@ -8,11 +8,15 @@ class Requirement < ApplicationRecord
   validates :id_in_project, presence: true
   validates :level, inclusion: { in: %w[high medium low],
                                  message: "'%{value}' no es un nivel válido" }
-  validates :status, inclusion: { in: %w[pending in_process verifying rejected],
+  validates :status, inclusion: { in: %w[pending in_process verifying done rejected],
                                   message: "'%{value}' no es un estado válido" }
 
   def id_string
-    "#{suffix}-#{id_in_project}"
+    if suffix.blank?
+      id_in_project
+    else
+      "#{suffix}-#{id_in_project}"
+    end
   end
 
   def next_id(project_id)

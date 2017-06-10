@@ -54,6 +54,15 @@ class RequirementsController < ApplicationController
     end
   end
 
+  def select
+    @requirements = Requirement.where(project_id: params[:project_id])
+    @requirement = Requirement.find(params[:id])
+    @comments = @requirement.id_string
+    respond_to do |format|
+      format.js { render layout: false }
+    end
+  end
+
   private
 
   def set_requirement

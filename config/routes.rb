@@ -11,7 +11,11 @@ Rails.application.routes.draw do
       get 'archived', to: 'projects#index_archived', as: 'archived'
       post ':id/archive', to: 'projects#archive', as: 'archive'
     end
-    resources :requirements
+    resources :requirements do
+      collection do
+        get ':id/select', to: 'requirements#select', as: 'select'
+      end
+    end
   end
 
   root 'projects#index'
