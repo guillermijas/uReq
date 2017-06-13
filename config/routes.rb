@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     resources :requirements do
       collection do
         get ':id/select', to: 'requirements#select', as: 'select'
+        get 'new_modal', to: 'requirements#new_modal', as: 'new_modal'
       end
     end
   end

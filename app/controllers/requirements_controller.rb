@@ -63,6 +63,13 @@ class RequirementsController < ApplicationController
     end
   end
 
+  def new_modal
+    @requirement = Requirement.new
+    respond_to do |format|
+      format.js { render layout: false }
+    end
+  end
+
   private
 
   def set_requirement

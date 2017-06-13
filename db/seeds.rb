@@ -1,15 +1,94 @@
 User.create!([
-                 {email: "guillermijas@gmail.com", password: 'qwerty123', role: 'project_manager', first_name: 'Guillermo', last_name: 'Mora Cordero'},
-                 {email: "rossi@gmail.com", password: 'qwerty123', role: 'project_manager', first_name: 'Carlos', last_name: 'Rossi'},
-                 {email: "admin@admin.com", password: 'asdf1234', role: 'admin', first_name: 'Admin', last_name: 'Admin'}
-             ])
-Project.create!([
-                    {name: "AGNT Telegrama", client: "Idea Technologies", end_date: "2017-05-25", status: "in_process", picture_file_name: nil, picture_content_type: nil, picture_file_size: nil, picture_updated_at: nil}
-                ])
-UserProject.create!([
-                        {project_id: 1, user_id: 1, owner: true},
-                        {project_id: 1, user_id: 3, owner: true}
-                    ])
+  {email: "guillermijas@gmail.com", password: 'qwerty123', role: 'project_manager', first_name: 'Guillermo', last_name: 'Mora Cordero'},
+  {email: "rossi@gmail.com", password: 'qwerty123', role: 'project_manager', first_name: 'Carlos', last_name: 'Rossi'},
+  {email: "admin@admin.com", password: 'asdf1234', role: 'admin', first_name: 'Admin', last_name: 'Admin'}
+])
 Log.create!([
-                {project_id: 1, user_id: 1, operation: "Guillermo Mora Cordero ha creado el proyecto 'AGNT Telegrama'"},
-            ])
+  {project_id: 1, user_id: 1, requirement_id: nil, comment_id: nil, operation: "Guillermo Mora Cordero ha creado el proyecto 'AGNT Telegrama'"},
+  {project_id: 1, user_id: 1, requirement_id: nil, comment_id: nil, operation: "Guillermo Mora Cordero ha actualizado el proyecto 'üReq'"},
+  {project_id: 1, user_id: 1, requirement_id: 1, comment_id: nil, operation: "Guillermo Mora Cordero ha creado el requisito 'RF-1'"},
+  {project_id: 1, user_id: 1, requirement_id: 2, comment_id: nil, operation: "Guillermo Mora Cordero ha creado el requisito 'RF-2'"},
+  {project_id: 1, user_id: 1, requirement_id: 3, comment_id: nil, operation: "Guillermo Mora Cordero ha creado el requisito 'RF-3'"},
+  {project_id: 1, user_id: 1, requirement_id: 4, comment_id: nil, operation: "Guillermo Mora Cordero ha creado el requisito '4'"},
+  {project_id: 1, user_id: 1, requirement_id: 4, comment_id: nil, operation: "Guillermo Mora Cordero ha actualizado el requisito 'RF-4'"},
+  {project_id: 1, user_id: 1, requirement_id: 5, comment_id: nil, operation: "Guillermo Mora Cordero ha creado el requisito 'RF-5'"},
+  {project_id: 1, user_id: 1, requirement_id: 3, comment_id: nil, operation: "Guillermo Mora Cordero ha actualizado el requisito 'RF-3'"},
+  {project_id: 1, user_id: 1, requirement_id: 6, comment_id: nil, operation: "Guillermo Mora Cordero ha creado el requisito 'RI-6'"},
+  {project_id: 1, user_id: 1, requirement_id: 7, comment_id: nil, operation: "Guillermo Mora Cordero ha creado el requisito 'RNF-7'"},
+  {project_id: 1, user_id: 1, requirement_id: 8, comment_id: nil, operation: "Guillermo Mora Cordero ha creado el requisito 'RF-8'"},
+  {project_id: 1, user_id: 1, requirement_id: 9, comment_id: nil, operation: "Guillermo Mora Cordero ha creado el requisito 'RF-9'"},
+  {project_id: 1, user_id: 1, requirement_id: 10, comment_id: nil, operation: "Guillermo Mora Cordero ha creado el requisito '10'"},
+  {project_id: 1, user_id: 1, requirement_id: 10, comment_id: nil, operation: "Guillermo Mora Cordero ha actualizado el requisito 'RF-10'"},
+  {project_id: 1, user_id: 1, requirement_id: 11, comment_id: nil, operation: "Guillermo Mora Cordero ha creado el requisito 'RF-11'"},
+  {project_id: 1, user_id: 1, requirement_id: 12, comment_id: nil, operation: "Guillermo Mora Cordero ha creado el requisito 'RF-12'"},
+  {project_id: 1, user_id: 1, requirement_id: 13, comment_id: nil, operation: "Guillermo Mora Cordero ha creado el requisito 'RF-13'"},
+  {project_id: 1, user_id: 1, requirement_id: 14, comment_id: nil, operation: "Guillermo Mora Cordero ha creado el requisito '14'"},
+  {project_id: 1, user_id: 1, requirement_id: 15, comment_id: nil, operation: "Guillermo Mora Cordero ha creado el requisito 'RF-15'"},
+  {project_id: 1, user_id: 1, requirement_id: 14, comment_id: nil, operation: "Guillermo Mora Cordero ha actualizado el requisito 'RF-14'"},
+  {project_id: 1, user_id: 1, requirement_id: 16, comment_id: nil, operation: "Guillermo Mora Cordero ha creado el requisito 'RF-16'"},
+  {project_id: 1, user_id: 1, requirement_id: 17, comment_id: nil, operation: "Guillermo Mora Cordero ha creado el requisito 'RF-17'"},
+  {project_id: 1, user_id: 1, requirement_id: 18, comment_id: nil, operation: "Guillermo Mora Cordero ha creado el requisito 'RS-18'"},
+  {project_id: 1, user_id: 1, requirement_id: 17, comment_id: nil, operation: "Guillermo Mora Cordero ha actualizado el requisito 'RS-17'"},
+  {project_id: 1, user_id: 1, requirement_id: 19, comment_id: nil, operation: "Guillermo Mora Cordero ha creado el requisito 'RS-19'"},
+  {project_id: 1, user_id: 1, requirement_id: 20, comment_id: nil, operation: "Guillermo Mora Cordero ha creado el requisito '20'"},
+  {project_id: 1, user_id: 1, requirement_id: 20, comment_id: nil, operation: "Guillermo Mora Cordero ha actualizado el requisito 'RF-20'"},
+  {project_id: 1, user_id: 1, requirement_id: 21, comment_id: nil, operation: "Guillermo Mora Cordero ha creado el requisito 'RI-21'"},
+  {project_id: 1, user_id: 1, requirement_id: 22, comment_id: nil, operation: "Guillermo Mora Cordero ha creado el requisito 'RI-22'"},
+  {project_id: 1, user_id: 1, requirement_id: 23, comment_id: nil, operation: "Guillermo Mora Cordero ha creado el requisito '23'"},
+  {project_id: 1, user_id: 1, requirement_id: 24, comment_id: nil, operation: "Guillermo Mora Cordero ha creado el requisito '24'"},
+  {project_id: 1, user_id: 1, requirement_id: 25, comment_id: nil, operation: "Guillermo Mora Cordero ha creado el requisito 'RI-25'"},
+  {project_id: 1, user_id: 1, requirement_id: 23, comment_id: nil, operation: "Guillermo Mora Cordero ha actualizado el requisito 'RI-23'"},
+  {project_id: 1, user_id: 1, requirement_id: 24, comment_id: nil, operation: "Guillermo Mora Cordero ha actualizado el requisito 'RI-24'"},
+  {project_id: 1, user_id: 1, requirement_id: 26, comment_id: nil, operation: "Guillermo Mora Cordero ha creado el requisito 'RNF-26'"},
+  {project_id: 1, user_id: 1, requirement_id: 27, comment_id: nil, operation: "Guillermo Mora Cordero ha creado el requisito 'RS-27'"},
+  {project_id: 1, user_id: 1, requirement_id: 28, comment_id: nil, operation: "Guillermo Mora Cordero ha creado el requisito 'RNF-28'"},
+  {project_id: 1, user_id: 1, requirement_id: 29, comment_id: nil, operation: "Guillermo Mora Cordero ha creado el requisito 'RNF-29'"},
+  {project_id: 1, user_id: 1, requirement_id: 30, comment_id: nil, operation: "Guillermo Mora Cordero ha creado el requisito '30'"},
+  {project_id: 1, user_id: 1, requirement_id: 31, comment_id: nil, operation: "Guillermo Mora Cordero ha creado el requisito 'RNF-31'"},
+  {project_id: 1, user_id: 1, requirement_id: 32, comment_id: nil, operation: "Guillermo Mora Cordero ha creado el requisito 'RNF-32'"},
+  {project_id: 1, user_id: 1, requirement_id: 33, comment_id: nil, operation: "Guillermo Mora Cordero ha creado el requisito 'RNF-33'"},
+  {project_id: 1, user_id: 1, requirement_id: 30, comment_id: nil, operation: "Guillermo Mora Cordero ha actualizado el requisito 'RNF-30'"}
+])
+Project.create!([
+  {name: "üReq", client: "Universidad de Málaga", end_date: "2017-05-25", status: "in_process"}
+])
+Requirement.create!([
+  {project_id: 1, user_id: 1, suffix: "RF", description: "<p>La aplicacion debe permitir el registro e inicio de sesi&oacute;n de usuarios</p>\r\n", status: "pending", end_date: nil, category: "Funcional", level: "high", id_in_project: 1},
+  {project_id: 1, user_id: 1, suffix: "RF", description: "<p>La aplicacion debe permitir crear proyectos</p>\r\n", status: "done", end_date: nil, category: "Funcional", level: "high", id_in_project: 2},
+  {project_id: 1, user_id: 1, suffix: "RF", description: "<p>La aplicaci&oacute;n debe permitir la creacion de requisitos <strong>dentro</strong> de un proyecto</p>\r\n", status: "done", end_date: nil, category: "Funcional", level: "high", id_in_project: 3},
+  {project_id: 1, user_id: 1, suffix: "RF", description: "<p>La aplicacion debe permitir a&ntilde;adir comentarios a un requisito dentro de un proyecto</p>\r\n", status: "pending", end_date: nil, category: "Funcional", level: "high", id_in_project: 4},
+  {project_id: 1, user_id: 1, suffix: "RF", description: "<p>La aplicacion debe permitir seleccionar a los usuarios que participar&aacute;n en un proyecto</p>\r\n", status: "pending", end_date: nil, category: "Funcional", level: "high", id_in_project: 5},
+  {project_id: 1, user_id: 1, suffix: "RI", description: "<p>Se debe guardar el nombre, apellido(s), nombre de usuario, hash de contrase&ntilde;a, fechas de creaci&oacute;n y ultima conexi&oacute;n, rol (Administrador / Jefe / Colaborador) y estado (activo/bloqueado)</p>\r\n", status: "pending", end_date: nil, category: "Informacion", level: "high", id_in_project: 6},
+  {project_id: 1, user_id: 1, suffix: "RNF", description: "<p>El usuario no debe sufrir esperas de m&aacute;s de 5 segundos entre cada operaci&oacute;n</p>\r\n", status: "pending", end_date: nil, category: "No funcional", level: "high", id_in_project: 7},
+  {project_id: 1, user_id: 1, suffix: "RF", description: "<p>La aplciacion debe permitir la edicion de los campos de un requisito, especialmente descripcion, fecha limite, categoria y estado</p>\r\n", status: "pending", end_date: nil, category: "Funcional", level: "high", id_in_project: 8},
+  {project_id: 1, user_id: 1, suffix: "RF", description: "<p>La aplicacion debe permitir enlaces entre requisitos, ya sean relacionados por satisfacer o cubrir</p>\r\n", status: "pending", end_date: nil, category: "Funcional", level: "high", id_in_project: 9},
+  {project_id: 1, user_id: 1, suffix: "RF", description: "<p>La aplicacion debe permitir eliminar requisitos</p>\r\n", status: "pending", end_date: nil, category: "Funcional", level: "high", id_in_project: 10},
+  {project_id: 1, user_id: 1, suffix: "RF", description: "<p>La aplicacion debe ofrecer un glosario para mejor comprension de terminos especificos de un proyecto</p>\r\n", status: "pending", end_date: nil, category: "Funcional", level: "high", id_in_project: 11},
+  {project_id: 1, user_id: 1, suffix: "RF", description: "<p>La aplicacion debe mantener un registro de todas las operaciones efectuadas, indicando ademas la fecha, hora y autor. Esto incluye las opreaciones CRUD para glosario, proyecto, requisitos y comentarios.</p>\r\n", status: "pending", end_date: nil, category: "Funcional", level: "high", id_in_project: 12},
+  {project_id: 1, user_id: 1, suffix: "RF", description: "<p>La aplicacion debe permitir exportar todos los requisitos a formato de hoja de calculo</p>\r\n", status: "pending", end_date: nil, category: "Funcional", level: "high", id_in_project: 13},
+  {project_id: 1, user_id: 1, suffix: "RF", description: "<p>La aplicacion debe poder generar un informe a partir de los requisitos en formato PDF</p>\r\n", status: "pending", end_date: nil, category: "Funcional", level: "high", id_in_project: 14},
+  {project_id: 1, user_id: 1, suffix: "RF", description: "<p>La aplicaion debe mostrar un esquema (matriz) con las relaciones entre requisitos</p>\r\n", status: "pending", end_date: nil, category: "Funcional", level: "high", id_in_project: 15},
+  {project_id: 1, user_id: 1, suffix: "RF", description: "<p>La aplicacion debe permitir la busqueda de requisitos por palabras contenidas en la descripcion o alterando el orden por columnas</p>\r\n", status: "pending", end_date: nil, category: "Funcional", level: "high", id_in_project: 16},
+  {project_id: 1, user_id: 1, suffix: "RS", description: "<p>Los usuarios colaboradores pueden ver proyectos (a los que pertenezcan), ver requisitos de un proyecto, modificar el glosario, crear y leer comentarios y gestionar tareas (Trello)</p>\r\n", status: "pending", end_date: nil, category: "Seguridad", level: "high", id_in_project: 17},
+  {project_id: 1, user_id: 1, suffix: "RS", description: "<p>Un jefe de proyecto podr&aacute; crear proyectos, ver y editar proyectos creados o asignados; crear, ver y editar requisitos y crear y ver comentarios. Tambiien pueden a&ntilde;adir colaboradores a proyectos y gestionar tareas (Trello)</p>\r\n", status: "pending", end_date: nil, category: "Seguridad", level: "high", id_in_project: 18},
+  {project_id: 1, user_id: 1, suffix: "RS", description: "<p>Un administrador debe poder crear, ver, editar y eliminar todos los proyectos, requisitos y comentarios; Asignar jefes a proyectos ya existentes. Tambien gestiona tareas (Trello) y tiene acceso al registro de acciones. Puede eliminar terminos del glosario</p>\r\n", status: "pending", end_date: nil, category: "Seguridad", level: "high", id_in_project: 19},
+  {project_id: 1, user_id: 1, suffix: "RF", description: "<p>La aplicacion debe permitir el incio de sesion de los usuarios mediante validacion de usuario y contrase&ntilde;a</p>\r\n", status: "pending", end_date: nil, category: "Funcional", level: "medium", id_in_project: 20},
+  {project_id: 1, user_id: 1, suffix: "RI", description: "<p>Se debe guardar el titulo, descripcion, fechas de creacion, cierre y fecha limite, id del cliente, estado y foto</p>\r\n", status: "pending", end_date: nil, category: "Informacion", level: "high", id_in_project: 21},
+  {project_id: 1, user_id: 1, suffix: "RI", description: "<p>Se debe guardar, ademas de la id del proyecto, usuario creador/modificador e id de requisitos relacionados, descripcion, fechas de creacion y modificacion, estado y categoria</p>\r\n", status: "pending", end_date: nil, category: "Informacion", level: "high", id_in_project: 22},
+  {project_id: 1, user_id: 1, suffix: "RI", description: "<p>Se debe guardar la id del usuario que lo ha escrito, la id del proyecto y del requisito al que pertenece y el cuerpo del texto, asi como la fecha de creacion</p>\r\n", status: "pending", end_date: nil, category: "Informacion", level: "high", id_in_project: 23},
+  {project_id: 1, user_id: 1, suffix: "RI", description: "<p>Se debe almacenar en el glosario la palabra o palabras clave y su definicion</p>\r\n", status: "pending", end_date: nil, category: "Informacion", level: "high", id_in_project: 24},
+  {project_id: 1, user_id: 1, suffix: "RI", description: "<p>Se debe almacenar en el registro la descripcion de la operacion, el usuario que la ha llevado a cabo y la hora en la que se efectua</p>\r\n", status: "pending", end_date: nil, category: "Informacion", level: "high", id_in_project: 25},
+  {project_id: 1, user_id: 1, suffix: "RNF", description: "<p>La interfaz debe permitir que el usuario obtenga la informacion que desee o realizar una operacion en menos de 5 clics de raton.</p>\r\n\r\n<p>Se tendran en cuenta pantallas de resolucion 720p y 1080p a la hora de crear dise&ntilde;os de interfaces</p>\r\n", status: "pending", end_date: nil, category: "No funcional", level: "high", id_in_project: 26},
+  {project_id: 1, user_id: 1, suffix: "RS", description: "<p>Las contrase&ntilde;as nunca se almacenaran como texto plano ni se podran consultar</p>\r\n", status: "pending", end_date: nil, category: "Seguridad", level: "high", id_in_project: 27},
+  {project_id: 1, user_id: 1, suffix: "RNF", description: "<p>Se debe garantizar un acceso a todos los usuarios de una red en el caso de montarse en servidor local.</p>\r\n\r\n<p>Si el sistema operativo esta conectado a internet o una red local y su navegador no bloquea javascript, sera capaz de utilizar la aplicacion</p>\r\n", status: "pending", end_date: nil, category: "No funcional", level: "high", id_in_project: 28},
+  {project_id: 1, user_id: 1, suffix: "RNF", description: "<p>Sera necesaria la instalacion de RVM (Ruby version manager) y las gemas de las que dependa el proyecto. Compatible con sistemas Windows, Mac OS y GNU/Linux</p>\r\n", status: "pending", end_date: nil, category: "No funcional", level: "high", id_in_project: 29},
+  {project_id: 1, user_id: 1, suffix: "RNF", description: "<p>El manual de usuario no debe ser una lectura obligatoria para poder usar la aplicacion. El tiempo maximo para el aprendizaje no debe ser superior a 15 minutos</p>\r\n", status: "pending", end_date: nil, category: "No funcional", level: "high", id_in_project: 30},
+  {project_id: 1, user_id: 1, suffix: "RNF", description: "<p>Unicamente sera necesario un hardware capaz de alojar el sistema operativo, RVM y el servidor Puma 3.8.2.Una red local tambien sera necesaria si no usamos un alojamiento externo.</p>\r\n\r\n<p>Tratandose de un programa con bajo trafico, una m&aacute;quina con 1GB de memoria RAM y un procesador Intel Core Duo ser&aacute; suficiente. Si se trabaja con AWS, una instancia t2.micro tambien nos servira</p>\r\n", status: "pending", end_date: nil, category: "No funcional", level: "high", id_in_project: 31},
+  {project_id: 1, user_id: 1, suffix: "RNF", description: "<p>Se debe permitir que mas de un usuario trabaje a la vez en el mismo proyecto, sin riesgo a que se creen id duplicadas</p>\r\n", status: "pending", end_date: nil, category: "No funcional", level: "high", id_in_project: 32},
+  {project_id: 1, user_id: 1, suffix: "RNF", description: "<p>La aplicacion se distribuye con una licencia GPLv3</p>\r\n", status: "pending", end_date: nil, category: "No funcional", level: "high", id_in_project: 33}
+])
+UserProject.create!([
+  {project_id: 1, user_id: 1, owner: true},
+  {project_id: 1, user_id: 3, owner: true}
+])
+

@@ -5,8 +5,11 @@
   #left-side-menu
     / https://stackoverflow.com/questions/9253269/conditionally-closing-a-tag-in-haml
     .container
+      = link_to 'Nuevo Requisito', new_modal_project_requirements_path(@project), remote: true, class: 'btn btn-secondary'
+      %br
+      %br
       - @requirements.group_by(&:category).each do |category, reqs|
-        %h2= category.blank? ? 'Sin categoría' : category
+        %h4= category.blank? ? 'Sin categoría' : category
         %ul
           - reqs.each do |req|
             %li
@@ -14,16 +17,16 @@
 
   #requirements
     = render 'layouts/alerts'
-
-    %table.table.table-responsive.table-bordered#table-requirements
-      = render 'requirements'
+    .table-responsive
+      %table.table.table-bordered#table-requirements
+        = render 'requirements'
 
     %br
-    = link_to 'Nuevo Requisito', new_project_requirement_path
 
   #right-side-menu
     = @comments
 
+#requirements-modal-form
 
 / https://stackoverflow.com/questions/25125076/how-to-make-tr-clickable-over-link-to
 :javascript

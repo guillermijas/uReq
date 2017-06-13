@@ -7,21 +7,23 @@
           %li= message
 
   .form-group
-    = f.input :suffix, label: 'ID', required: true,
-              error: 'El sufijo de la ID es obligatorio.', error_html: { class: 'error' }
-  .form-group
-    = f.input :description,  as: :ckeditor, input_html: { ckeditor: { toolbar: 'mini' } }, label: 'Descripcion',
+    = f.input :description,  as: :ckeditor, input_html: { ckeditor: { toolbar: 'simple' } }, label: 'Descripcion',
               required: true, error: 'La descripción del requisito es obligatoria.',
               error_html: { class: 'error' }
   .form-group
     = f.input :status, label: 'Estado',
               collection: [%w(Pendiente pending), ['En proceso', 'in_process'], %w(Verificando verifying), %w(Rechazado rejected), %w(Hecho done)],
               include_blank: false
-  .form-group
-    = f.input :category, label: 'Categoría'
+  .row
+    .col-md
+      .form-group
+        = f.input :category, label: 'Categoría'
+    .col-md
+      .form-group
+        = f.input :suffix, label: 'Sufijo', error: 'El sufijo de la ID es obligatorio.', error_html: { class: 'error' }
   .form-group
     = f.input :level, label: 'Nivel',
               collection: [%w(Alto high), %w(Medio medium), %w(Bajo low)],
               include_blank: false
   .actions
-    = f.button :submit, 'Save'
+    = f.button :submit, 'Guardar', class: 'btn btn-primary'
