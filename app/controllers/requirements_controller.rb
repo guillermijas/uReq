@@ -55,6 +55,7 @@ class RequirementsController < ApplicationController
   end
 
   def select
+    @scroll = params[:scroll]
     @requirements = Requirement.where(project_id: params[:project_id])
     @requirement = Requirement.find(params[:id])
     @comments = @requirement.id_string

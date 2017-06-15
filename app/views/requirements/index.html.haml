@@ -13,7 +13,7 @@
         %ul
           - reqs.each do |req|
             %li
-              =link_to req.id_string, select_project_requirements_path(@project, req), remote: true
+              =link_to req.id_string, select_project_requirements_path(@project, req, scroll: true), remote: true
 
   #requirements
     = render 'layouts/alerts'
@@ -37,3 +37,5 @@
       type: "GET"
     });
   });
+
+-console

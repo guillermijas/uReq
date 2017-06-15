@@ -5,8 +5,10 @@ var row = $("#<%= @requirement.id_string %>");
 var req = $('#requirements')
 
 if (row.length !== 0) {
-    req.scrollTop(req.position());
-    var pos = row.position().top - 120;
-    req.scrollTop(pos);
+    <%- if @scroll %>
+      req.scrollTop(req.position());
+      var pos = row.position().top - 120;
+      req.scrollTop(pos);
+    <%- end %>
     row.addClass('highlight');
 }

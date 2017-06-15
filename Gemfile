@@ -19,7 +19,7 @@ gem 'haml-rails'
 gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
 gem 'paperclip'
-gem 'puma', '~> 3.7'
+gem 'puma'
 gem 'rails', '~> 5.1.1'
 gem 'ransack'
 gem 'sass-rails', '~> 5.0'
@@ -33,7 +33,7 @@ gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'capybara', '~> 2.13'
+  gem 'capybara'
   gem 'selenium-webdriver'
 end
 

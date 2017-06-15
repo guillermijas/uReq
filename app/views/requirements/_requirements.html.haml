@@ -10,7 +10,7 @@
 %tbody
   - @requirements.each do |requirement|
     %tr{id: requirement.id_string, 'data-href': select_project_requirements_path(@project, requirement) }
-      %td=link_to requirement.id_string, select_project_requirements_path(@project, requirement, format: :js), remote: true
+      %td=link_to requirement.id_string, select_project_requirements_path(@project, requirement, format: :js,  scroll: false), remote: true
       %td= requirement.description.html_safe
       %td= t(requirement.status)
       %td= requirement.category
