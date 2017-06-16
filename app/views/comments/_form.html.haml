@@ -1,13 +1,8 @@
-= form_for @comment do |f|
-  - if @comment.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@comment.errors.count, "error")} prohibited this comment from being saved:"
-      %ul
-        - @comment.errors.full_messages.each do |message|
-          %li= message
-
+- comment = Comment.new
+- project = Project.find(params[:project_id])
+= simple_form_for([project, @requirement, comment], remote: true) do |f|
   .field
-    = f.label :body
-    = f.text_area :body
+    = f.input :body
   .actions
-    = f.submit 'Save'
+    = f.button :submit, 'Guardar', class: 'btn btn-primary'
+

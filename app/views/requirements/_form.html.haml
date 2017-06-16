@@ -1,11 +1,4 @@
 = simple_form_for([@project, @requirement]) do |f|
-  - if @requirement.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@requirement.errors.count, 'error')} prohibited this requirement from being saved:"
-      %ul
-        - @requirement.errors.full_messages.each do |message|
-          %li= message
-
   .form-group
     = f.input :description,  as: :ckeditor, input_html: { ckeditor: { toolbar: 'simple' } }, label: 'Descripcion',
               required: true, error: 'La descripción del requisito es obligatoria.',

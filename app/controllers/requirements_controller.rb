@@ -58,7 +58,8 @@ class RequirementsController < ApplicationController
     @scroll = params[:scroll]
     @requirements = Requirement.where(project_id: params[:project_id])
     @requirement = Requirement.find(params[:id])
-    @comments = @requirement.id_string
+    @comments = Comment.where(requirement_id: params[:id])
+    @comment = Comment.new
     respond_to do |format|
       format.js { render layout: false }
     end

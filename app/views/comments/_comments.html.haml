@@ -1,0 +1,7 @@
+- @comments.each do |comment|
+  %p
+    %strong= comment.user.full_name
+    \:
+    = comment.body
+= render 'comments/form'
+
