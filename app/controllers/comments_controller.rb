@@ -11,13 +11,14 @@ class CommentsController < ApplicationController
     @comment.user = current_user
     @comment.requirement_id = params[:requirement_id]
     @comments = Comment.where(requirement_id: params[:requirement_id])
+    @requirement = Requirement.find(params[:requirement_id])
+    @project = Project.find(params[:project_id])
     respond_to do |format|
       if @comment.save!
-        @requirement = Requirement.find(params[:requirement_id])
-        format.js { render layout: false, notice: 'Comment was successfully created.' }
-      else
-        format.js { render layout: false }
+        Log.new(operation: "#{current_user.full_name} ha comentado el requisito '#{@requirement.id_string}'",
+                project_id: @project.id, user_id: current_user.id, requirement_id: @requirement.id, comment_id: @comment.id).save!
       end
+      format.js { render layout: false }
     end
   end
 
@@ -25,9 +26,13 @@ class CommentsController < ApplicationController
   # DELETE /comments/1.json
   def destroy
     @comment.destroy
+    @comments = Comment.where(requirement_id: params[:requirement_id])
+    @requirement = Requirement.find(params[:requirement_id])
+    @project = Project.find(params[:project_id])
     respond_to do |format|
-      format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }
-      format.json { head :no_content }
+      Log.new(operation: "#{current_user.full_name} ha borrado un comentario en el requisito '#{@requirement.id_string}'",
+              project_id: @project.id, user_id: current_user.id, requirement_id: @requirement.id, comment_id: @comment.id).save!
+      format.js { render layout: false }
     end
   end
 

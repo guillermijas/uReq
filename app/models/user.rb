@@ -20,6 +20,10 @@ class User < ApplicationRecord
     first_name + ' ' + last_name
   end
 
+  def short_name
+    first_name.first + '. ' + last_name.partition(' ').first
+  end
+
   def user_role
     case role
       when 'collaborator'

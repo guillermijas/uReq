@@ -10,11 +10,11 @@
       %br
       - @requirements.group_by(&:category).each do |category, reqs|
         %h4= category.blank? ? 'Sin categoría' : category
-        %ul
+        %ul.root
           - reqs.each do |req|
             %li
               =link_to req.id_string, select_project_requirements_path(@project, req, scroll: true), remote: true
-
+        %br
   #requirements
     = render 'layouts/alerts'
     .table-responsive
@@ -22,7 +22,7 @@
         = render 'requirements'
     %br
 
-  #right-side-menu
+  %section#right-side-menu
 
 #requirements-modal-form
 

@@ -1,7 +1,10 @@
-- @comments.each do |comment|
-  %p
-    %strong= comment.user.full_name
-    \:
-    = comment.body
-= render 'comments/form'
-
+%article#comments-list
+  - @comments.each do |comment|
+    %p
+      %strong= comment.user.short_name
+      \:
+      = comment.body
+    =link_to 'Borrar', project_requirement_comment_path(@project, @requirement, comment), method: :delete, remote: true
+    %hr
+%article#comments-form
+  = render 'comments/form'

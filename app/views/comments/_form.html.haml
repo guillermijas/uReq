@@ -2,7 +2,5 @@
 - project = Project.find(params[:project_id])
 = simple_form_for([project, @requirement, comment], remote: true) do |f|
   .field
-    = f.input :body
-  .actions
-    = f.button :submit, 'Guardar', class: 'btn btn-primary'
-
+    = f.input :body, label: false
+    = f.button :submit, 'Guardar', class: 'btn btn-primary btn-long'

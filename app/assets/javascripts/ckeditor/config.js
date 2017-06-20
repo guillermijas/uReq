@@ -18,4 +18,7 @@ CKEDITOR.editorConfig = function (config) {
         {name: 'insert', items: ['Image', 'SpecialChar']},
         {name: 'colors', items: [ 'TextColor', 'BGColor']}
     ];
+    config.toolbar_simplest = [
+        {name: 'all', items: ['Bold', 'Italic', 'Underline','Link','BulletedList']}
+    ];
 };
