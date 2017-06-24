@@ -12,7 +12,11 @@ class RequirementsController < ApplicationController
 
   def show; end
 
-  def edit; end
+  def edit
+    respond_to do |format|
+      format.js{ render layout: false }
+    end
+  end
 
   def new
     @requirement = Requirement.new
@@ -58,8 +62,7 @@ class RequirementsController < ApplicationController
 
   def select
     @scroll = params[:scroll]
-    @q = Requirement.where(project_id: params[:project_id]).ransack(params[:q])
-    @requirements = @q.result
+    @requirements = Requirement.where(project_id: params[:project_id])
     @requirement = Requirement.find(params[:id])
     @comments = Comment.where(requirement_id: params[:id])
     @comment = Comment.new
