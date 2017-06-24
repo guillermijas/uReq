@@ -4,7 +4,8 @@
       %strong= comment.user.short_name
       \:
       = comment.body
-    =link_to 'Borrar', project_requirement_comment_path(@project, @requirement, comment), method: :delete, remote: true
-    %hr
+      =link_to project_requirement_comment_path(@project, @requirement, comment), method: :delete, remote: true do
+        =icon('times')
+
 %article#comments-form
   = render 'comments/form'

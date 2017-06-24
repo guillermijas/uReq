@@ -82,7 +82,7 @@ $hihglight: #F2F2C0;
   width: 200px;
   float: left;
   height: calc(100% - #{$header-height});
-  overflow-y: scroll;
+  overflow-y: hidden;
 }
 
 #requirements {
@@ -111,4 +111,8 @@ a{
   .modal-dialog{
     max-width:600px;
   }
+}
+
+#submit-search{
+  width: 100%;
 }

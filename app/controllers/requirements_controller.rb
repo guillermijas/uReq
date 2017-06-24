@@ -5,7 +5,9 @@ class RequirementsController < ApplicationController
 
 
   def index
-    @requirements = Requirement.where(project_id: params[:project_id])
+    @q = Requirement.where(project_id: params[:project_id]).ransack(params[:q])
+    @requirements = @q.result
+    # @requirements = Requirement.where(project_id: params[:project_id])
   end
 
   def show; end
@@ -56,7 +58,8 @@ class RequirementsController < ApplicationController
 
   def select
     @scroll = params[:scroll]
-    @requirements = Requirement.where(project_id: params[:project_id])
+    @q = Requirement.where(project_id: params[:project_id]).ransack(params[:q])
+    @requirements = @q.result
     @requirement = Requirement.find(params[:id])
     @comments = Comment.where(requirement_id: params[:id])
     @comment = Comment.new
