@@ -2,7 +2,7 @@
   #header
     = render 'header'
 
-  #left-side-menu
+  %section#left-side-menu
     / https://stackoverflow.com/questions/9253269/conditionally-closing-a-tag-in-haml
     .container
       = link_to 'Nuevo Requisito', new_modal_project_requirements_path(@project), remote: true, class: 'btn btn-secondary'
@@ -16,7 +16,7 @@
             %li
               =link_to req.id_string, select_project_requirements_path(@project, req, scroll: true), remote: true
         %br
-  #requirements
+  %section#requirements
     = render 'layouts/alerts'
 
     .table-responsive
@@ -28,8 +28,7 @@
             %th= sort_link(@q, :status, 'Estado')
             %th= sort_link(@q, :category, 'Categoría')
             %th= sort_link(@q, :level, 'Nivel')
-            %th
-            %th
+            %th{colspan: 2} Acciones
           = search_form_for [@project, @q], html:{class: 'form-inline full-width'} do |f|
             %tr
               %td= f.search_field :suffix_cont, class: 'form-control', placeholder: 'Sufijo ...'
@@ -42,9 +41,6 @@
                   %span.fa.fa-search
         %tbody#table-requirements
           = render 'requirements'
-
-
-    %br
 
   %section#right-side-menu
 

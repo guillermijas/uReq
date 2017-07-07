@@ -15,9 +15,9 @@ Rails.application.routes.draw do
       end
       resources :comments
     end
+    resources :keywords
   end
 
-  resources :glossaries
   resources :logs
 
 

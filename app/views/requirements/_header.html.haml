@@ -4,9 +4,21 @@
       = icon('folder-open-o')
       = @project.name
   .col.text-center
-    %h2
+    - users = ''
+    - @project.users.each do |user|
+      - users += user.full_name + ', '
+    %button{'data-toggle': 'popover', 'data-html': 'true', title: 'Paarticipantes', 'data-content': "#{users[0..-3]}", 'data-placement': 'bottom'}
+      = icon('user')
+
+  .col.text-center
+    - done = "Hechos: #{@requirements.where(status: 'done').count}/#{@requirements.count}</br>"
+    - in_proccess = "En proceso: #{@requirements.where(status: 'in_process').count}/#{@requirements.count}</br>"
+    - rejected = "Rechazados: #{@requirements.where(status: 'rejected').count}/#{@requirements.count}</br>"
+    - verifying = "Verificando: #{@requirements.where(status: 'verifying').count}/#{@requirements.count}</br>"
+    - pending = "Pendiente: #{@requirements.where(status: 'pending').count}/#{@requirements.count}</br>"
+    - msg = done + in_proccess + rejected + verifying + pending
+    %button{'data-toggle': 'popover', 'data-html': 'true', title: 'Estadísticas', 'data-content': "#{msg}", 'data-placement': 'bottom'}
       = icon('bar-chart-o')
-      = "#{@requirements.where(status: 'done').count}/#{@requirements.count}"
 
   .col.text-right
     %h2

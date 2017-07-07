@@ -6,4 +6,6 @@ $(document).ready(function(){
 
     $(document).on("input", "#requirement_category", updateSuffix);
 
+    $('[data-toggle="popover"]').popover()
+
 });

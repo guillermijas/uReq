@@ -60,7 +60,7 @@ class InitDatabase < ActiveRecord::Migration[5.1]
       t.timestamps
     end
 
-    create_table :glossaries do |t|
+    create_table :keywords do |t|
       t.belongs_to :project, index: true
       t.string :key
       t.string :definition

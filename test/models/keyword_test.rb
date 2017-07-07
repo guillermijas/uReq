@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class GlossaryTest < ActiveSupport::TestCase
+class KeywordTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
