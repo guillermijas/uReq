@@ -11,9 +11,9 @@
     - @keywords.each do |keyword|
       %tr
         %td= link_to 'Show', keyword
-        %td= link_to 'Edit', edit_keyword_path(keyword)
+        /%td= link_to 'Edit', edit_keyword_path(keyword)
         %td= link_to 'Destroy', keyword, method: :delete, data: { confirm: 'Are you sure?' }
 
 %br
 
-= link_to 'New Keyword', new_keyword_path
+= link_to 'New Keyword', new_project_keyword_path(params[:project_id])
