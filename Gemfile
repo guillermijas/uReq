@@ -26,12 +26,12 @@ gem 'sass-rails', '~> 5.0'
 gem 'seed_dump'
 gem 'simple_form', '~> 3.2', '>= 3.2.1'
 gem 'sprockets-rails'
-gem 'sqlite3'
 gem 'truncate_html'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
+  gem 'sqlite3'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'capybara'
   gem 'selenium-webdriver'
@@ -44,4 +44,7 @@ group :development do
   gem 'web-console', '>= 3.3.0'
 end
 
+group :production do
+  gem 'pg'
+end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
