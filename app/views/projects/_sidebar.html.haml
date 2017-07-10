@@ -6,7 +6,7 @@
     %ul#menu-content.menu-content.collapse.out
 
       -if current_user.avatar.blank?
-        = image_tag('user-no-avatar', class: 'avatar')
+        = image_tag(image_url('user-no-avatar'), class: 'avatar')
       -else
         = image_tag(current_user.avatar.url(:thumb), class: 'avatar')
 
