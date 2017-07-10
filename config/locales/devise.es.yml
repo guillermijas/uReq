@@ -18,6 +18,8 @@ es:
       invalid_token: 'Token de autentificación inválido.'
       timeout: 'Tu sesión ha expirado. Inicia sesión nuevamente.'
       inactive: 'Tu cuenta aún no ha sido activada.'
+      user:
+        not_found_in_database: 'Usuario no encontrado'
     sessions:
       signed_in: 'Inicio de sesión correcto'
       signed_out: 'Cerraste sesión correctamente.'
