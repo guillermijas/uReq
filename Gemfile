@@ -29,6 +29,7 @@ gem 'sprockets-rails'
 gem 'truncate_html'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
+gem 'aws-sdk'
 
 group :development, :test do
   gem 'sqlite3'
@@ -46,6 +47,5 @@ end
 
 group :production do
   gem 'pg'
-  gem 'aws-sdk', '~> 2.3'
 end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
