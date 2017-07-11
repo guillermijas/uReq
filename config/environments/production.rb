@@ -22,16 +22,16 @@ Rails.application.configure do
   end
 
   config.active_record.dump_schema_after_migration = false
-
   config.paperclip_defaults = {
     storage: :s3,
-    s3_region: 'eu-central-1',
     s3_credentials: {
-        bucket: 'aa1hyvvgisousyi',
-        access_key_id: ENV['AWS_ACCESS_KEY_ID'],
-        secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
+      bucket: 'aa1hyvvgisousyi',
+      access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+      secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
+      s3_region: 'eu-central-1'
     },
     url: ':s3_domain_url',
     path: ':class/:attachment/:id_partition/:style/:filename'
   }
+
 end
