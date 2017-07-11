@@ -19,7 +19,7 @@
         %label Foto de portada
         %br
         -if @project.picture.blank?
-          = image_tag(image_url('project-picture-default'), class: 'picture')
+          = image_tag(image_url('project-picture-default.png'), class: 'picture')
         -else
           = image_tag(@project.picture.url(:medium), class: 'picture')
         %br
