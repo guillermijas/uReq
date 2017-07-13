@@ -1,11 +1,73 @@
-%article#comments-list
-  - @comments.each do |comment|
-    %p
-      %strong= comment.user.short_name
-      \:
-      = comment.body
-      =link_to project_requirement_comment_path(@project, @requirement, comment), method: :delete, remote: true do
-        =icon('times')
 
-%article#comments-form
-  = render 'comments/form'
+%ul#myTab.nav.nav-tabs{:role => 'tablist'}
+  %li.nav-item
+    %a.nav-link.active{'aria-controls': 'Comments', 'data-toggle': 'tab', :href => '#commentstab', :role => 'tab'}= icon('comments')
+  %li.nav-item
+    %a.nav-link{'aria-controls': 'relations', 'data-toggle': 'tab', :href => '#relations', :role => 'tab'}= icon('exchange')
+  %li.nav-item
+    %a.nav-link{'aria-controls': 'trello', 'data-toggle': 'tab', :href => '#trello', :role => 'tab'}= icon('sticky-note-o')
+  %li.nav-item
+    %a.nav-link{'aria-controls': 'history', 'data-toggle': 'tab', :href => '#history', :role => 'tab'}= icon('edit')
+.tab-content
+  #commentstab.tab-pane.active{:role => 'tabpanel'}
+    %article#comments-list
+      %h4
+        %strong Comentarios
+      - @comments.each do |comment|
+        %p
+          %strong= comment.user.short_name
+          \:
+          = comment.body
+          =link_to project_requirement_comment_path(@project, @requirement, comment), method: :delete, remote: true do
+            =icon('times')
+
+    %article#comments-form
+      = render 'comments/form'
+
+  #relations.tab-pane{:role => 'tabpanel'}
+    %h4
+      %strong Relaciones
+    %p aksjndfi
+    %p asdojfj
+    %p aosdjnf
+    %p naopsjdfn
+
+  #trello.tab-pane{:role => 'tabpanel'}
+    %h4
+      %strong Trello
+    %button.btn.btn-info#btn-trello Crear tarea trello
+
+  #history.tab-pane{:role => 'tabpanel'}
+    %h4
+      %strong Historial
+    - history = Log.where(project_id: @project, requirement_id: @requirement)
+    - history.each do |his|
+      %p
+        = his.operation
+
+
+
+
+
+:javascript
+  var authenticationSuccess = function() { console.log('Successful authentication'); };
+  var authenticationFailure = function() { console.log('Failed authentication'); };
+
+  function trellologin(){
+    Trello.authorize({
+      type: 'popup',
+      name: 'uReq',
+      scope: {
+        read: 'true',
+        write: 'true'
+      },
+      expiration: 'never',
+      success: authenticationSuccess,
+      error: authenticationFailure
+    });
+  }
+
+  $("#btn-trello").click(function(e){
+    e.preventDefault();
+    trellologin();
+  });
