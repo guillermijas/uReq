@@ -1,14 +1,14 @@
 
 %ul#myTab.nav.nav-tabs{role: 'tablist'}
   %li.nav-item
-    %a.nav-link.active{'aria-controls': 'Comments', 'data-toggle': 'tab', href: '#commentstab', role: 'tab'}= icon('comments')
+    %a#comments.nav-link.active{'aria-controls': 'Comments', 'data-toggle': 'tab', href: '#comments-tab', role: 'tab'}= icon('comments')
   %li.nav-item
-    %a.nav-link{'aria-controls': 'relations', 'data-toggle': 'tab', href: '#relations', role: 'tab'}= icon('exchange')
+    %a#relations.nav-link{'aria-controls': 'relations', 'data-toggle': 'tab', href: '#relations-tab', role: 'tab'}= icon('exchange')
   -unless @project.trello_board_id.blank? || @project.trello_list_id.blank?
     %li.nav-item
-      %a.nav-link{'aria-controls': 'trello', 'data-toggle': 'tab', href: '#trello', role: 'tab'}= icon('sticky-note-o')
+      %a#trello.nav-link{'aria-controls': 'trello', 'data-toggle': 'tab', href: '#trello-tab', role: 'tab'}= icon('sticky-note-o')
   %li.nav-item
-    %a.nav-link{'aria-controls': 'history', 'data-toggle': 'tab', href: '#history', role: 'tab'}= icon('edit')
+    %a#history.nav-link{'aria-controls': 'history', 'data-toggle': 'tab', href: '#history-tab', role: 'tab'}= icon('edit')
 .tab-content
   #commentstab.tab-pane.active{role: 'tabpanel'}
     %article#comments-list
@@ -25,7 +25,7 @@
     %article#comments-form
       = render 'comments/form'
 
-  #relations.tab-pane{role: 'tabpanel'}
+  #relations-tab.tab-pane{role: 'tabpanel'}
     %h4
       %strong Relaciones
     %p aksjndfi
@@ -34,7 +34,7 @@
     %p naopsjdfn
 
   -unless @project.trello_board_id.blank? || @project.trello_list_id.blank?
-    #trello.tab-pane{role: 'tabpanel'}
+    #trello-tab.tab-pane{role: 'tabpanel'}
       %h4
         %strong Trello
       .field
@@ -49,7 +49,7 @@
 
       %a.btn.btn-info#btn-trello Crear tarea trello
 
-  #history.tab-pane{role: 'tabpanel'}
+  #history-tab.tab-pane{role: 'tabpanel'}
     %h4
       %strong Historial
     - history = Log.where(project_id: @project, requirement_id: @requirement)
@@ -77,9 +77,21 @@
                 pos: 'top'
               };
     }
+
     $("#btn-trello").click(function(e){
       e.preventDefault();
       card = getNewCard();
       console.log(card);
       Trello.post('/cards/', card, creationSuccess);
     });
+
+:javascript
+  var active;
+
+  $('#myTab a').click(function(){
+    $(this).tab('show');
+    active = $(this).context.id;
+    console.log(active);
+  });
+
+  $(document.getElementById(active)).tab('show');
