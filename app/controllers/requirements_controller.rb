@@ -66,6 +66,12 @@ class RequirementsController < ApplicationController
     @requirement = Requirement.find(params[:id])
     @comments = Comment.where(requirement_id: params[:id])
     @comment = Comment.new
+    unless params[:task_id].blank?
+      Task.new(requirement: @requirement, trello_task_id: params[:task_id]).save!
+      Log.new(operation: "#{current_user.full_name} ha creado una tarea para el requisito '#{@requirement.id_string}'",
+              project_id: @project.id, user_id: current_user.id, requirement_id: @requirement.id).save!
+      puts Task.first
+    end
     respond_to do |format|
       format.js { render layout: false }
     end
@@ -91,6 +97,6 @@ class RequirementsController < ApplicationController
   def requirement_params
     params.require(:requirement).permit(:suffix, :description,
                                         :status, :end_date,
-                                        :category, :level)
+                                        :category, :level, :task_id)
   end
 end

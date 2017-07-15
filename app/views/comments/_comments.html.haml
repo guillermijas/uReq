@@ -59,7 +59,16 @@
 
 -unless @project.trello_board_id.blank? || @project.trello_list_id.blank?
   :javascript
-    var creationSuccess = function(data) { alert('Tarjeta creada con éxito'); };
+    var cardId;
+    var creationSuccess = function(data) {
+      cardId = data.id;
+      alert('Tarjeta creada con éxito');
+      $.ajax({
+        url: "#{request.path}?task_id="+cardId,
+        type: "GET"
+      });
+    };
+
     function getNewCard(){
       var myList = "#{@project.trello_list_id}";
       return {  name: $('#title').val(),
