@@ -98,7 +98,9 @@ class ProjectsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def project_params
-    params.require(:project).permit(:name, :client, :end_date, :status, :picture, :delete_picture)
+    params.require(:project).permit(:name, :client, :end_date, :status,
+                                    :picture, :delete_picture, :trello_board_id,
+                                    :trello_list_id)
   end
 
 end

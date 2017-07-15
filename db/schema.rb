@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170601125240) do
+ActiveRecord::Schema.define(version: 20170714001459) do
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string "data_file_name", null: false
@@ -67,6 +67,8 @@ ActiveRecord::Schema.define(version: 20170601125240) do
     t.string "picture_content_type"
     t.integer "picture_file_size"
     t.datetime "picture_updated_at"
+    t.string "trello_board_id"
+    t.string "trello_list_id"
   end
 
   create_table "requirements", force: :cascade do |t|
@@ -83,6 +85,14 @@ ActiveRecord::Schema.define(version: 20170601125240) do
     t.datetime "updated_at", null: false
     t.index ["project_id"], name: "index_requirements_on_project_id"
     t.index ["user_id"], name: "index_requirements_on_user_id"
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.integer "requirement_id"
+    t.string "trello_task_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["requirement_id"], name: "index_tasks_on_requirement_id"
   end
 
   create_table "user_projects", force: :cascade do |t|

@@ -1,17 +1,18 @@
 
-%ul#myTab.nav.nav-tabs{:role => 'tablist'}
+%ul#myTab.nav.nav-tabs{role: 'tablist'}
   %li.nav-item
-    %a.nav-link.active{'aria-controls': 'Comments', 'data-toggle': 'tab', :href => '#commentstab', :role => 'tab'}= icon('comments')
+    %a.nav-link.active{'aria-controls': 'Comments', 'data-toggle': 'tab', href: '#commentstab', role: 'tab'}= icon('comments')
   %li.nav-item
-    %a.nav-link{'aria-controls': 'relations', 'data-toggle': 'tab', :href => '#relations', :role => 'tab'}= icon('exchange')
+    %a.nav-link{'aria-controls': 'relations', 'data-toggle': 'tab', href: '#relations', role: 'tab'}= icon('exchange')
+  -unless @project.trello_board_id.blank? || @project.trello_list_id.blank?
+    %li.nav-item
+      %a.nav-link{'aria-controls': 'trello', 'data-toggle': 'tab', href: '#trello', role: 'tab'}= icon('sticky-note-o')
   %li.nav-item
-    %a.nav-link{'aria-controls': 'trello', 'data-toggle': 'tab', :href => '#trello', :role => 'tab'}= icon('sticky-note-o')
-  %li.nav-item
-    %a.nav-link{'aria-controls': 'history', 'data-toggle': 'tab', :href => '#history', :role => 'tab'}= icon('edit')
+    %a.nav-link{'aria-controls': 'history', 'data-toggle': 'tab', href: '#history', role: 'tab'}= icon('edit')
 .tab-content
-  #commentstab.tab-pane.active{:role => 'tabpanel'}
+  #commentstab.tab-pane.active{role: 'tabpanel'}
     %article#comments-list
-      %h4
+      %h5
         %strong Comentarios
       - @comments.each do |comment|
         %p
@@ -24,7 +25,7 @@
     %article#comments-form
       = render 'comments/form'
 
-  #relations.tab-pane{:role => 'tabpanel'}
+  #relations.tab-pane{role: 'tabpanel'}
     %h4
       %strong Relaciones
     %p aksjndfi
@@ -32,12 +33,23 @@
     %p aosdjnf
     %p naopsjdfn
 
-  #trello.tab-pane{:role => 'tabpanel'}
-    %h4
-      %strong Trello
-    %button.btn.btn-info#btn-trello Crear tarea trello
+  -unless @project.trello_board_id.blank? || @project.trello_list_id.blank?
+    #trello.tab-pane{role: 'tabpanel'}
+      %h4
+        %strong Trello
+      .field
+        %label{for: '#title'} Título
+        %input#title{type: 'text', value: "#{@requirement.id_string}"}
 
-  #history.tab-pane{:role => 'tabpanel'}
+      %br
+
+      .field
+        %label{for: '#description'} Descripción
+        %textarea#description= strip_tags(@requirement.description.html_safe)
+
+      %a.btn.btn-info#btn-trello Crear tarea trello
+
+  #history.tab-pane{role: 'tabpanel'}
     %h4
       %strong Historial
     - history = Log.where(project_id: @project, requirement_id: @requirement)
@@ -45,29 +57,43 @@
       %p
         = his.operation
 
+-unless @project.trello_board_id.blank? || @project.trello_list_id.blank?
+  :javascript
+
+    var authenticationSuccess = function() { console.log('Successful authentication'); };
+    var authenticationFailure = function() { console.log('Failed authentication'); };
+    var creationSuccess = function(data) { alert('Card created successfully. Data returned:' + JSON.stringify(data)); };
+
+    function getNewCard(){
+      var myList = "#{@project.trello_list_id}";
+      var newCard = {
+        name: $('#title').val(),
+        desc: $('#description').val(),
+        idList: myList,
+        pos: 'top'
+      };
+      return newCard;
+    }
 
 
+    function trelloLogin(){
+        Trello.authorize({
+            type: 'popup',
+            name: 'üReq - TFG',
+            scope: {
+                read: 'true',
+                write: 'true'
+            },
+            expiration: 'never',
+            success: authenticationSuccess,
+            error: authenticationFailure
+        });
+    }
 
-
-:javascript
-  var authenticationSuccess = function() { console.log('Successful authentication'); };
-  var authenticationFailure = function() { console.log('Failed authentication'); };
-
-  function trellologin(){
-    Trello.authorize({
-      type: 'popup',
-      name: 'uReq',
-      scope: {
-        read: 'true',
-        write: 'true'
-      },
-      expiration: 'never',
-      success: authenticationSuccess,
-      error: authenticationFailure
+    $("#btn-trello").click(function(e){
+      e.preventDefault();
+      trelloLogin();
+      card = getNewCard();
+      console.log(card);
+      Trello.post('/cards/', card, creationSuccess);
     });
-  }
-
-  $("#btn-trello").click(function(e){
-    e.preventDefault();
-    trellologin();
-  });

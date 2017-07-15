@@ -20,5 +20,13 @@
         %label Foto de portada
         = f.input :picture, as: :file, label: false
       %br
+      .row
+        .col
+          .form-group
+            = f.input :trello_board_id, label: 'ID Tablero (Trello)'
+        .col
+          .form-group
+            = f.input :trello_list_id, label: 'ID Lista por defecto (Trello)'
+      %br
       %br
       = f.button :submit, 'Crear proyecto', class: 'btn btn-primary'

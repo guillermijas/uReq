@@ -7,7 +7,8 @@
     - users = ''
     - @project.users.each do |user|
       - users += user.full_name + ', '
-    %button{'data-toggle': 'popover', 'data-html': 'true', title: 'Paarticipantes', 'data-content': "#{users[0..-3]}", 'data-placement': 'bottom'}
+    %button{'data-toggle': 'popover', 'data-html': 'true', title: 'Participantes', 'data-content': "#{users[0..-3]}", 'data-placement': 'bottom'}
+      /users[0..-3] es para quitar el ', ' del final
       = icon('user')
 
   .col.text-center
