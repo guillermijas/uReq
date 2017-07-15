@@ -46,6 +46,20 @@
 
 #requirements-modal-form
 
+-unless @project.trello_board_id.blank? || @project.trello_list_id.blank?
+  :javascript
+      var authenticationSuccess = function() { console.log('Autenticación correcta'); };
+      var authenticationFailure = function() { console.log('Error de autenticación'); };
+      Trello.authorize({
+          type: 'popup',
+          name: 'üReq - TFG',
+          scope: {
+              read: 'true',
+              write: 'true' },
+          expiration: 'never',
+          success: authenticationSuccess,
+          error: authenticationFailure
+      });
 / https://stackoverflow.com/questions/25125076/how-to-make-tr-clickable-over-link-to
 :javascript
   $(document).on("click", "#table-requirements tr", function() {

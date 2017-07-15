@@ -3,6 +3,8 @@ $(document).ready(function(){
     function updateSuffix(){
       $("#requirement_suffix").val('R'+$("#requirement_category").val().match(/\b\w/g).join('').toUpperCase());
     }
+
     $(document).on("input", "#requirement_category", updateSuffix);
+
     $('[data-toggle="popover"]').popover();
 });

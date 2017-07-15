@@ -59,40 +59,17 @@
 
 -unless @project.trello_board_id.blank? || @project.trello_list_id.blank?
   :javascript
-
-    var authenticationSuccess = function() { console.log('Successful authentication'); };
-    var authenticationFailure = function() { console.log('Failed authentication'); };
-    var creationSuccess = function(data) { alert('Card created successfully. Data returned:' + JSON.stringify(data)); };
-
+    var creationSuccess = function(data) { alert('Tarjeta creada con éxito'); };
     function getNewCard(){
       var myList = "#{@project.trello_list_id}";
-      var newCard = {
-        name: $('#title').val(),
-        desc: $('#description').val(),
-        idList: myList,
-        pos: 'top'
-      };
-      return newCard;
+      return {  name: $('#title').val(),
+                desc: $('#description').val(),
+                idList: myList,
+                pos: 'top'
+              };
     }
-
-
-    function trelloLogin(){
-        Trello.authorize({
-            type: 'popup',
-            name: 'üReq - TFG',
-            scope: {
-                read: 'true',
-                write: 'true'
-            },
-            expiration: 'never',
-            success: authenticationSuccess,
-            error: authenticationFailure
-        });
-    }
-
     $("#btn-trello").click(function(e){
       e.preventDefault();
-      trelloLogin();
       card = getNewCard();
       console.log(card);
       Trello.post('/cards/', card, creationSuccess);
