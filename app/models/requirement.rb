@@ -23,5 +23,4 @@ class Requirement < ApplicationRecord
     last_req = Requirement.where(project_id: project_id).last
     last_req.nil? ? 1 : last_req.id_in_project + 1
   end
-
 end

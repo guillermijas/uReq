@@ -1,5 +1,4 @@
 Rails.application.configure do
-
   config.cache_classes = true
   config.eager_load = true
   config.consider_all_requests_local       = false
@@ -9,7 +8,7 @@ Rails.application.configure do
   config.assets.js_compressor = :uglifier
   config.assets.compile = false
   config.log_level = :debug
-  config.log_tags = [ :request_id ]
+  config.log_tags = [:request_id]
   config.action_mailer.perform_caching = false
   config.i18n.fallbacks = true
   config.active_support.deprecation = :notify
@@ -33,5 +32,4 @@ Rails.application.configure do
     url: ':s3_domain_url',
     path: ':class/:attachment/:id_partition/:style/:filename'
   }
-
 end

@@ -11,7 +11,6 @@ class Project < ApplicationRecord
   attr_accessor :delete_picture
   before_validation { picture.clear if delete_picture == '1' }
 
-
   validates :name, presence: true, allow_blank: false
   validates :status, inclusion: { in: %w[planning in_process on_hold verifying archived],
                                   message: "'%{value}' no es un estado válido" }
@@ -32,5 +31,4 @@ class Project < ApplicationRecord
       'Error en el estado'
     end
   end
-
 end

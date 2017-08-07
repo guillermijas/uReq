@@ -65,7 +65,7 @@ class RequirementsController < ApplicationController
     @requirement = Requirement.find(params[:id])
     @comments = Comment.where(requirement_id: params[:id])
     @comment = Comment.new
-    if params[:task_id].blank?
+    if params[:task_id].present?
       Task.new(requirement: @requirement, trello_task_id: params[:task_id]).save!
       Log.new(operation: "#{current_user.full_name} ha creado una tarea para el requisito '#{@requirement.id_string}'",
               project_id: @project.id, user_id: current_user.id, requirement_id: @requirement.id).save!

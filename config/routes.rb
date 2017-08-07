@@ -20,6 +20,5 @@ Rails.application.routes.draw do
 
   resources :logs
 
-
   root 'projects#index'
 end

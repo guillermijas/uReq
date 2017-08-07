@@ -53,7 +53,7 @@
       %br
       %br
       %section
-        - tasks = Task.where(requirement_id: @requirement).pluck(:trello_task_id)
+        - tasks = Task.where(requirement_id: @requirement).pluck(:trello_task_id).reverse!
         - tasks.each do |t|
           %article{id: "card-list-#{t}"}
           :javascript
@@ -84,7 +84,7 @@
     var cardId;
     var creationSuccess = function(data) {
       cardId = data.id;
-      alert('Tarjeta creada con éxito');
+      console.log('Tarjeta creada con éxito');
       $.ajax({
         url: "#{request.path}?task_id="+cardId,
         type: "GET"

@@ -102,5 +102,4 @@ class ProjectsController < ApplicationController
                                     :picture, :delete_picture, :trello_board_id,
                                     :trello_list_id)
   end
-
 end

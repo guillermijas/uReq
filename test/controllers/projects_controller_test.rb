@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class ProjectsControllerTest < ActionDispatch::IntegrationTest
-
   setup do
     @project = projects(:project_1)
     @user = users(:guille)
@@ -52,13 +51,13 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should not update project" do
-    patch project_url(@project), params: { project: {name: ''} }
-    assert_not_equal(@project.name , '')
+    patch project_url(@project), params: { project: { name: '' } }
+    assert_not_equal(@project.name, '')
   end
 
   test "should not update project 2" do
-    patch project_url(@project), params: { project: {status: 'test'} }
-    assert_not_equal(@project.name , '')
+    patch project_url(@project), params: { project: { status: 'test' } }
+    assert_not_equal(@project.name, '')
   end
 
   test "should destroy project" do
@@ -67,5 +66,4 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
     end
     assert_redirected_to projects_url
   end
-
 end

@@ -26,14 +26,14 @@ class User < ApplicationRecord
 
   def user_role
     case role
-      when 'collaborator'
-        'Colaborador'
-      when 'admin'
-        'Administrador'
-      when 'project_manager'
-        'Jefe de proyecto'
-      else
-        'Sin definir'
+    when 'collaborator'
+      'Colaborador'
+    when 'admin'
+      'Administrador'
+    when 'project_manager'
+      'Jefe de proyecto'
+    else
+      'Sin definir'
     end
   end
 end
