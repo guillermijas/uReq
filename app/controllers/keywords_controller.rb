@@ -9,8 +9,7 @@ class KeywordsController < ApplicationController
 
   # GET /keywords/1
   # GET /keywords/1.json
-  def show
-  end
+  def show; end
 
   # GET /keywords/new
   def new
@@ -18,8 +17,7 @@ class KeywordsController < ApplicationController
   end
 
   # GET /keywords/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /keywords
   # POST /keywords.json
@@ -62,13 +60,14 @@ class KeywordsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_keyword
-      @keyword = Keyword.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def keyword_params
-      params.fetch(:keyword, {})
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_keyword
+    @keyword = Keyword.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def keyword_params
+    params.fetch(:keyword, {})
+  end
 end

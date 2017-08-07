@@ -9,19 +9,23 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.3.3'
 end
 
+gem 'aws-sdk'
 gem 'bootstrap', '~> 4.0.0.alpha6'
 gem 'cancancan'
 gem 'ckeditor', github: 'galetahub/ckeditor'
 gem 'coffee-rails', '~> 4.2'
 gem 'devise'
+gem 'fasterer'
 gem 'font-awesome-sass', '~> 4.7.0'
 gem 'haml-rails'
 gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
+gem 'overcommit'
 gem 'paperclip'
 gem 'puma'
 gem 'rails', '~> 5.1.1'
 gem 'ransack', github: 'activerecord-hackery/ransack'
+gem 'rubocop', require: false
 gem 'sass-rails', '~> 5.0'
 gem 'seed_dump'
 gem 'simple_form', '~> 3.2', '>= 3.2.1'
@@ -29,13 +33,12 @@ gem 'sprockets-rails'
 gem 'truncate_html'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
-gem 'aws-sdk'
 
 group :development, :test do
-  gem 'sqlite3'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'capybara'
   gem 'selenium-webdriver'
+  gem 'sqlite3'
 end
 
 group :development do

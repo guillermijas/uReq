@@ -1,0 +1,27 @@
+verify_signatures: false
+
+PreCommit:
+  ALL:
+    on_fail: warn
+    on_warn: warn # Treat all warnings as failures
+
+  RuboCop:
+    enabled: true
+    Metrics/ParameterLists:
+       enabled: false
+    
+  Fasterer:
+    enabled: true
+  
+  # npm install -g csslint
+  CssLint:
+    enabled: true
+
+  # gem install scss_lint
+  ScssLint:
+    enabled: true
+  
+  # npm install -g jshint 
+  JsHint:
+    enabled: true
+
