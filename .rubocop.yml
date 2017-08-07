@@ -1,5 +1,3 @@
-#inherit_from: .rubocop_todo.yml
-
 AllCops:
   Exclude:
     - 'spec/**/*'
@@ -21,3 +19,9 @@ Style/StringLiterals:
 
 Rails:
   Enabled: true
+
+Metrics/LineLength:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
