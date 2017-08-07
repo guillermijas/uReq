@@ -15,12 +15,10 @@ gem 'cancancan'
 gem 'ckeditor', github: 'galetahub/ckeditor'
 gem 'coffee-rails', '~> 4.2'
 gem 'devise'
-gem 'fasterer'
 gem 'font-awesome-sass', '~> 4.7.0'
 gem 'haml-rails'
 gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
-gem 'overcommit'
 gem 'paperclip'
 gem 'puma'
 gem 'rails', '~> 5.1.1'
@@ -36,7 +34,8 @@ gem 'uglifier', '>= 1.3.0'
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'capybara'
-  gem 'haml-lint', require: false
+  gem 'fasterer'
+  gem 'overcommit'
   gem 'rubocop', require: false
   gem 'selenium-webdriver'
   gem 'sqlite3'

@@ -10,21 +10,23 @@
   %li.nav-item
     %a#history.nav-link{'aria-controls': 'history', 'data-toggle': 'tab', href: '#history-tab', role: 'tab'}= icon('edit')
 .tab-content
-  #commentstab.tab-pane.active{role: 'tabpanel'}
-    %article#comments-list
-      %h5
-        %strong Comentarios
-      - @comments.each do |comment|
-        %p
-          %strong= comment.user.short_name
-          \:
-          = comment.body
-          =link_to project_requirement_comment_path(@project, @requirement, comment), method: :delete, remote: true do
-            =icon('times')
-
-    %article#comments-form
-      = render 'comments/form'
-
+  #comments-tab.tab-pane.active{role: 'tabpanel'}
+    %section#comments-list
+      %article
+        %h5
+          %strong Comentarios
+        - @comments.each do |comment|
+          %p
+            %strong= comment.user.short_name
+            \:
+            = comment.body
+            =link_to project_requirement_comment_path(@project, @requirement, comment), method: :delete, remote: true do
+              =icon('times')
+      %article#comments-form
+        = render 'comments/form'
+      %br
+      %br
+      %br
   #relations-tab.tab-pane{role: 'tabpanel'}
     %h4
       %strong Relaciones
@@ -48,7 +50,25 @@
         %textarea#description= strip_tags(@requirement.description.html_safe)
 
       %a.btn.btn-info#btn-trello Crear tarea trello
-
+      %br
+      %br
+      %section
+        - tasks = Task.where(requirement_id: @requirement).pluck(:trello_task_id)
+        - tasks.each do |t|
+          %article{id: "card-list-#{t}"}
+          :javascript
+            var a = Trello.cards.get("#{ t }", function(card){
+              $('article#card-list-'+"#{t}").append(
+                "<div class='card'>"+
+                  "<div class='card-block'>"+
+                    "<h4 class='card-title'>"+ card.name +"</h4>"+
+                    "<p class='card-text'>"+ card.desc +"</p>"+
+                  "</div>"+
+                "</div><br/>");
+            });
+      %br
+      %br
+      %br
   #history-tab.tab-pane{role: 'tabpanel'}
     %h4
       %strong Historial
@@ -56,7 +76,9 @@
     - history.each do |his|
       %p
         = his.operation
-
+    %br
+    %br
+    %br
 -unless @project.trello_board_id.blank? || @project.trello_list_id.blank?
   :javascript
     var cardId;
@@ -91,7 +113,6 @@
   $('#myTab a').click(function(){
     $(this).tab('show');
     active = $(this).context.id;
-    console.log(active);
   });
 
   $(document.getElementById(active)).tab('show');

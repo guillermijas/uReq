@@ -11,18 +11,6 @@ PreCommit:
   Fasterer:
     enabled: true
 
-  Reek:
-    enabled: false
-  
-  # npm install -g csslint
-  CssLint:
-    enabled: true
-
-  # gem install scss_lint
-  ScssLint:
-    enabled: true
-  
-  # npm install -g jshint 
   JsHint:
     enabled: true
 

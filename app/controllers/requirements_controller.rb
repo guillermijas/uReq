@@ -3,7 +3,6 @@ class RequirementsController < ApplicationController
   before_action :set_project
   before_action :authenticate_user!
 
-
   def index
     @q = Requirement.where(project_id: params[:project_id]).ransack(params[:q])
     @requirements = @q.result
@@ -14,7 +13,7 @@ class RequirementsController < ApplicationController
 
   def edit
     respond_to do |format|
-      format.js{ render layout: false }
+      format.js { render layout: false }
     end
   end
 
@@ -66,11 +65,10 @@ class RequirementsController < ApplicationController
     @requirement = Requirement.find(params[:id])
     @comments = Comment.where(requirement_id: params[:id])
     @comment = Comment.new
-    unless params[:task_id].blank?
+    if params[:task_id].blank?
       Task.new(requirement: @requirement, trello_task_id: params[:task_id]).save!
       Log.new(operation: "#{current_user.full_name} ha creado una tarea para el requisito '#{@requirement.id_string}'",
               project_id: @project.id, user_id: current_user.id, requirement_id: @requirement.id).save!
-      puts Task.first
     end
     respond_to do |format|
       format.js { render layout: false }

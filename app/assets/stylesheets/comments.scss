@@ -8,7 +8,7 @@
 
 #comments-list{
   word-wrap: break-word;
-  overflow-y: scroll;
+  overflow-y: hidden;
   height: 80%;
   padding: 5px;
   border-bottom: 1px solid #666;
@@ -22,6 +22,7 @@
 #commentstab, .tab-content{
   height: 100%;
   width: 100%;
+  overflow-y: scroll;
 }
 
 #trello-tab{
