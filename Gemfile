@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
   "https://github.com/#{repo_name}.git"
 end
 
@@ -25,7 +25,6 @@ gem 'paperclip'
 gem 'puma'
 gem 'rails', '~> 5.1.1'
 gem 'ransack', github: 'activerecord-hackery/ransack'
-gem 'rubocop', require: false
 gem 'sass-rails', '~> 5.0'
 gem 'seed_dump'
 gem 'simple_form', '~> 3.2', '>= 3.2.1'
@@ -35,8 +34,10 @@ gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'capybara'
+  gem 'haml-lint', require: false
+  gem 'rubocop', require: false
   gem 'selenium-webdriver'
   gem 'sqlite3'
 end
@@ -51,4 +52,4 @@ end
 group :production do
   gem 'pg'
 end
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
