@@ -29,6 +29,12 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params)
     @project.users.push(current_user)
     @project.users.push(User.where(role: 'admin').where.not(id: current_user))
+    if params[:user_ids].present?
+      participants = params[:user_ids]
+      participants.each do |p|
+        puts p
+      end
+    end
     respond_to do |format|
       if @project.save!
         @project.user_projects.each do |usr_pr|
@@ -47,7 +53,9 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1.json
   def update
     respond_to do |format|
-      if @project.update(project_params)
+      if @project.update(project_params.except(:user_ids))
+        @project.users.push(User.find(params[:project][:user_ids].reject(&:blank?)))
+        @project.save
         Log.new(operation: "#{current_user.full_name} ha actualizado el proyecto '#{@project.name}'", project_id: @project.id, user_id: current_user.id).save!
         format.html { redirect_to projects_path, notice: 'El proyecto se ha actualizado corretamente.' }
       else
@@ -100,6 +108,6 @@ class ProjectsController < ApplicationController
   def project_params
     params.require(:project).permit(:name, :client, :end_date, :status,
                                     :picture, :delete_picture, :trello_board_id,
-                                    :trello_list_id)
+                                    :trello_list_id, user_ids: [])
   end
 end

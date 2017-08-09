@@ -102,8 +102,7 @@
 
     $("#btn-trello").click(function(e){
       e.preventDefault();
-      card = getNewCard();
-      console.log(card);
+      var card = getNewCard();
       Trello.post('/cards/', card, creationSuccess);
     });
 

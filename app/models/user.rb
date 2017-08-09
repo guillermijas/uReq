@@ -4,8 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_attached_file :avatar, styles: { medium: "300x300", thumb: "100x100" }
-  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
+  has_attached_file :avatar, styles: { medium: '300x300', thumb: '100x100' }
+  validates_attachment_content_type :avatar, content_type: %r{\Aimage\/.*\Z}
 
   validates :first_name, presence: true, allow_blank: false
   validates :last_name, presence: true, allow_blank: false
@@ -22,6 +22,14 @@ class User < ApplicationRecord
 
   def short_name
     first_name.first + '. ' + last_name.partition(' ').first
+  end
+
+  def self.admins
+    User.where(role: 'admin')
+  end
+
+  def self.registered_users
+    User.where(role: %w[project_manager collaborator])
   end
 
   def user_role
