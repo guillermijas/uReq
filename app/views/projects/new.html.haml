@@ -7,18 +7,34 @@
     = simple_form_for @project do |f|
       - if @project.errors.any?
         .alert.alert-danger.alert-dismissible Error al guardar proyecto. Revise los campos
-
-      .form-group
-        = f.input :name, label: 'Nombre del proyeto', required: true, error: 'El nombre del proyecto es obligatorio.', error_html: { class: 'error' }
-      .form-group
-        = f.input :client, label: 'Cliente'
-      .form-group
-        = f.input :status, label: 'Estado',
-                  collection: [%w(Planificando planning), ['En proceso', 'in_process'], ['En espera', 'on_hold'], %w(Verificando verifying), %w(Archivado archived) ],
-                  selected: 'Planificando', include_blank: false
-      .form-group
-        %label Foto de portada
-        = f.input :picture, as: :file, label: false
+      .row
+        .col-md
+          .form-group
+            = f.input :name, label: 'Nombre del proyeto', required: true, error: 'El nombre del proyecto es obligatorio.', error_html: { class: 'error' }
+          .form-group
+            = f.input :client, label: 'Cliente'
+          .form-group
+            = f.input :status, label: 'Estado',
+                        collection: [%w(Planificando planning), ['En proceso', 'in_process'], ['En espera', 'on_hold'], %w(Verificando verifying), %w(Archivado archived) ],
+                        include_blank: false, input_html: { class: 'custom-select' }
+          .form-group
+            %label Foto de portada
+            %br
+            -if @project.picture.blank?
+              = image_tag(image_url('project-picture-default.png'), class: 'picture')
+            -else
+              = image_tag(@project.picture.url(:medium), class: 'picture')
+            %br
+            %br
+            = f.input :picture, as: :file, label: false
+            = f.check_box(:delete_picture)
+            Eliminar foto
+        .col-md
+          %h3 Participantes
+          .form-group.staff-checkboxes
+            - all_users = User.registered_users
+            = f.association :users, as: :check_boxes, collection: all_users - Array(current_user),
+               label_method: :full_name, label: false
       %br
       .row
         .col
@@ -30,3 +46,4 @@
       %br
       %br
       = f.button :submit, 'Crear proyecto', class: 'btn btn-primary'
+      = link_to 'Volver', projects_path, class: 'btn btn-secondary'

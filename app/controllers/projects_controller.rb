@@ -26,19 +26,14 @@ class ProjectsController < ApplicationController
   # POST /projects
   # POST /projects.json
   def create
-    @project = Project.new(project_params)
-    @project.users.push(current_user)
-    @project.users.push(User.where(role: 'admin').where.not(id: current_user))
-    if params[:user_ids].present?
-      participants = params[:user_ids]
-      participants.each do |p|
-        puts p
-      end
-    end
+    @project = Project.new(project_params.except(:user_ids))
+    @project.users.push(current_user) # meter el usuario que lo crea es propietario
+    @project.users.push(User.admins) # los admin tambien
+    @project.users.push(User.find(params[:project][:user_ids].reject(&:blank?))) if params[:project][:user_ids].present?
     respond_to do |format|
-      if @project.save!
+      if @project.save
         @project.user_projects.each do |usr_pr|
-          usr_pr.owner = true
+          usr_pr.owner = (usr_pr.user == current_user || usr_pr.user.role == 'admin' ? true : false)
           usr_pr.save
         end
         Log.new(operation: "#{current_user.full_name} ha creado el proyecto '#{@project.name}'", project_id: @project.id, user_id: current_user.id).save!
@@ -54,7 +49,7 @@ class ProjectsController < ApplicationController
   def update
     respond_to do |format|
       if @project.update(project_params.except(:user_ids))
-        @project.users.push(User.find(params[:project][:user_ids].reject(&:blank?)))
+        @project.users.push(User.find(params[:project][:user_ids].reject(&:blank?))) if params[:project][:user_ids].present?
         @project.save
         Log.new(operation: "#{current_user.full_name} ha actualizado el proyecto '#{@project.name}'", project_id: @project.id, user_id: current_user.id).save!
         format.html { redirect_to projects_path, notice: 'El proyecto se ha actualizado corretamente.' }
