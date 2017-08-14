@@ -21,7 +21,8 @@
         %p
           %strong Estado:
           = @project.status_string
-
+        %p
+          = link_to 'Exportar CSV', export_csv_projects_path(@project), class: 'btn btn-secondary'
       .modal-footer
         .row
         = link_to 'Ver requisitos', project_requirements_path(@project), class: 'btn btn-info'

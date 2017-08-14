@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: %i[show edit update destroy show_modal archive]
+  before_action :set_project, only: %i[show edit update destroy show_modal archive export_csv]
   before_action :authenticate_user!
 
   # GET /projects
@@ -90,6 +90,10 @@ class ProjectsController < ApplicationController
         format.html { redirect_to projects_path, alert: 'El proyecto no se ha podido archivador.' }
       end
     end
+  end
+
+  def export_csv
+    render csv: Requirement.where(project_id: @project.id), filename: "#{@project.name}_reqs", type: 'text/csv'
   end
 
   private
