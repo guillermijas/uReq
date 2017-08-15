@@ -32,6 +32,14 @@ class User < ApplicationRecord
     User.where(role: %w[project_manager collaborator])
   end
 
+  def admin?
+    role == 'admin'
+  end
+
+  def manager?
+    role == 'project_manager'
+  end
+
   def user_role
     case role
     when 'collaborator'

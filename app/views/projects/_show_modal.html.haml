@@ -27,6 +27,10 @@
         .row
         = link_to 'Ver requisitos', project_requirements_path(@project), class: 'btn btn-info'
         = link_to 'Glosario', project_keywords_path(@project), class: 'btn btn-info'
-        = link_to 'Editar', edit_project_path(@project), class: 'btn btn-primary'
-        - unless @project.status == 'archived'
-          = link_to 'Archivar', archive_projects_path(@project), method: :post, data: { confirm: '¿Archivar proyecto?' }, class: 'btn btn-danger'
+        - if can? :update, @project
+          = link_to 'Editar', edit_project_path(@project), class: 'btn btn-primary'
+          - if @project.status == 'archived'
+            - if can? :delete, @project
+              = link_to 'Eliminar', project_path(@project), method: :delete, data: { confirm: '¿Eliminar definitivamente?' }, class: 'btn btn-danger'
+          - else
+            = link_to 'Archivar', archive_projects_path(@project), method: :post, data: { confirm: '¿Archivar proyecto?' }, class: 'btn btn-danger'
