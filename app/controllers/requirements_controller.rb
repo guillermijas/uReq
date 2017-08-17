@@ -6,7 +6,8 @@ class RequirementsController < ApplicationController
   def index
     @q = Requirement.where(project_id: params[:project_id]).ransack(params[:q])
     @requirements = @q.result
-    # @requirements = Requirement.where(project_id: params[:project_id])
+    @requirement = Requirement.new(project: @project)
+    redirect_to projects_path unless can? :read, @requirement
   end
 
   def show; end

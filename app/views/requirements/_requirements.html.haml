@@ -5,9 +5,10 @@
     %td= t(requirement.status)
     %td= requirement.category
     %td= t(requirement.level)
-    %td
-      = link_to edit_project_requirement_path(@project, requirement), remote: true do
-        =icon('pencil')
-    %td
-      = link_to project_requirement_path(@project, requirement), method: :delete, data: { confirm: '¿Estás seguro?' } do
-        =icon('trash')
+    - if can? :update, @requirement
+      %td
+        = link_to edit_project_requirement_path(@project, requirement), remote: true do
+          =icon('pencil')
+      %td
+        = link_to project_requirement_path(@project, requirement), method: :delete, data: { confirm: '¿Estás seguro?' } do
+          =icon('trash')

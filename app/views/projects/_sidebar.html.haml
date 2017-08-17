@@ -25,10 +25,11 @@
         %li{class: ('active' if action_name == 'index_archived')}
           =icon('folder')
           Proyectos archivados
-      =link_to(new_project_path) do
-        %li{class: ('active' if action_name == 'new')}
-          =icon('plus')
-          Nuevo proyecto
+      - if can? :create, Project
+        =link_to(new_project_path) do
+          %li{class: ('active' if action_name == 'new')}
+            =icon('plus')
+            Nuevo proyecto
       =link_to(edit_user_registration_path) do
         %li
           =icon('user')
