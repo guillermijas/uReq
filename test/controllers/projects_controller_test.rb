@@ -2,23 +2,23 @@ require 'test_helper'
 
 class ProjectsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @project = projects(:project_1)
+    @project = projects(:ureq)
     @user = users(:guille)
     @admin = users(:admin)
     sign_in(@user)
   end
 
-  test "should get index" do
+  test 'should get index' do
     get projects_url
     assert_response :success
   end
 
-  test "should get new" do
+  test 'should get new' do
     get new_project_url
     assert_response :success
   end
 
-  test "should create project" do
+  test 'should create project' do
     assert_difference('Project.count' && 'Log.count') do
       post projects_url, params: {
         project: {
@@ -34,35 +34,35 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to projects_path
   end
 
-  test "should not create project" do
-    assert_raise ActiveRecord::RecordInvalid do
+  test 'should not create project' do
+    assert_no_difference('Project.count') do
       post projects_url, params: { project: { name: '', status: @project.status } }
     end
   end
 
-  test "should get edit" do
+  test 'should get edit' do
     get edit_project_url(@project)
     assert_response :success
   end
 
-  test "should update project" do
+  test 'should update project' do
     patch project_url(@project), params: { project: { client: @project.client,
                                                       end_date: @project.end_date,
                                                       name: @project.name, status: @project.status } }
     assert_redirected_to projects_path
   end
 
-  test "should not update project" do
+  test 'should not update project' do
     patch project_url(@project), params: { project: { name: '' } }
     assert_not_equal(@project.name, '')
   end
 
-  test "should not update project 2" do
+  test 'should not update project 2' do
     patch project_url(@project), params: { project: { status: 'test' } }
     assert_not_equal(@project.name, '')
   end
 
-  test "should destroy project" do
+  test 'should destroy project' do
     assert_difference('Project.count', -1) do
       delete project_url(@project)
     end

@@ -24,3 +24,10 @@ rossi:
   last_name: Rossi
   encrypted_password: <%= Devise::Encryptor.digest(User, "qwerty123") %>
   role: project_manager
+
+fer:
+  email: fer@fer.com
+  first_name: Fernando
+  last_name: Jimenez
+  encrypted_password: <%= Devise::Encryptor.digest(User, "qwerty123") %>
+  role: collaborator

@@ -1,0 +1,9 @@
+ureq_guille:
+  project: ureq
+  user: guille
+  owner: true
+
+ureq_rossi:
+  project: ureq
+  user: rossi
+  owner: false

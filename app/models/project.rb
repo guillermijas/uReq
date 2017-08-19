@@ -6,7 +6,7 @@ class Project < ApplicationRecord
   has_many :keywords, dependent: :destroy
 
   has_attached_file :picture, styles: { medium: '300x300', thumb: '100x100' }
-  validates_attachment_content_type :picture, content_type: ['image/jpeg', 'image/gif', 'image/png']
+  validates_attachment_content_type :picture, content_type: %w[image/jpeg image/gif image/png]
 
   attr_accessor :delete_picture
   before_validation { picture.clear if delete_picture == '1' }

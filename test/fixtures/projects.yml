@@ -1,6 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-project_1:
-  name: proyecto 1
-  client: MyString
+ureq:
+  name: uReq
+  client: Universidad de Malaga
   status: in_process

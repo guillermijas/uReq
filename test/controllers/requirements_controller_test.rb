@@ -1,15 +1,26 @@
 require 'test_helper'
 
 class RequirementsControllerTest < ActionDispatch::IntegrationTest
-  #   setup do
-  #     @requirement = requirements(:one)
-  #   end
-  #
-  #   test "should get index" do
-  #     get requirements_url
-  #     assert_response :success
-  #   end
-  #
+  setup do
+    @requirement = requirements(:one)
+    @project = projects(:ureq)
+    @user = users(:guille)
+    @fer = users(:fer)
+    @admin = users(:admin)
+  end
+
+  test 'should get index' do
+    sign_in(@user)
+    get project_requirements_path(@project)
+    assert_response :success
+  end
+
+  test 'should not get index' do
+    sign_in(@fer)
+    get project_requirements_path(@project)
+    assert_redirected_to projects_path
+  end
+
   #   test "should get new" do
   #     get new_requirement_url
   #     assert_response :success
