@@ -46,7 +46,9 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update project" do
-    patch project_url(@project), params: { project: { client: @project.client, end_date: @project.end_date, name: @project.name, status: @project.status } }
+    patch project_url(@project), params: { project: { client: @project.client,
+                                                      end_date: @project.end_date,
+                                                      name: @project.name, status: @project.status } }
     assert_redirected_to projects_path
   end
 
