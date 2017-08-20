@@ -1,17 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  suffix: MyString
-  description: MyText
-  status: MyString
+  suffix: RF
+  description: La aplicacion debe permitir inicio de sesion
+  status: pending
   end_date: 2017-05-25
   category: MyString
-  level: MyString
+  level: high
 
 two:
-  suffix: MyString
-  description: MyText
-  status: MyString
+  suffix: adsfasdf
+  description: asdasdf
+  status: asdf
   end_date: 2017-05-25
-  category: MyString
-  level: MyString
+  category: asdfas
+  level: asdfasfd

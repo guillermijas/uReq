@@ -1,5 +1,6 @@
 class Requirement < ApplicationRecord
   has_many :comments, dependent: :destroy
+  has_many :tasks, dependent: :destroy
   belongs_to :user
   belongs_to :project
 
@@ -11,9 +12,7 @@ class Requirement < ApplicationRecord
   validates :status, inclusion: { in: %w[pending in_process verifying done rejected],
                                   message: "'%<value>s' no es un estado válido" }
 
-  # ===============
   # = CSV support =
-  # ===============
   comma do
     id_string 'ID'
     plain_text_description 'Descripción'
@@ -22,9 +21,6 @@ class Requirement < ApplicationRecord
     t_level 'Nivel'
     comments size: 'Comments'
   end
-  # ===============
-  # =   End CSV   =
-  # ===============
 
   def id_string
     if suffix.blank?

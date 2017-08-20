@@ -10,8 +10,6 @@ class RequirementsController < ApplicationController
     redirect_to projects_path unless can? :read, @requirement
   end
 
-  def show; end
-
   def edit
     respond_to do |format|
       format.js { render layout: false }
