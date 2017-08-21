@@ -2,7 +2,9 @@ ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 
-class ActiveSupport::TestCase
-  fixtures :all
-  include Devise::Test::IntegrationHelpers
+class ActiveSupport
+  class TestCase
+    fixtures :all
+    include Devise::Test::IntegrationHelpers
+  end
 end
