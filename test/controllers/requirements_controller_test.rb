@@ -57,16 +57,16 @@ class RequirementsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should update requirement' do
-    patch project_requirement_path(@project, @requirement), params: { requirement: { category: 'Seguridad',
-                                                                                     description: 'Terminar login' } }
-    assert_redirected_to project_requirements_path(@project)
+    patch project_requirement_path(@project, @requirement), xhr: true, params: { requirement: { category: 'Seguridad',
+                                                                                                description: 'Terminar login' } }
+    assert_response :success
   end
 
-  #   test 'should destroy requirement' do
-  #     assert_difference('Requirement.count', -1) do
-  #       delete requirement_url(@requirement)
-  #     end
-  #
-  #     assert_redirected_to requirements_url
-  #   end
+  test 'should destroy requirement' do
+    assert_difference('Requirement.count', -1) do
+      delete project_requirement_path(@project, @requirement)
+    end
+
+    assert_redirected_to project_requirements_path(@project)
+  end
 end
