@@ -10,7 +10,7 @@ source 'https://rails-assets.org' do
 end
 
 gem 'aws-sdk'
-gem 'bootstrap', '~> 4.0.0.alpha6'
+gem 'bootstrap', '~> 4.0.0.beta'
 gem 'cancancan'
 gem 'ckeditor', github: 'galetahub/ckeditor'
 gem 'coffee-rails', '~> 4.2'

@@ -298,7 +298,7 @@ PLATFORMS
 
 DEPENDENCIES
   aws-sdk
-  bootstrap (~> 4.0.0.alpha6)
+  bootstrap (~> 4.0.0.beta)
   byebug
   cancancan
   capybara
