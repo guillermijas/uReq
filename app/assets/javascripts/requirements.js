@@ -1,3 +1,5 @@
+CKEDITOR.config.customConfig = 'ck_config.js';
+
 $(document).ready(function(){
     /*https://stackoverflow.com/questions/8279859/get-first-letter-of-each-word-in-a-string-in-javascript*/
     function updateSuffix(){
@@ -9,4 +11,5 @@ $(document).ready(function(){
     $('[data-toggle="popover"]').popover();
 
 });
+
 
