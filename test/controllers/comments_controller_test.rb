@@ -1,27 +1,22 @@
 require 'test_helper'
 
 class CommentsControllerTest < ActionDispatch::IntegrationTest
-  #   setup do
-  #     @comment = comments(:one)
-  #   end
-  #
-  #   test "should get index" do
-  #     get comments_url
-  #     assert_response :success
-  #   end
-  #
-  #   test "should get new" do
-  #     get new_comment_url
-  #     assert_response :success
-  #   end
-  #
-  #   test "should create comment" do
-  #     assert_difference('Comment.count') do
-  #       post comments_url, params: { comment: { body: @comment.body } }
-  #     end
-  #
-  #     assert_redirected_to comment_url(Comment.last)
-  #   end
+  setup do
+    @comment = comments(:one)
+    @requirement = requirements(:one)
+    @project = projects(:ureq)
+    @user = users(:guille)
+    @fer = users(:fer)
+    @admin = users(:admin)
+    sign_in(@user)
+  end
+
+  test 'should create comment' do
+    assert_difference('Comment.count') do
+      post project_requirement_comment_path(@project, @requirement), params: { comment: { body: @comment.body } }
+    end
+    assert_response :success
+  end
   #
   #   test "should show comment" do
   #     get comment_url(@comment)
