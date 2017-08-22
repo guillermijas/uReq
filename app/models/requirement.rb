@@ -12,6 +12,8 @@ class Requirement < ApplicationRecord
   validates :status, inclusion: { in: %w[pending in_process verifying done rejected],
                                   message: "'%<value>s' no es un estado válido" }
 
+  after_create :use_keywords_definitions
+
   # = CSV support =
   comma do
     id_string 'ID'
@@ -67,5 +69,20 @@ class Requirement < ApplicationRecord
   def next_id(project_id)
     last_req = Requirement.where(project_id: project_id).last
     last_req.nil? ? 1 : last_req.id_in_project + 1
+  end
+
+  def use_keywords_definitions
+    keywords = Keyword.where(project_id: project)
+    keywords.each do |kw|
+      next unless description.include?(kw.key)
+      abbr = "<abbr title='#{kw.definition}'>#{kw.key}</abbr>"
+      newdesc = if description[%r{<abbr title='[A-Za-z0-9 ,.\-]*'>#{kw.key}</abbr>}]
+                  description.gsub(%r{<abbr title='[A-Za-z0-9 ,.\-]*'>#{kw.key}</abbr>}, abbr)
+                else
+                  description.gsub(kw.key, abbr)
+                end
+      update(description: newdesc)
+      save
+    end
   end
 end
