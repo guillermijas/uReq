@@ -62,7 +62,7 @@ class InitDatabase < ActiveRecord::Migration[5.1]
     create_table :keywords do |t|
       t.belongs_to :project, index: true
       t.string :key
-      t.string :definition
+      t.text :definition
       t.timestamps
     end
 

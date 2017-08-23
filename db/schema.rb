@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20170714001459) do
   create_table "keywords", force: :cascade do |t|
     t.integer "project_id"
     t.string "key"
-    t.string "definition"
+    t.text "definition"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["project_id"], name: "index_keywords_on_project_id"

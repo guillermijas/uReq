@@ -1,0 +1,10 @@
+.row.align-items-center
+  .col
+    %h2
+      = icon('folder-open-o')
+      = @project.name
+  .col.text-right
+    %h2
+      = link_to projects_path do
+        =icon('arrow-left')
+        Volver

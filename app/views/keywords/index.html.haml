@@ -1,19 +1,45 @@
-%h1 Listing keywords
+#wrapper
+  #header
+    = render 'header'
 
-%table
-  %thead
-    %tr
-      %th
-      %th
-      %th
+  %section#left-side-menu
+    / https://stackoverflow.com/questions/9253269/conditionally-closing-a-tag-in-haml
+    .container
+      = link_to 'Nueva definición', new_modal_project_requirements_path(@project), remote: true, class: 'btn btn-secondary'
+      %br
+      %br
+      %h3.text-center Ejemplos
+      %ul
+        %li
+          %abbr{title: 'Ruby on Rails'} RoR
+        %li
+          %abbr{title: 'Application Programming Interface'} API
+        %li
+          %abbr{title: 'Javascript object notation'} JSON
+        %li
+          %abbr{title: 'uReq'} aplicacion
 
-  %tbody
-    - @keywords.each do |keyword|
-      %tr
-        %td= link_to 'Show', keyword
-        /%td= link_to 'Edit', edit_keyword_path(keyword)
-        %td= link_to 'Destroy', keyword, method: :delete, data: { confirm: 'Are you sure?' }
 
-%br
+  %section#requirements
+    = render 'layouts/alerts'
 
-= link_to 'New Keyword', new_project_keyword_path(params[:project_id])
+    .table-responsive
+      %table.table.table-bordered
+        %thead
+          %tr
+            %th= sort_link(@q, :key, 'Clave')
+            %th= sort_link(@q, :definition, 'Definición')
+            %th{colspan: 2} Acciones
+          = search_form_for [@project, @q], html:{class: 'form-inline full-width'} do |f|
+            %tr
+              %td= f.search_field :key, class: 'form-control', placeholder: 'Clave ...'
+              %td= f.search_field :definition, class: 'form-control', placeholder: 'Definición ...'
+              %td{colspan: 2}
+                = button_tag type: 'submit', class: 'btn btn-secondary', id: 'submit-search' do
+                  %span.fa.fa-search
+        %tbody#table-keywords
+          %tr#new-keyword
+            = render 'form'
+          = render 'keywords'
+
+  %section#right-side-menu

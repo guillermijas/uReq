@@ -1,0 +1,10 @@
+- @keywords.each do |kw|
+  %tr{id: "keyword-#{kw.key}"}
+    %td= kw.key
+    %td= kw.definition
+    %td
+      = link_to edit_project_keyword_path(@project, kw) do
+        = icon('pencil')
+    %td
+      = link_to project_keyword_path(@project, kw), method: :delete, data: { confirm: '¿Estás seguro?' } do
+        = icon('trash')

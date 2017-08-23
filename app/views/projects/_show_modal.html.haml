@@ -21,16 +21,13 @@
         %p
           %strong Estado:
           = @project.status_string
-        %p
-          = link_to 'Exportar CSV', export_csv_projects_path(@project), class: 'btn btn-secondary'
+        = link_to 'Exportar CSV', export_csv_projects_path(@project), class: 'btn btn-secondary'
       .modal-footer
-        .row
-        = link_to 'Ver requisitos', project_requirements_path(@project), class: 'btn btn-info'
+        .text-left= link_to 'Ver requisitos', project_requirements_path(@project), class: 'btn btn-info'
         = link_to 'Glosario', project_keywords_path(@project), class: 'btn btn-info'
         - if can? :update, @project
           = link_to 'Editar', edit_project_path(@project), class: 'btn btn-primary'
           - if @project.status == 'archived'
-            - if can? :delete, @project
-              = link_to 'Eliminar', project_path(@project), method: :delete, data: { confirm: '¿Eliminar definitivamente?' }, class: 'btn btn-danger'
+            = link_to 'Eliminar', project_path(@project), method: :delete, data: { confirm: '¿Eliminar definitivamente?' }, class: 'btn btn-danger'
           - else
             = link_to 'Archivar', archive_projects_path(@project), method: :post, data: { confirm: '¿Archivar proyecto?' }, class: 'btn btn-danger'

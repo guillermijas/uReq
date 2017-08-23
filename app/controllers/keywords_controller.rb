@@ -1,10 +1,13 @@
 class KeywordsController < ApplicationController
   before_action :set_keyword, only: %i[show edit update destroy]
+  before_action :set_project
 
   # GET /keywords
   # GET /keywords.json
   def index
-    @keywords = Keyword.all
+    @q = Keyword.where(project_id: params[:project_id]).ransack(params[:q])
+    @keywords = @q.result
+    @keyword = Keyword.new
   end
 
   # GET /keywords/1
@@ -22,14 +25,12 @@ class KeywordsController < ApplicationController
   # POST /keywords.json
   def create
     @keyword = Keyword.new(keyword_params)
-
+    @keyword.project = @project
     respond_to do |format|
       if @keyword.save
-        format.html { redirect_to @keyword, notice: 'Keyword was successfully created.' }
-        format.json { render :show, status: :created, location: @keyword }
+        format.html { redirect_to project_keywords_path, notice: 'Definicion creada con éxito' }
       else
-        format.html { render :new }
-        format.json { render json: @keyword.errors, status: :unprocessable_entity }
+        format.html { redirect_to project_keywords_path, alert: 'ERROR: La definición no ha sido creada' }
       end
     end
   end
@@ -53,20 +54,21 @@ class KeywordsController < ApplicationController
   def destroy
     @keyword.destroy
     respond_to do |format|
-      format.html { redirect_to keywords_url, notice: 'Keyword was successfully destroyed.' }
-      format.json { head :no_content }
+      format.html { redirect_to project_keywords_path, notice: 'Definicion borrada con éxito' }
     end
   end
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_keyword
     @keyword = Keyword.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
+  def set_project
+    @project = Project.find(params[:project_id])
+  end
+
   def keyword_params
-    params.require(:keyword).permit(:description)
+    params.require(:keyword).permit(:key, :definition)
   end
 end
