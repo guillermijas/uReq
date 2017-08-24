@@ -18,21 +18,21 @@
       %hr
 
       =link_to(projects_path) do
-        %li{class: ('active' if action_name == 'index')}
+        %li
           =icon('folder-open')
           Proyectos activos
       =link_to(archived_projects_path) do
-        %li{class: ('active' if action_name == 'index_archived')}
+        %li
           =icon('folder')
           Proyectos archivados
       - if can? :create, Project
         =link_to(new_project_path) do
-          %li{class: ('active' if action_name == 'new')}
+          %li
             =icon('plus')
             Nuevo proyecto
       - if can? :read, Log
         =link_to(logs_path) do
-          %li
+          %li.active
             =icon('file-o')
             Registro de acciones
       =link_to(edit_user_registration_path) do
