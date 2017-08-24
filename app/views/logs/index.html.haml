@@ -1,21 +1,32 @@
-%h1 Listing logs
+=render 'sidebar'
+#projects
+  =render 'layouts/alerts'
+  %h1.text-center Registro de acciones
+  %br
+  %br
+  .table-responsive
+    %table.table.table-bordered.table-hover
+      %thead
+        %tr
+          %th= sort_link(@q, :operation, 'Operacion')
+          %th= sort_link(@q, :project_name, 'Proyecto')
+          %th= sort_link(@q, :user_last_name, 'Usuario')
+          %th= sort_link(@q, :created_at, 'Fecha')
 
-%table
-  %thead
-    %tr
-      %th Operation
-      %th
-      %th
-      %th
-
-  %tbody
-    - @logs.each do |log|
-      %tr
-        %td= log.operation
-        %td= link_to 'Show', log
-        %td= link_to 'Edit', edit_log_path(log)
-        %td= link_to 'Destroy', log, method: :delete, data: { confirm: 'Are you sure?' }
-
-%br
-
-= link_to 'New Log', new_log_path
+      %tbody
+        %tr
+          %td{colspan: 4}
+            .row.w-100
+              = search_form_for @q, html:{class: 'form-inline w-100'} do |f|
+                .col-5= f.search_field :operation_cont, class: 'form-control w-100', placeholder: 'Operacion ...'
+                .col-3= f.search_field :project_name_cont, class: 'form-control w-100', placeholder: 'Proyecto ...'
+                .col-3= f.search_field :user_last_name_cont, class: 'form-control w-100', placeholder: 'Apellido ...'
+                .col-1
+                  = button_tag type: 'submit', class: 'btn btn-secondary', id: 'submit-search' do
+                    %span.fa.fa-search
+        - @logs.each do |log|
+          %tr
+            %td= log.operation
+            %td= log.project.nil? ? 'Proyecto eliminado' : log.project.name
+            %td= log.user.nil? ? 'Usuario eliminado' : log.user.short_name
+            %td= log.created_at.strftime('%Y-%m-%d (%H:%M)')

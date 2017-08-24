@@ -1,17 +1,6 @@
 =render 'sidebar'
 #projects
-  -unless alert.nil?
-    .alert.alert-danger.alert-dismissible.fade.show{:role => "alert"}
-      %button.close{'aria-label': 'Close', 'data-dismiss': 'alert', type: 'button'}
-        %span{'aria-hidden': 'true'} ×
-      %strong= icon('times')
-      =alert
-  -unless notice.nil?
-    .alert.alert-success.alert-dismissible.fade.show{:role => "alert"}
-      %button.close{'aria-label': 'Close', 'data-dismiss': 'alert', type: 'button'}
-        %span{'aria-hidden': 'true'} ×
-      %strong= icon('check')
-      =notice
+  =render('layouts/alerts')
   -if action_name == 'index_archived'
     %h1.text-center Proyectos archivados
   - else

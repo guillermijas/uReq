@@ -38,10 +38,9 @@
               %td= f.search_field :status_cont, class: 'form-control', placeholder: 'Estado ...'
               %td= f.search_field :category_cont, class: 'form-control', placeholder: 'Categoría ...'
               %td= f.search_field :level_cont, class: 'form-control', placeholder: 'Nivel ...'
-              - if can? :update, @requirement
-                %td{colspan: 2}
-                  = button_tag type: 'submit', class: 'btn btn-secondary', id: 'submit-search' do
-                    %span.fa.fa-search
+              %td{colspan: 2}
+                = button_tag type: 'submit', class: 'btn btn-secondary', id: 'submit-search' do
+                  %span.fa.fa-search
         %tbody#table-requirements
           = render 'requirements'
 

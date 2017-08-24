@@ -15,6 +15,7 @@ class User < ApplicationRecord
 
   has_many :requirements
   has_many :comments
+  has_many :logs
 
   def full_name
     first_name + ' ' + last_name
