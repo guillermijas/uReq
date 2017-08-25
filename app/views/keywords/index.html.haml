@@ -24,12 +24,9 @@
     .custom-table
       .table-header
         .row
-          .col-3
-            = sort_link(@q, :key, 'Clave')
-          .col-7
-            = sort_link(@q, :definition, 'Definición')
-          .col-2
-            Acciones
+          .col-3= sort_link(@q, :key, 'Clave')
+          .col-7= sort_link(@q, :definition, 'Definición')
+          .col-2 Acciones
       .table-body
         .row
           = search_form_for [@project, @q], html:{class: 'form-inline w-100'} do |f|

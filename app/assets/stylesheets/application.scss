@@ -3,6 +3,7 @@
 @import "requirements";
 @import "keywords";
 @import "projects";
+@import "logs";
 @import "devise";
 @import "project_sidebar";
 @import "font-awesome-sprockets";
@@ -41,4 +42,8 @@ html, body {
   abbr{
     color: $red;
   }
+}
+
+.w-65 {
+  width: 65% !important;
 }

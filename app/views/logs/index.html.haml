@@ -1,10 +1,36 @@
 =render 'sidebar'
-#projects
+#projects.logs
   =render 'layouts/alerts'
   %h1.text-center Registro de acciones
   %br
   %br
-  .table-responsive
+  .custom-table
+    .table-header
+      .row
+        .col-6= sort_link(@q, :operation, 'Operacion')
+        .col-2= sort_link(@q, :project_name, 'Proyecto')
+        .col-2= sort_link(@q, :user_last_name, 'Usuario')
+        .col-2= sort_link(@q, :created_at, 'Fecha')
+    .table-body
+      .row
+        = search_form_for @q, html:{class: 'form-inline w-100'} do |f|
+          .col-6= f.search_field :operation_cont, class: 'form-control w-100', placeholder: 'Operacion ...'
+          .col-2= f.search_field :project_name_cont, class: 'form-control w-100', placeholder: 'Proyecto ...'
+          .col-2= f.search_field :user_last_name_cont, class: 'form-control w-100', placeholder: 'Apellido ...'
+          .col-2
+            = f.search_field :created_at_cont, class: 'form-control w-65 mr-2', placeholder: 'Fecha ...'
+            = button_tag type: 'submit', class: 'btn btn-secondary w-25', id: 'submit-search' do
+              %span.fa.fa-search
+      - @logs.each do |log|
+        .row
+          .col-6= log.operation
+          .col-2= log.project.nil? ? 'Proyecto eliminado' : log.project.name
+          .col-2= log.user.nil? ? 'Usuario eliminado' : log.user.short_name
+          .col-2= log.created_at.strftime('%Y-%m-%d (%H:%M)')
+
+
+
+  -#.table-responsive
     %table.table.table-bordered.table-hover
       %thead
         %tr
@@ -18,9 +44,10 @@
           %td{colspan: 4}
             .row.w-100
               = search_form_for @q, html:{class: 'form-inline w-100'} do |f|
-                .col-5= f.search_field :operation_cont, class: 'form-control w-100', placeholder: 'Operacion ...'
-                .col-3= f.search_field :project_name_cont, class: 'form-control w-100', placeholder: 'Proyecto ...'
-                .col-3= f.search_field :user_last_name_cont, class: 'form-control w-100', placeholder: 'Apellido ...'
+                .col-7= f.search_field :operation_cont, class: 'form-control w-100', placeholder: 'Operacion ...'
+                .col-2= f.search_field :project_name_cont, class: 'form-control w-100', placeholder: 'Proyecto ...'
+                .col-2= f.search_field :user_last_name_cont, class: 'form-control w-100', placeholder: 'Apellido ...'
+                .col-2= f.search_field :created_at_cont, class: 'form-control w-100', placeholder: 'Fecha ...'
                 .col-1
                   = button_tag type: 'submit', class: 'btn btn-secondary', id: 'submit-search' do
                     %span.fa.fa-search
@@ -30,3 +57,24 @@
             %td= log.project.nil? ? 'Proyecto eliminado' : log.project.name
             %td= log.user.nil? ? 'Usuario eliminado' : log.user.short_name
             %td= log.created_at.strftime('%Y-%m-%d (%H:%M)')
+
+-#.custom-table
+      .table-header
+        .row
+          .col-3
+            = sort_link(@q, :key, 'Clave')
+          .col-7
+            = sort_link(@q, :definition, 'Definición')
+          .col-2
+            Acciones
+      .table-body
+        .row
+          = search_form_for [@project, @q], html:{class: 'form-inline w-100'} do |f|
+            .col-3= f.search_field :key, class: 'form-control w-100', placeholder: 'Clave ...'
+            .col-7= f.search_field :definition, class: 'form-control w-100', placeholder: 'Definición ...'
+            .col-2
+              = button_tag type: 'submit', class: 'btn btn-secondary', id: 'submit-search' do
+                %span.fa.fa-search
+        .row
+          =render 'form'
+        = render 'keywords'

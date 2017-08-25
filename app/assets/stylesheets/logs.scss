@@ -1,3 +1,26 @@
-// Place all the styles related to the logs controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+$light-gray: #e9ecef;
+
+.logs {
+  .custom-table {
+    padding: 20px;
+
+    .table-header {
+      font-weight: bold;
+
+      [class*="col-"] {
+        border-top: 1px solid $light-gray;
+      }
+    }
+
+    .row {
+      [class*="col-"] {
+        padding: 15px;
+        border-bottom: 1px solid $light-gray;
+        border-right: 1px solid $light-gray;
+      }
+      .col-6 {
+        border-left: 1px solid $light-gray;
+      }
+    }
+  }
+}
