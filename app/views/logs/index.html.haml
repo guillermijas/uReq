@@ -9,14 +9,14 @@
       .row
         .col-6= sort_link(@q, :operation, 'Operacion')
         .col-2= sort_link(@q, :project_name, 'Proyecto')
-        .col-2= sort_link(@q, :user_last_name, 'Usuario')
+        .col-2= sort_link(@q, :user_name, 'Usuario')
         .col-2= sort_link(@q, :created_at, 'Fecha')
     .table-body
       .row
         = search_form_for @q, html:{class: 'form-inline w-100'} do |f|
           .col-6= f.search_field :operation_cont, class: 'form-control w-100', placeholder: 'Operacion ...'
           .col-2= f.search_field :project_name_cont, class: 'form-control w-100', placeholder: 'Proyecto ...'
-          .col-2= f.search_field :user_last_name_cont, class: 'form-control w-100', placeholder: 'Apellido ...'
+          .col-2= f.search_field :user_name_cont, class: 'form-control w-100', placeholder: 'Apellido ...'
           .col-2
             = f.search_field :created_at_cont, class: 'form-control w-65 mr-2', placeholder: 'Fecha ...'
             = button_tag type: 'submit', class: 'btn btn-secondary w-25', id: 'submit-search' do
@@ -24,6 +24,6 @@
       - @logs.each do |log|
         .row
           .col-6= log.operation
-          .col-2= log.project.nil? ? 'Proyecto eliminado' : log.project.name
-          .col-2= log.user.nil? ? 'Usuario eliminado' : log.user.short_name
+          .col-2= log.project_name
+          .col-2= log.user_name
           .col-2= log.created_at.strftime('%Y-%m-%d (%H:%M)')

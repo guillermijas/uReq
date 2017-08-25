@@ -36,7 +36,8 @@ class ProjectsController < ApplicationController
           usr_pr.owner = (usr_pr.user == current_user || usr_pr.user.role == 'admin' ? true : false)
           usr_pr.save
         end
-        Log.new(operation: "#{current_user.full_name} ha creado el proyecto '#{@project.name}'", project_id: @project.id, user_id: current_user.id).save!
+        Log.new(operation: "#{current_user.full_name} ha creado el proyecto '#{@project.name}'",
+                project_name: @project.name, user_name: current_user.short_name).save!
         format.html { redirect_to projects_path, notice: 'El proyecto se ha creado con éxito' }
       else
         format.html { render :new }
@@ -51,7 +52,8 @@ class ProjectsController < ApplicationController
       if @project.update(project_params.except(:user_ids))
         @project.users.push(User.find(params[:project][:user_ids].reject(&:blank?))) if params[:project][:user_ids].present?
         @project.save
-        Log.new(operation: "#{current_user.full_name} ha actualizado el proyecto '#{@project.name}'", project_id: @project.id, user_id: current_user.id).save!
+        Log.new(operation: "#{current_user.full_name} ha actualizado el proyecto '#{@project.name}'",
+                project_name: @project.name, user_name: current_user.short_name).save!
         format.html { redirect_to projects_path, notice: 'El proyecto se ha actualizado corretamente.' }
       else
         format.html { render :edit }
@@ -63,7 +65,8 @@ class ProjectsController < ApplicationController
   # DELETE /projects/1.json
   def destroy
     @project.destroy
-    Log.new(operation: "#{current_user.full_name} ha eliminado el proyecto '#{@project.name}'", project_id: @project.id, user_id: current_user.id).save!
+    Log.new(operation: "#{current_user.full_name} ha eliminado el proyecto '#{@project.name}'",
+            project_name: @project.name, user_name: current_user.short_name).save!
     redirect_to projects_url, notice: 'El proyecto se ha eliminado con éxito'
   end
 
@@ -84,7 +87,8 @@ class ProjectsController < ApplicationController
   def archive
     respond_to do |format|
       if @project.update(status: 'archived')
-        Log.new(operation: "#{current_user.full_name} ha archivado el proyecto '#{@project.name}'", project_id: @project.id, user_id: current_user.id).save!
+        Log.new(operation: "#{current_user.full_name} ha archivado el proyecto '#{@project.name}'",
+                project_name: @project.name, user_name: current_user.short_name).save!
         format.html { redirect_to projects_path, notice: 'El proyecto se ha archivado corretamente.' }
       else
         format.html { redirect_to projects_path, alert: 'El proyecto no se ha podido archivador.' }

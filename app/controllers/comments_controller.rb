@@ -16,7 +16,7 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.save!
         Log.new(operation: "#{current_user.full_name} ha comentado el requisito '#{@requirement.id_string}'",
-                project_id: @project.id, user_id: current_user.id, requirement_id: @requirement.id, comment_id: @comment.id).save!
+                project_name: @project.name, user_name: current_user.short_name).save!
       end
       format.js { render layout: false }
     end
@@ -31,7 +31,7 @@ class CommentsController < ApplicationController
     @project = Project.find(params[:project_id])
     respond_to do |format|
       Log.new(operation: "#{current_user.full_name} ha borrado un comentario en el requisito '#{@requirement.id_string}'",
-              project_id: @project.id, user_id: current_user.id, requirement_id: @requirement.id, comment_id: @comment.id).save!
+              project_name: @project.name, user_name: current_user.short_name).save!
       format.js { render layout: false }
     end
   end

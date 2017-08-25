@@ -43,17 +43,11 @@ ActiveRecord::Schema.define(version: 20170714001459) do
   end
 
   create_table "logs", force: :cascade do |t|
-    t.integer "project_id"
-    t.integer "user_id"
-    t.integer "requirement_id"
-    t.integer "comment_id"
+    t.string "project_name"
+    t.string "user_name"
     t.text "operation"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["comment_id"], name: "index_logs_on_comment_id"
-    t.index ["project_id"], name: "index_logs_on_project_id"
-    t.index ["requirement_id"], name: "index_logs_on_requirement_id"
-    t.index ["user_id"], name: "index_logs_on_user_id"
   end
 
   create_table "projects", force: :cascade do |t|
