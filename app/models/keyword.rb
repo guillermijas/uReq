@@ -5,6 +5,7 @@ class Keyword < ApplicationRecord
   validates :definition, presence: true, allow_blank: false
 
   after_create :replace_keyword_in_requirement
+  after_update :replace_keyword_in_requirement
   before_destroy :remove_keyword_in_requirements
 
   # Crea o actualiza las etiquetas <abbr title="description"></abbr>

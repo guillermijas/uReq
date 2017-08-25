@@ -1,5 +1,6 @@
 $header-height: 80px;
 $sidebar-width: 200px;
+$light-gray: #e9ecef;
 
 .keywords {
   background: #ffffff;
@@ -8,6 +9,30 @@ $sidebar-width: 200px;
   overflow-x: scroll;
   overflow-y: scroll;
   width: calc(100% - 2*#{$sidebar-width});
+
+  .custom-table {
+    padding: 20px;
+
+    .table-header {
+      font-weight: bold;
+
+      [class*="col-"] {
+        border-top: 1px solid $light-gray;
+      }
+    }
+
+    .row {
+
+      [class*="col-"] {
+        padding: 15px;
+        border-bottom: 1px solid $light-gray;
+        border-right: 1px solid $light-gray;
+      }
+      .col-3 {
+        border-left: 1px solid $light-gray;
+      }
+    }
+  }
 }
 
 .new-keyword{

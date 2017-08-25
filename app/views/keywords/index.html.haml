@@ -19,27 +19,27 @@
         %li
           %abbr{title: 'uReq'} aplicacion
 
-
-  %section#requirements
+  %section.keywords
     = render 'layouts/alerts'
-
-    .table-responsive
-      %table.table.table-bordered
-        %thead
-          %tr
-            %th= sort_link(@q, :key, 'Clave')
-            %th= sort_link(@q, :definition, 'Definición')
-            %th{colspan: 2} Acciones
-          = search_form_for [@project, @q], html:{class: 'form-inline full-width'} do |f|
-            %tr
-              %td= f.search_field :key, class: 'form-control', placeholder: 'Clave ...'
-              %td= f.search_field :definition, class: 'form-control', placeholder: 'Definición ...'
-              %td{colspan: 2}
-                = button_tag type: 'submit', class: 'btn btn-secondary', id: 'submit-search' do
-                  %span.fa.fa-search
-        %tbody#table-keywords
-          %tr#new-keyword
-            = render 'form'
-          = render 'keywords'
+    .custom-table
+      .table-header
+        .row
+          .col-3
+            = sort_link(@q, :key, 'Clave')
+          .col-7
+            = sort_link(@q, :definition, 'Definición')
+          .col-2
+            Acciones
+      .table-body
+        .row
+          = search_form_for [@project, @q], html:{class: 'form-inline w-100'} do |f|
+            .col-3= f.search_field :key, class: 'form-control w-100', placeholder: 'Clave ...'
+            .col-7= f.search_field :definition, class: 'form-control w-100', placeholder: 'Definición ...'
+            .col-2
+              = button_tag type: 'submit', class: 'btn btn-secondary', id: 'submit-search' do
+                %span.fa.fa-search
+        .row
+          =render 'form'
+        = render 'keywords'
 
   %section#right-side-menu

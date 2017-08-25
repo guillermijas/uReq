@@ -1,9 +1,7 @@
-%td{colspan: 4}
-  = simple_form_for([@project, @keyword]) do |f|
-    .row
-      .col-md-5.form-group
-        = f.input :key, label: false, placeholder: 'Nueva clave'
-      .col-md-5.form-group
-        = f.input :definition, as: :string, label: false, placeholder: 'Nueva definicion'
-      .col-md-2.actions
-        = f.button :submit, 'Guardar', class: 'btn-primary w-100'
+= simple_form_for([@project, @keyword], html: { class: 'form-inline w-100'}) do |f|
+  .col-3
+    = f.input :key, label: false, placeholder: 'Nueva clave', input_html: { class: 'w-100' }
+  .col-7
+    = f.input :definition, as: :string, label: false, placeholder: 'Nueva definicion', input_html: { class: 'w-100' }
+  .col-2
+    = f.button :submit, 'Guardar', class: 'btn-primary w-100'
