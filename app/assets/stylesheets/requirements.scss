@@ -7,6 +7,8 @@ $light: #ccc;
 $dark: #666666;
 $hihglight: #F2F2C0;
 
+$light-gray: #e9ecef;
+
 
 #header {
   height: $header-height;
@@ -93,6 +95,30 @@ $hihglight: #F2F2C0;
   overflow-y: scroll;
   width: calc(100% - 2*#{$sidebar-width});
   overflow-x: scroll;
+
+  .custom-table {
+    padding-left: 15px;
+    padding-right: 15px;
+
+    .table-header {
+      font-weight: bold;
+
+      [class*="col-"] {
+        border-top: 1px solid $light-gray;
+      }
+    }
+
+    .row {
+      [class*="col-"] {
+        padding: 15px;
+        border-bottom: 1px solid $light-gray;
+        border-right: 1px solid $light-gray;
+      }
+      .col-6 {
+        border-left: 1px solid $light-gray;
+      }
+    }
+  }
 }
 
 a{

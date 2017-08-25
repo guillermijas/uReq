@@ -7,8 +7,7 @@
   -unless @project.trello_board_id.blank? || @project.trello_list_id.blank?
     %li.nav-item
       %a#trello.nav-link{'aria-controls': 'trello', 'data-toggle': 'tab', href: '#trello-tab', role: 'tab'}= icon('sticky-note-o')
-  %li.nav-item
-    %a#history.nav-link{'aria-controls': 'history', 'data-toggle': 'tab', href: '#history-tab', role: 'tab'}= icon('edit')
+  
 .tab-content
   #comments-tab.tab-pane.active{role: 'tabpanel'}
     %section#comments-list
@@ -69,16 +68,7 @@
       %br
       %br
       %br
-  #history-tab.tab-pane{role: 'tabpanel'}
-    %h4
-      %strong Historial
-    - history = Log.where(project_id: @project, requirement_id: @requirement)
-    - history.each do |his|
-      %p
-        = his.operation
-    %br
-    %br
-    %br
+
 -unless @project.trello_board_id.blank? || @project.trello_list_id.blank?
   :javascript
     var cardId;

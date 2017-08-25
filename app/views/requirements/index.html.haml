@@ -20,28 +20,38 @@
   %section#requirements
     = render 'layouts/alerts'
 
-    .table-responsive
-      %table.table.table-bordered
-        %thead
-          %tr
-            %th= sort_link(@q, :id, 'ID')
-            %th= sort_link(@q, :description, 'Descripción')
-            %th= sort_link(@q, :status, 'Estado')
-            %th= sort_link(@q, :category, 'Categoría')
-            %th= sort_link(@q, :level, 'Nivel')
+    .custom-table
+      .table-header
+        .row
+          .col-1= sort_link(@q, :id, 'ID')
+          .col-5= sort_link(@q, :description, 'Descripción')
+          .col-2= sort_link(@q, :status, 'Estado')
+          .col-2= sort_link(@q, :category, 'Categoría')
+          - if can? :update, @requirement
+            .col-1= sort_link(@q, :level, 'Nivel')
+            .col-1 Acciones
+          -else
+            .col-2= sort_link(@q, :level, 'Nivel')
+
+      .table-body
+        .row
+          =search_form_for [@project, @q], html:{class: 'form-inline w-100'} do |f|
+            .col-1= f.search_field :suffix_cont, class: 'form-control w-100', placeholder: 'Sufijo ...'
+            .col-5= f.search_field :description_cont, class: 'form-control w-100', placeholder: 'Descripción ...'
+            .col-2= f.search_field :status_cont, class: 'form-control w-100', placeholder: 'Estado ...'
+            .col-2= f.search_field :category_cont, class: 'form-control w-100', placeholder: 'Categoría ...'
             - if can? :update, @requirement
-              %th{colspan: 2} Acciones
-          = search_form_for [@project, @q], html:{class: 'form-inline full-width'} do |f|
-            %tr
-              %td= f.search_field :suffix_cont, class: 'form-control', placeholder: 'Sufijo ...'
-              %td= f.search_field :description_cont, class: 'form-control', placeholder: 'Descripción ...'
-              %td= f.search_field :status_cont, class: 'form-control', placeholder: 'Estado ...'
-              %td= f.search_field :category_cont, class: 'form-control', placeholder: 'Categoría ...'
-              %td= f.search_field :level_cont, class: 'form-control', placeholder: 'Nivel ...'
-              %td{colspan: 2}
+              .col-1= f.search_field :level_cont, class: 'form-control w-100', placeholder: 'Nivel ...'
+              .col-1
                 = button_tag type: 'submit', class: 'btn btn-secondary', id: 'submit-search' do
                   %span.fa.fa-search
-        %tbody#table-requirements
+            - else
+              .col-2
+                = f.search_field :level_cont, class: 'form-control w-65', placeholder: 'Nivel ...'
+                = button_tag type: 'submit', class: 'btn btn-secondary w-25', id: 'submit-search' do
+                  %span.fa.fa-search
+
+        #table-requirements
           = render 'requirements'
 
   %section#right-side-menu
@@ -64,10 +74,11 @@
       });
 / https://stackoverflow.com/questions/25125076/how-to-make-tr-clickable-over-link-to
 :javascript
-  $(document).on("click", "#table-requirements tr", function() {
+  $(document).on("click", "#table-requirements div.row", function() {
     var link  = $(this).data("href");
     $.ajax({
       url: link,
       type: "GET"
     });
   });
+  $('[data-toggle="popover"]').popover();

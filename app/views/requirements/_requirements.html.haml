@@ -1,14 +1,15 @@
 - @requirements.each do |requirement|
-  %tr{id: requirement.id_string, 'data-href': select_project_requirements_path(@project, requirement) }
-    %td=link_to requirement.id_string, select_project_requirements_path(@project, requirement, format: :js,  scroll: false), remote: true
-    %td= requirement.description.html_safe
-    %td= t(requirement.status)
-    %td= requirement.category
-    %td= t(requirement.level)
+  .row{id: requirement.id_string, 'data-href': select_project_requirements_path(@project, requirement) }
+    .col-1=link_to requirement.id_string, select_project_requirements_path(@project, requirement, format: :js,  scroll: false), remote: true
+    .col-5= requirement.description.html_safe
+    .col-2= t(requirement.status)
+    .col-2= requirement.category
     - if can? :update, @requirement
-      %td
+      .col-1= t(requirement.level)
+      .col-1
         = link_to edit_project_requirement_path(@project, requirement), remote: true do
           =icon('pencil')
-      %td
         = link_to project_requirement_path(@project, requirement), method: :delete, data: { confirm: '¿Estás seguro?' } do
           =icon('trash')
+    -else
+      .col-2= t(requirement.level)
