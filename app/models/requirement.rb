@@ -32,6 +32,14 @@ class Requirement < ApplicationRecord
     end
   end
 
+  def satisfies
+    Requirement.find(satisfies_id) if satisfies_id
+  end
+
+  def cover
+    Requirement.where(satisfies_id: id)
+  end
+
   def t_status
     case status
     when 'pending'

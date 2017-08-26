@@ -6,7 +6,7 @@
   .form-group
     = f.input :status, label: 'Estado',
               collection: [%w(Pendiente pending), ['En proceso', 'in_process'], %w(Verificando verifying), %w(Rechazado rejected), %w(Hecho done)],
-              include_blank: false
+              include_blank: false, input_html: { class: 'custom-select' }
   .row
     .col-md
       .form-group
@@ -14,9 +14,13 @@
     .col-md
       .form-group
         = f.input :suffix, label: 'Sufijo', error: 'El sufijo de la ID es obligatorio.', error_html: { class: 'error' }
+  .row
+    .col-md
+      = f.input :level, label: 'Nivel', collection: [%w(Alto high), %w(Medio medium), %w(Bajo low)],
+                include_blank: false, input_html: { class: 'custom-select' }
+    .col-md
+      = f.input :satisfies_id, lable: 'Satisface', collection: Requirement.where(project: @project),
+                label_method: :id_string, input_html: { class: 'custom-select' }
   .form-group
-    = f.input :level, label: 'Nivel',
-              collection: [%w(Alto high), %w(Medio medium), %w(Bajo low)],
-              include_blank: false
   .actions
-    = f.button :submit, 'Guardar', class: 'btn btn-primary'
+    = f.button :submit, 'Guardar', class: 'btn btn-primary w-100'

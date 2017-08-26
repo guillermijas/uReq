@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170714001459) do
+ActiveRecord::Schema.define(version: 20170826115623) do
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string "data_file_name", null: false
@@ -77,7 +77,9 @@ ActiveRecord::Schema.define(version: 20170714001459) do
     t.integer "id_in_project"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "satisfies_id"
     t.index ["project_id"], name: "index_requirements_on_project_id"
+    t.index ["satisfies_id"], name: "index_requirements_on_satisfies_id"
     t.index ["user_id"], name: "index_requirements_on_user_id"
   end
 

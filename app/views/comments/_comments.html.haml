@@ -1,15 +1,35 @@
 
 %ul#myTab.nav.nav-tabs{role: 'tablist'}
   %li.nav-item
-    %a#comments.nav-link.active{'aria-controls': 'Comments', 'data-toggle': 'tab', href: '#comments-tab', role: 'tab'}= icon('comments')
-  %li.nav-item
     %a#relations.nav-link{'aria-controls': 'relations', 'data-toggle': 'tab', href: '#relations-tab', role: 'tab'}= icon('exchange')
+  %li.nav-item
+    %a#comments.nav-link{'aria-controls': 'Comments', 'data-toggle': 'tab', href: '#comments-tab', role: 'tab'}= icon('comments')
   -unless @project.trello_board_id.blank? || @project.trello_list_id.blank?
     %li.nav-item
       %a#trello.nav-link{'aria-controls': 'trello', 'data-toggle': 'tab', href: '#trello-tab', role: 'tab'}= icon('sticky-note-o')
-  
+
 .tab-content
-  #comments-tab.tab-pane.active{role: 'tabpanel'}
+  #relations-tab.tab-pane{role: 'tabpanel'}
+    %h4
+      %strong Relaciones
+    %br
+    %h5 Satisface
+    - if @requirement.satisfies
+      %p=link_to @requirement.satisfies.id_string, select_project_requirements_path(@project,@requirement.satisfies, scroll: true), remote: true
+    -else
+      %p (Vacío)
+
+    %h5 Cubre
+    - if @requirement.cover.blank?
+      %p (Vacío)
+    -else
+      - @requirement.cover.each do |req|
+        %p=link_to req.id_string, select_project_requirements_path(@project, req, scroll: true), remote: true
+    %br
+    %br
+    %br
+
+  #comments-tab.tab-pane{role: 'tabpanel'}
     %section#comments-list
       %article
         %h5
@@ -26,13 +46,6 @@
       %br
       %br
       %br
-  #relations-tab.tab-pane{role: 'tabpanel'}
-    %h4
-      %strong Relaciones
-    %p aksjndfi
-    %p asdojfj
-    %p aosdjnf
-    %p naopsjdfn
 
   -unless @project.trello_board_id.blank? || @project.trello_list_id.blank?
     #trello-tab.tab-pane{role: 'tabpanel'}
@@ -97,11 +110,17 @@
     });
 
 :javascript
-  var active;
+
+  console.log(active);
+  if(active === null){
+  console.log('adnsjfn');
+    $('#relations-tab').addClass('active');
+    $('#relations').addClass('active');
+  }
 
   $('#myTab a').click(function(){
     $(this).tab('show');
-    active = $(this).context.id;
+    active = $(this)[0].id;
   });
 
   $(document.getElementById(active)).tab('show');

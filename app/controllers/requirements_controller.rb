@@ -94,6 +94,7 @@ class RequirementsController < ApplicationController
   def requirement_params
     params.require(:requirement).permit(:suffix, :description,
                                         :status, :end_date,
-                                        :category, :level, :task_id)
+                                        :category, :level,
+                                        :satisfies_id, :task_id)
   end
 end
