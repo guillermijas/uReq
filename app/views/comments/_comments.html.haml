@@ -32,8 +32,9 @@
   #comments-tab.tab-pane{role: 'tabpanel'}
     %section#comments-list
       %article
-        %h5
+        %h4
           %strong Comentarios
+        %br
         - @comments.each do |comment|
           %p
             %strong= comment.user.short_name
@@ -53,13 +54,11 @@
         %strong Trello
       .field
         %label{for: '#title'} Título
-        %input#title{type: 'text', value: "#{@requirement.id_string}"}
-
+        %input#title.form-control{type: 'text', value: "#{@requirement.id_string}"}
       %br
-
       .field
         %label{for: '#description'} Descripción
-        %textarea#description= strip_tags(@requirement.description.html_safe)
+        %textarea#description.form-control= strip_tags(@requirement.description.html_safe)
 
       %a.btn.btn-info#btn-trello Crear tarea trello
       %br
@@ -72,7 +71,7 @@
             var a = Trello.cards.get("#{ t }", function(card){
               $('article#card-list-'+"#{t}").append(
                 "<div class='card'>"+
-                  "<div class='card-block'>"+
+                  "<div class='card-body'>"+
                     "<h4 class='card-title'>"+ card.name +"</h4>"+
                     "<p class='card-text'>"+ card.desc +"</p>"+
                   "</div>"+
