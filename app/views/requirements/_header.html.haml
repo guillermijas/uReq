@@ -7,7 +7,7 @@
     - users = ''
     - @project.users.each do |user|
       - users += user.full_name + ', '
-    %button{'data-toggle': 'popover', 'data-html': 'true', title: 'Participantes', 'data-content': "#{users[0..-3]}", 'data-placement': 'bottom'}
+    %button.btn.btn-secondary{'data-toggle': 'popover', 'data-html': 'true', title: 'Participantes', 'data-content': "#{users[0..-3]}", 'data-placement': 'bottom'}
       /users[0..-3] es para quitar el ', ' del final
       = icon('user')
 
@@ -18,7 +18,7 @@
     - verifying = "Verificando: #{@requirements.where(status: 'verifying').count}/#{@requirements.count}</br>"
     - pending = "Pendiente: #{@requirements.where(status: 'pending').count}/#{@requirements.count}</br>"
     - msg = done + in_proccess + rejected + verifying + pending
-    %button{'data-toggle': 'popover', 'data-html': 'true', title: 'Estadísticas', 'data-content': "#{msg}", 'data-placement': 'bottom'}
+    %button.btn.btn-secondary{'data-toggle': 'popover', 'data-html': 'true', title: 'Estadísticas', 'data-content': "#{msg}", 'data-placement': 'bottom'}
       = icon('bar-chart-o')
 
   .col.text-right
