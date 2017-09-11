@@ -4,6 +4,7 @@ class Project < ApplicationRecord
 
   has_many :requirements, dependent: :destroy
   has_many :keywords, dependent: :destroy
+  has_many :logs
 
   has_attached_file :picture, styles: { medium: '300x300', thumb: '100x100' }
   validates_attachment_content_type :picture, content_type: %w[image/jpeg image/gif image/png]

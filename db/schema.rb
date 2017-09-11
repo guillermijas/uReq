@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170826115623) do
+ActiveRecord::Schema.define(version: 20170911142455) do
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string "data_file_name", null: false
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20170826115623) do
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "deleted", default: false, null: false
     t.index ["requirement_id"], name: "index_comments_on_requirement_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
@@ -43,11 +44,15 @@ ActiveRecord::Schema.define(version: 20170826115623) do
   end
 
   create_table "logs", force: :cascade do |t|
-    t.string "project_name"
-    t.string "user_name"
+    t.integer "project_id"
+    t.integer "user_id"
+    t.integer "requirement_id"
     t.text "operation"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_logs_on_project_id"
+    t.index ["requirement_id"], name: "index_logs_on_requirement_id"
+    t.index ["user_id"], name: "index_logs_on_user_id"
   end
 
   create_table "projects", force: :cascade do |t|
@@ -63,6 +68,7 @@ ActiveRecord::Schema.define(version: 20170826115623) do
     t.datetime "picture_updated_at"
     t.string "trello_board_id"
     t.string "trello_list_id"
+    t.boolean "deleted", default: false, null: false
   end
 
   create_table "requirements", force: :cascade do |t|
@@ -78,6 +84,7 @@ ActiveRecord::Schema.define(version: 20170826115623) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "satisfies_id"
+    t.boolean "deleted", default: false, null: false
     t.index ["project_id"], name: "index_requirements_on_project_id"
     t.index ["satisfies_id"], name: "index_requirements_on_satisfies_id"
     t.index ["user_id"], name: "index_requirements_on_user_id"
@@ -119,6 +126,7 @@ ActiveRecord::Schema.define(version: 20170826115623) do
     t.string "avatar_content_type"
     t.integer "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.boolean "deleted", default: false, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

@@ -4,7 +4,7 @@ class RequirementsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @q = Requirement.where(project_id: params[:project_id]).ransack(params[:q])
+    @q = Requirement.where(deleted: false).where(project_id: params[:project_id]).order(:id_in_project).ransack(params[:q])
     @requirements = @q.result
     @requirement = Requirement.new(project: @project)
     redirect_to projects_path unless can? :read, @requirement
@@ -27,8 +27,7 @@ class RequirementsController < ApplicationController
     @requirement.id_in_project = @requirement.next_id(@project.id)
     respond_to do |format|
       if @requirement.save
-        Log.new(operation: "#{current_user.full_name} ha creado el requisito '#{@requirement.id_string}'",
-                project_name: @project.name, user_name: current_user.short_name).save!
+        Log.create(operation: 'Crear requisito', project: @project, user: current_user, requirement: @requirement)
         format.html { redirect_to project_requirements_path(@project), notice: 'Requisito creado' }
       else
         format.html { render :new }
@@ -40,8 +39,7 @@ class RequirementsController < ApplicationController
     respond_to do |format|
       @requirement.user = current_user
       if @requirement.update(requirement_params)
-        Log.new(operation: "#{current_user.full_name} ha actualizado el requisito '#{@requirement.id_string}'",
-                project_name: @project.name, user_name: current_user.short_name).save!
+        Log.create(operation: 'Actualizar requisito', project: @project, user: current_user, requirement: @requirement)
         format.html { redirect_to project_requirements_path(@project), notice: 'Requisito actualizado' }
       else
         format.html { render :edit }
@@ -50,24 +48,22 @@ class RequirementsController < ApplicationController
   end
 
   def destroy
-    @requirement.destroy
+    @requirement.update(deleted: true)
     respond_to do |format|
-      Log.new(operation: "#{current_user.full_name} ha borrado el requisito '#{@requirement.id_string}'",
-              project_name: @project.name, user_name: current_user.short_name).save!
+      Log.create(operation: 'Elminar requisito', project: @project, user: current_user, requirement: @requirement)
       format.html { redirect_to project_requirements_path(@project), notice: 'Requisito eliminado' }
     end
   end
 
   def select
     @scroll = params[:scroll]
-    @requirements = Requirement.where(project_id: params[:project_id])
+    @requirements = Requirement.where(project_id: params[:project_id], deleted: false).order(:id_in_project)
     @requirement = Requirement.find(params[:id])
-    @comments = Comment.where(requirement_id: params[:id])
+    @comments = Comment.where(requirement_id: params[:id], deleted: false)
     @comment = Comment.new
     if params[:task_id].present?
       Task.new(requirement: @requirement, trello_task_id: params[:task_id]).save!
-      Log.new(operation: "#{current_user.full_name} ha creado una tarea para el requisito '#{@requirement.id_string}'",
-              project_name: @project.name, user_name: current_user.short_name).save!
+      Log.create!(operation: 'Crear tarea Trello', project_id: @project, user_id: current_user.id, requirement_id: @requirement.id)
     end
     respond_to do |format|
       format.js { render layout: false }

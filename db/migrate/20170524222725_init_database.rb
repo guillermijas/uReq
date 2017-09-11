@@ -51,8 +51,9 @@ class InitDatabase < ActiveRecord::Migration[5.1]
     end
 
     create_table :logs do |t|
-      t.string :project_name
-      t.string :user_name
+      t.belongs_to :project, index: true
+      t.belongs_to :user, index: true
+      t.belongs_to :requirement, index: true
       t.text :operation
       t.timestamps
     end
