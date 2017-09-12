@@ -38,7 +38,9 @@ class RequirementsController < ApplicationController
   def update
     respond_to do |format|
       @requirement.user = current_user
+      @requirement.use_keywords_definitions
       if @requirement.update(requirement_params)
+        @requirement.use_keywords_definitions
         Log.create(operation: 'Actualizar requisito', project: @project, user: current_user, requirement: @requirement)
         format.html { redirect_to project_requirements_path(@project), notice: 'Requisito actualizado' }
       else

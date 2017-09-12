@@ -19,8 +19,7 @@ class KeywordsController < ApplicationController
     @keyword.project = @project
     respond_to do |format|
       if @keyword.save
-        Log.new(operation: "#{current_user.full_name} ha creado la definicion '#{@keyword.key}'",
-                project_name: @project.name, user_name: current_user.short_name).save!
+        Log.create(operation: "Creado la palabra clave '#{@keyword.key}'", project: @project, user: current_user)
         format.html { redirect_to project_keywords_path, notice: 'Definicion creada con éxito' }
       else
         format.html { redirect_to project_keywords_path, alert: 'ERROR: La definición no ha sido creada' }
@@ -31,8 +30,7 @@ class KeywordsController < ApplicationController
   def update
     respond_to do |format|
       if @keyword.update(keyword_params)
-        Log.new(operation: "#{current_user.full_name} ha actualizado la definicion de '#{@keyword.key}'",
-                project_name: @project.name, user_name: current_user.short_name).save!
+        Log.create(operation: "Actualizado la definicion de '#{@keyword.key}'", project: @project, user: current_user)
         format.html { redirect_to project_keywords_path, notice: 'Definicion actualizada con éxito' }
       else
         format.html { redirect_to project_keywords_path, alert: 'ERROR: La definición no se ha actualizado' }
@@ -41,8 +39,7 @@ class KeywordsController < ApplicationController
   end
 
   def destroy
-    Log.new(operation: "#{current_user.full_name} ha eliminado la definicion de '#{@keyword.key}'",
-            project_name: @project.name, user_name: current_user.short_name).save!
+    Log.create(operation: "Eliminado la palabra clave '#{@keyword.key}'", project: @project, user: current_user)
     @keyword.destroy
     respond_to do |format|
       format.html { redirect_to project_keywords_path, notice: 'Definicion borrada con éxito' }
