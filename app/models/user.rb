@@ -13,9 +13,9 @@ class User < ApplicationRecord
   has_many :user_projects, dependent: :destroy
   has_many :projects, -> { distinct }, through: :user_projects
 
-  has_many :requirements
-  has_many :comments
-  has_many :logs
+  has_many :requirements, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :logs, dependent: :destroy
 
   def full_name
     first_name + ' ' + last_name

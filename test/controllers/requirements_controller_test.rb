@@ -59,14 +59,15 @@ class RequirementsControllerTest < ActionDispatch::IntegrationTest
   test 'should update requirement' do
     patch project_requirement_path(@project, @requirement), xhr: true, params: { requirement: { category: 'Seguridad',
                                                                                                 description: 'Terminar login' } }
+    assert_equal(Requirement.find(@requirement.id).category, 'Seguridad')
     assert_response :success
   end
 
   test 'should destroy requirement' do
-    assert_difference('Requirement.count', -1) do
+    assert_no_difference('Requirement.count') do
       delete project_requirement_path(@project, @requirement)
     end
-
+    assert_equal(Requirement.find(@requirement.id).deleted, true)
     assert_redirected_to project_requirements_path(@project)
   end
 end

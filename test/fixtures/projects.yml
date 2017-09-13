@@ -4,3 +4,4 @@ ureq:
   name: uReq
   client: Universidad de Malaga
   status: in_process
+  deleted: false

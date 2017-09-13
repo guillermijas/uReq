@@ -1,7 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  body: MyText
+  body: Este requisito se ha actualizado
+  requirement: one
+  user: guille
+  deleted: false
 
 two:
-  body: MyText
+  body: Este requisito se ha actualizado
+  requirement: one
+  user: guille
+  deleted: false

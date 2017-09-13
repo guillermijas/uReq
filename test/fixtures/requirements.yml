@@ -7,6 +7,9 @@ one:
   end_date: 2017-05-25
   category: MyString
   level: high
+  project: ureq
+  id_in_project: 1
+  user: guille
 
 two:
   suffix: adsfasdf
@@ -15,3 +18,6 @@ two:
   end_date: 2017-05-25
   category: asdfas
   level: asdfasfd
+  project: ureq
+  user: guille
+  id_in_project: 2

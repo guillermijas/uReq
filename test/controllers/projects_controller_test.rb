@@ -46,26 +46,26 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should update project' do
-    patch project_url(@project), params: { project: { client: @project.client,
-                                                      end_date: @project.end_date,
-                                                      name: @project.name, status: @project.status } }
+    patch project_url(@project), params: { project: { client: 'Carlos Rossi' } }
+    assert_equal(Project.find(@project.id).client, 'Carlos Rossi')
     assert_redirected_to projects_path
   end
 
   test 'should not update project' do
     patch project_url(@project), params: { project: { name: '' } }
-    assert_not_equal(@project.name, '')
+    assert_not_equal(Project.find(@project.id).name, '')
   end
 
   test 'should not update project 2' do
     patch project_url(@project), params: { project: { status: 'test' } }
-    assert_not_equal(@project.name, '')
+    assert_not_equal(Project.find(@project.id).status, 'test')
   end
 
   test 'should destroy project' do
-    assert_difference('Project.count', -1) do
+    assert_no_difference('Project.count') do
       delete project_url(@project)
     end
+    assert_equal(Project.find(@project.id).deleted, true)
     assert_redirected_to projects_url
   end
 end

@@ -11,16 +11,17 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should create comment' do
-    assert_difference('Comment.count') do
+    assert_difference('Comment.count', 1) do
       post project_requirement_comments_path(@project.id, @requirement.id), xhr: true, params: { comment: { body: @comment.body } }
     end
     assert_response :success
   end
 
   test 'should destroy comment' do
-    assert_difference('Comment.count', -1) do
+    assert_difference('Comment.count', 0) do
       delete project_requirement_comment_path(@project.id, @requirement.id, @comment.id), xhr: true
     end
+    assert_equal(true, Comment.find(@comment.id).deleted)
     assert_response :success
   end
 end

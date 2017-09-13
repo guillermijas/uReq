@@ -51,10 +51,8 @@ class RequirementsController < ApplicationController
 
   def destroy
     @requirement.update(deleted: true)
-    respond_to do |format|
-      Log.create(operation: 'Elminar requisito', project: @project, user: current_user, requirement: @requirement)
-      format.html { redirect_to project_requirements_path(@project), notice: 'Requisito eliminado' }
-    end
+    Log.create(operation: 'Elminar requisito', project: @project, user: current_user, requirement: @requirement)
+    redirect_to project_requirements_path(@project), notice: 'Requisito eliminado'
   end
 
   def select
