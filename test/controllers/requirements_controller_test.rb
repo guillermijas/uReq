@@ -32,7 +32,6 @@ class RequirementsControllerTest < ActionDispatch::IntegrationTest
     assert_difference('Requirement.count') do
       post project_requirements_path(@project), params: { requirement: { category: @requirement.category,
                                                                          description: @requirement.description,
-                                                                         end_date: @requirement.end_date,
                                                                          level: @requirement.level,
                                                                          status: @requirement.status,
                                                                          suffix: @requirement.suffix } }
@@ -44,7 +43,6 @@ class RequirementsControllerTest < ActionDispatch::IntegrationTest
     assert_no_difference('Requirement.count') do
       post project_requirements_path(@project), params: { requirement: { category: @requirement2.category,
                                                                          description: @requirement2.description,
-                                                                         end_date: @requirement2.end_date,
                                                                          level: @requirement2.level,
                                                                          status: @requirement2.status,
                                                                          suffix: @requirement2.suffix } }
@@ -60,6 +58,13 @@ class RequirementsControllerTest < ActionDispatch::IntegrationTest
     patch project_requirement_path(@project, @requirement), xhr: true, params: { requirement: { category: 'Seguridad',
                                                                                                 description: 'Terminar login' } }
     assert_equal(Requirement.find(@requirement.id).category, 'Seguridad')
+    assert_response :success
+  end
+
+  test 'should update requirement with keyword aplicacion' do
+    patch project_requirement_path(@project, @requirement), xhr: true, params: { requirement: { category: 'Seguridad',
+                                                                                                description: 'Terminar login aplicacion' } }
+    assert_equal(true, Requirement.find(@requirement.id).description.include?('<abbr'))
     assert_response :success
   end
 

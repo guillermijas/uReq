@@ -29,7 +29,7 @@
           .col-2= sort_link(@q, :category, 'Categoría')
           - if can? :update, @requirement
             .col-1= sort_link(@q, :level, 'Nivel')
-            .col-1 Acciones
+            .col-1 Acción
           -else
             .col-2= sort_link(@q, :level, 'Nivel')
 
