@@ -3,7 +3,7 @@ class Requirement < ApplicationRecord
   has_many :tasks, dependent: :destroy
   belongs_to :user
   belongs_to :project
-  has_many :logs, dependent: :destroy
+  has_many :logs
 
   validates :project_id, presence: true
   validates :user_id, presence: true

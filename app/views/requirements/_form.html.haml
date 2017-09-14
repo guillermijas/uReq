@@ -19,7 +19,8 @@
       = f.input :level, label: 'Nivel', collection: [%w(Alto high), %w(Medio medium), %w(Bajo low)],
                 include_blank: false, input_html: { class: 'custom-select' }
     .col-md
-      = f.input :satisfies_id, label: 'Satisface', collection: Requirement.where(project: @project),
+      = f.input :satisfies_id, label: 'Satisface',
+                collection: Requirement.where(project: @project).where.not(id: @requirement.id).where('satisfies_id != ? or satisfies_id is null', @requirement.id).order(:id_in_project),
                 label_method: :id_string, input_html: { class: 'custom-select' }
   .form-group
   .actions
