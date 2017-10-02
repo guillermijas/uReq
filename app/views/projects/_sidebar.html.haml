@@ -33,6 +33,10 @@
           %li
             =icon('file-o')
             Registro de acciones
+      =link_to(root_url+'manual.pdf', { target: '_blank' }) do
+        %li
+          =icon('book')
+          Manual de usuario
       =link_to(edit_user_registration_path) do
         %li
           =icon('user')
