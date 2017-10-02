@@ -1,28 +1,46 @@
 .row.align-items-center
   .col
     %h2
-      = icon('folder-open-o')
-      = @project.name
+      = link_to projects_path, class: 'normal-text' do
+        = icon('folder-open-o')
+        = @project.name
   .col.text-center
     - users = ''
     - @project.users.each do |user|
       - users += user.full_name + ', '
-    %button.btn.btn-secondary{'data-toggle': 'popover', 'data-html': 'true', title: 'Participantes', 'data-content': "#{users[0..-3]}", 'data-placement': 'bottom'}
+    %button#collaborators-button.btn.btn-secondary{'data-toggle': 'popover', 'data-html': 'true', title: 'Participantes', 'data-content': "#{users[0..-3]}", 'data-placement': 'bottom'}
       /users[0..-3] es para quitar el ', ' del final
       = icon('user')
 
   .col.text-center
-    - done = "Hechos: #{@requirements.where(status: 'done').count}/#{@requirements.count}</br>"
-    - in_proccess = "En proceso: #{@requirements.where(status: 'in_process').count}/#{@requirements.count}</br>"
-    - rejected = "Rechazados: #{@requirements.where(status: 'rejected').count}/#{@requirements.count}</br>"
-    - verifying = "Verificando: #{@requirements.where(status: 'verifying').count}/#{@requirements.count}</br>"
-    - pending = "Pendiente: #{@requirements.where(status: 'pending').count}/#{@requirements.count}</br>"
-    - msg = done + in_proccess + rejected + verifying + pending
-    %button.btn.btn-secondary{'data-toggle': 'popover', 'data-html': 'true', title: 'Estadísticas', 'data-content': "#{msg}", 'data-placement': 'bottom'}
+    - done = @requirements.where(status: 'done').count
+    - in_proccess = @requirements.where(status: 'in_process').count
+    - rejected = @requirements.where(status: 'rejected').count
+    - verifying = @requirements.where(status: 'verifying').count
+    - pending = @requirements.where(status: 'pending').count
+    %button#stats-button.btn.btn-secondary{'data-toggle': 'popover', 'data-html': 'true', title: 'Estadísticas', 'data-content': '<canvas id="stats" width="400" height="400"></canvas>', 'data-placement': 'bottom'}
       = icon('bar-chart-o')
 
-  .col.text-right
-    %h2
-      = link_to projects_path do
-        =icon('arrow-left')
-        Volver
+  .col
+
+:javascript
+  $( document ).ready(function() {
+    $('#collaborators-button').popover();
+
+    $('#stats-button').popover({
+      html: true,
+      content: '<canvas id="stats" width="400" height="400"></canvas>'
+    }).on('shown.bs.popover', function() {
+
+      new Chart($('#stats'), {
+        type: 'pie',
+        data: {
+          labels: ["Hechos", "En proceso", "Rechazados", "Verificando", "Pendientes"],
+          datasets: [{
+            data: ["#{done}","#{in_proccess}","#{rejected}","#{verifying}","#{pending}"],
+            backgroundColor: ["#229954", "#f1c40f", "#e74c3c", "#9b59b6","#85c1e9"]
+          }]
+        }
+      });
+    });
+  });

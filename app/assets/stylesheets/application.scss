@@ -47,3 +47,12 @@ html, body {
 .w-65 {
   width: 65% !important;
 }
+
+.normal-text {
+  color: white;
+  text-decoration: none;
+
+  &:hover, &:active, &:visited {
+    color: white;
+  }
+}

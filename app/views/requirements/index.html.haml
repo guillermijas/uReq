@@ -9,6 +9,9 @@
         = link_to 'Nuevo Requisito', new_modal_project_requirements_path(@project), remote: true, class: 'btn btn-secondary'
         %br
         %br
+        = link_to 'Glosario', project_keywords_path(@project), class: 'btn btn-secondary'
+        %br
+        %br
       - all_reqs = Requirement.where(project_id: params[:project_id])
       - all_reqs.group_by(&:category).each do |category, reqs|
         %h4= category.blank? ? 'Sin categoría' : category
@@ -81,6 +84,5 @@
       type: "GET"
     });
   });
-  $('[data-toggle="popover"]').popover();
   var active = null;
 
