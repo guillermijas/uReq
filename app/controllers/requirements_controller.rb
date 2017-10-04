@@ -63,7 +63,7 @@ class RequirementsController < ApplicationController
     @comment = Comment.new
     if params[:task_id].present?
       Task.new(requirement: @requirement, trello_task_id: params[:task_id]).save!
-      Log.create!(operation: 'Crear tarea Trello', project_id: @project, user_id: current_user.id, requirement_id: @requirement.id)
+      Log.create(operation: 'Crear tarea Trello', project: @project, user: current_user, requirement: @requirement)
     end
     respond_to do |format|
       format.js { render layout: false }

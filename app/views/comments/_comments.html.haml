@@ -88,7 +88,7 @@
       cardId = data.id;
       console.log('Tarjeta creada con éxito');
       $.ajax({
-        url: "#{request.path}?task_id="+cardId,
+        url: "#{select_project_requirements_path(@requirement)}?task_id="+cardId,
         type: "GET"
       });
     };
@@ -109,17 +109,12 @@
     });
 
 :javascript
-
-  console.log(active);
   if(active === null){
-  console.log('adnsjfn');
     $('#relations-tab').addClass('active');
     $('#relations').addClass('active');
   }
-
   $('#myTab a').click(function(){
     $(this).tab('show');
     active = $(this)[0].id;
   });
-
   $(document.getElementById(active)).tab('show');

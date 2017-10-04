@@ -1,4 +1,4 @@
-$("#table-requirements").html("<%= escape_javascript(render partial: 'requirements') %>");
+$("#table-requirements").html("<%= j(render partial: 'requirements') %>");
 
 var row = $("#<%= @requirement.id_string %>");
 var req = $('#requirements')
@@ -12,4 +12,4 @@ if (row.length !== 0) {
   row.addClass('highlight');
 }
 
-$("#right-side-menu").html("<%= escape_javascript(render partial: 'comments/comments') %>");
+$("#right-side-menu").html("<%= j(render partial: 'comments/comments') %>");
