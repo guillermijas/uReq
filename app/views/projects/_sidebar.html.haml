@@ -33,7 +33,8 @@
           %li
             =icon('file-o')
             Registro de acciones
-      %a{href: 'manual.pdf'}
+      - manual_url = Rails.env.production? ? 'public/manual.pdf' : 'manual.pdf'
+      %a{href: manual_url}
         %li
           =icon('book')
           Manual de usuario
